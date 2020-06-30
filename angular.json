@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "yad-eliezer"
+    }
+  },
+  "defaultProject": "yad-eliezer",
+  "cli": {
+    "analytics": "fc181827-f724-479a-af87-abc61b161b70"
+  }
 }
