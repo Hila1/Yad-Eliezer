@@ -1,0 +1,40 @@
+.plusIcon {
+    position: absolute;
+    left: 5%;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: -10px;
+}
+
+select:not([class^='Image']),datalist:not([class^='Image']),.datalist:not([class^='Image']){
+    background-image: none ;
+    background-size: inherit;
+    background-repeat: no-repeat;
+    background-position:right center;
+    background-origin: padding-box;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    background-position: left;
+    background-position-x: 12px;
+    
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+.column_div {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin-left: 0;
+}

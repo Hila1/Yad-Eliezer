@@ -1,0 +1,51 @@
+mat-tab-group {
+    padding: 5px;
+    align-items: center;
+    padding-left: auto;
+    padding-right: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for tab labels */
+
+.mat-tab-label, .mat-tab-label.mat-tab-label-active {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: transparent;
+    color: #1a9177;
+    font-weight: bold;
+    font-size: large;
+}
+
+hr {
+    border: 0;
+    clear: both;
+    display: block;
+    width: 100%;
+    background-color: #94a39e8a;
+    height: 1px;
+    margin-top: 35px;
+    margin-bottom: 15px;
+} 
+
+
+.single-line {
+    display: flex;
+    flex-direction: row;
+    /* background-color: indigo; */
+}
+
+.space {
+    width: 15%;
+    /* background-color: green; */
+    height: 50px;
+}
+
+
+mat-expansion-panel {
+    width: 70%;
+} 
+mat-expansion-panel-header {
+    background-color: rgb(241, 241, 241);
+}

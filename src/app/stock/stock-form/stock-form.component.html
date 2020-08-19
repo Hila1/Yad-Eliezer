@@ -1,0 +1,36 @@
+<details-card></details-card>
+
+<div class="single-line">
+  <div class="space"></div>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          פרטי שמלה
+        </mat-panel-title>
+        <mat-panel-description>
+          לחץ {{panelOpenState ? 'לסגירה' : 'לפתיחה'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <dress-details></dress-details>
+    </mat-expansion-panel>
+</div>
+
+ 
+
+<hr />
+
+<mat-tab-group>
+
+  <mat-tab [label]=title[0]>
+    <fixes></fixes>
+  </mat-tab>
+
+  <mat-tab [label]=title[1]>
+    <events></events>
+  </mat-tab>
+
+  <mat-tab [label]=title[2]>
+    <crm></crm>
+  </mat-tab>
+
+</mat-tab-group>

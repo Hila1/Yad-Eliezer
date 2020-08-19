@@ -1,0 +1,22 @@
+/* Structure */
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+.mat-header-cell {
+    padding-right: 15px;
+    font-size: medium;
+}
+
+/* @use "@material/fab";
+
+@include fab.core-styles; */

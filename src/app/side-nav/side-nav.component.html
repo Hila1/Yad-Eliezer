@@ -1,0 +1,32 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+  <mat-drawer class="sidenav-content" #drawer>
+    <ul class="nav-links">
+      <h2>אפשרויות</h2>
+      <hr />
+      <li><a href="#">לוח פגישות</a></li>
+      <hr />
+      <li><a href="#">עריכת פרמטרים</a></li>
+      <hr />
+      <li><a href="#">ניהול תיקונים</a></li>
+      <hr />
+      <li><a href="#">ניהול ניקוי יבש</a></li>
+      <hr />
+      <li><a href="#">הפקדת תשלומים</a></li>
+    </ul>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+        (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>סלון כלות</span>
+      <span class="example-spacer"></span>
+      <button-toggle></button-toggle>
+    </mat-toolbar>
+
+    <div class="router-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

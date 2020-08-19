@@ -1,0 +1,42 @@
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.mat-header-cell {
+    padding-right: 15px;
+    font-size: medium;
+}
+
+/* for smaller screens */
+@media only screen and (max-width: 736px) {
+    .mat-header-cell {
+        padding-right: 5px;
+        font-size: small;
+    }
+
+    td {
+        font-size: small;
+    }
+}
+
+/* for smaller screens */
+@media only screen and (max-width: 568px) {
+    .mat-header-cell {
+        padding-right: 5px;
+        font-size: x-small;
+    }
+
+    td {
+        font-size: x-small;
+    }
+}

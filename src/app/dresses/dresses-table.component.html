@@ -1,0 +1,56 @@
+<!-- <html dir="rtl" lang="he">
+<button class="mdc-fab" aria-label="Favorite">
+  <div class="mdc-fab__ripple"></div>
+  <span class="mdc-fab__icon material-icons">favorite</span>
+</button> -->
+<h1>שמלות</h1>
+<loading-spinner *ngIf="showSpinner"></loading-spinner>
+<mat-form-field>
+  <mat-label>חיפוש</mat-label>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="הכנס מילות חיפוש" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- BridalItemId Column -->
+    <ng-container matColumnDef="BridalItemId">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>קוד פריט</th>
+      <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.BridalItemId}} </td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="Description">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>תאור</th>
+      <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.Description}} </td>
+    </ng-container>
+
+    <!-- BridalTypeItem Column -->
+    <ng-container matColumnDef="BridalTypeItem">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> סוג פריט </th>
+      <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.BridalTypeItem}} </td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="Color">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> צבע </th>
+      <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.Color}} </td>
+    </ng-container>
+
+    <!-- Style Column -->
+    <ng-container matColumnDef="Style">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>סגנון</th>
+      <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.Style}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+</div>
+
+<!-- </html> -->

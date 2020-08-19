@@ -1,0 +1,19 @@
+<div class="column_div PlusIcon" #allColumn style="position: relative">
+    <mat-form-field appearance="fill">
+        <mat-label>{{Label}}</mat-label>
+        <span id="plusIcon" #plusIcon (click)="clickAddDataList()" class="plusIcon" style="display: none;">
+            <mat-icon>add</mat-icon>
+        </span>
+        <input matInput [disabled]="disabled" [(ngModel)]="inputModelDesc" #allInput
+            id="ArrDataListInput{{DataListTableName}}" style="cursor:pointer; width: 175px" 
+            (keyup)="keyupFunction()"
+            autocomplete="off" [attr.list]="DataListTableName" >
+        <datalist id="{{DataListTableName}}">
+            <select class="selectLi" id="ArrDataListSelect{{DataListTableName}}">
+                <option *ngFor="let item of ArrDataList" [value]="item[DataListDesc]">
+                    <span>{{item[DataListDesc]}}</span>
+                </option>
+            </select>
+        </datalist>
+    </mat-form-field>
+</div>

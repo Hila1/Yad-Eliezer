@@ -1,0 +1,46 @@
+<mat-card *ngIf="dataSource">
+    <table>
+      <tr>
+        <td>
+          <h5>קוד פריט במלאי</h5>
+        </td>
+        <td>
+          <h5>מק"ט</h5>
+        </td>
+        <td>
+          <h5>מידה</h5>
+  
+        </td>
+        <td>
+          <h5>סטטוס</h5>
+        </td>
+        <td>
+          <h5>סוג פריט</h5>
+        </td>
+        <td>
+          <h5>שם פריט</h5>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>{{dataSource.BridalItemId}}</h3>
+        </td>
+        <td>
+          <h3>{{dataSource.Mct}}</h3>
+        </td>
+        <td>
+          <h3>{{dataSource.Size}}</h3>
+        </td>
+        <td>
+          <h3>{{dataSource.StatusActiveDesc}}</h3>
+        </td>
+        <td>
+          <h3>{{dataSource.BridalTypeItem}}</h3>
+        </td>
+        <td>
+          <h3>{{dataSource.BridalItem_Description}}</h3>
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  

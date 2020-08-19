@@ -1,0 +1,44 @@
+<div>
+    <h1>אירועים</h1>
+</div>
+<div class="line">
+    <!-- <loading-spinner *ngIf="showSpinner"></loading-spinner> -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource">
+        <!-- "SeamLevel",
+        "SeamType", -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef>שם לקוח</th>
+            <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+        </ng-container>
+
+        <!-- EventDate Column -->
+        <ng-container matColumnDef="EventDate">
+            <th mat-header-cell *matHeaderCellDef>ת. אירוע</th>
+            <td mat-cell *matCellDef="let row"> {{row.EventDate.slice(0,-13)}} </td>
+        </ng-container>
+
+        <!-- Hall Column -->
+        <ng-container matColumnDef="Hall">
+            <th mat-header-cell *matHeaderCellDef>אולם</th>
+            <td mat-cell *matCellDef="let row"> {{row.Hall}} </td>
+        </ng-container>
+
+        <!-- StatusBridalEvent Column -->
+        <ng-container matColumnDef="StatusBridalEvent">
+            <th mat-header-cell *matHeaderCellDef>סטטוס</th>
+            <td mat-cell *matCellDef="let row"> {{row.StatusBridalEvent}} </td>
+        </ng-container>
+
+        <!-- Comment Column -->
+        <ng-container matColumnDef="Comment">
+            <th mat-header-cell *matHeaderCellDef>הערות</th>
+            <td mat-cell *matCellDef="let row"> {{row.Comment}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+</div>

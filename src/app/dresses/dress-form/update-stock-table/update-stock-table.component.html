@@ -1,0 +1,113 @@
+<html dir="rtl" lang="he">
+<loading-spinner *ngIf="showSpinner"></loading-spinner>
+<div class="centered">
+  <div class="line">
+    <div class="add-button-container">
+      <button mat-fab (click)="addEmptyRow()" [ngStyle]="buttonStyle" [disabled]="disableForm">+</button>
+    </div>
+
+    <div class="save-button-container">
+      <button mat-fab (click)="saveTableChanges()" [ngStyle]="buttonStyle" [disabled]="disableForm">
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </div>
+  <!-- {{ dataSource | json}}
+  <p></p>
+  <p></p>
+  <p></p>
+  {{ originalDataSource | json}} -->
+</div>
+<div>
+  <table mat-table [dataSource]="dataSource">
+    <!-- Mct Column -->
+    <ng-container matColumnDef="Mct">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="headerCellStyle">מק"ט</th>
+      <td mat-cell *matCellDef="let row" [ngStyle]="cellStyle">
+        <mat-form-field class="narrow-input-field" appearance="fill" (keyup)="checkForMctExistance($event.target.value, row)">
+          <input matInput value="{{row.Mct}}" #Mct="ngModel" required [(ngModel)]="row.Mct">
+          <mat-hint>{{row.hint}}</mat-hint>
+
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+
+    <!-- Size Column -->
+    <ng-container matColumnDef="Size">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="headerCellStyle">מידה</th>
+      <td mat-cell *matCellDef="let row" [ngStyle]="cellStyle">
+        <mat-form-field class="narrow-input-field" appearance="fill">
+          <mat-select name="CurrencyId" #Mct="ngModel" [(ngModel)]="row.SizeId">
+            <mat-option [value]="c.SizeId" *ngFor="let c of sizeArray">{{c.Description}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <!-- Condition Column -->
+    <ng-container matColumnDef="Condition">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="headerCellStyle">מצב</th>
+      <td mat-cell *matCellDef="let row" [ngStyle]="cellStyle">
+
+        <app-data-list-plus-input DataListDesc='Description' DataListId='ConditionId'
+          styleColumn='[{"margin-top": "10px"}, {"margin-left": "10px"},{"width": "83px"}]'
+          DataListTableName='Condition' Label='' [(inputModel)]="row.ConditionId">
+        </app-data-list-plus-input>
+      </td>
+    </ng-container>
+
+    <!-- lengthItem Column -->
+    <ng-container matColumnDef="lengthItem">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="headerCellStyle">אורך</th>
+      <td mat-cell *matCellDef="let row" [ngStyle]="cellStyle">
+        <mat-form-field class="input-field" appearance="fill">
+          <mat-select #Mct="ngModel" [(ngModel)]="row.LengthItemId" name="lengthItem">
+            <mat-option value="427">סטנדרט</mat-option>
+            <mat-option value="428">עד גובה 1.60</mat-option>
+            <mat-option value="429">מגובה 1.68</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <!-- Location Column -->
+    <ng-container matColumnDef="Location">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="headerCellStyle">מיקום</th>
+      <td mat-cell *matCellDef="let row" [ngStyle]="cellStyle">
+        <mat-form-field appearance="fill">
+          <input matInput value="{{row.Location}}" #Mct="ngModel" [(ngModel)]="row.Location">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <!-- Comments Column -->
+    <ng-container matColumnDef="Comments">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="headerCellStyle">הערות</th>
+      <td mat-cell *matCellDef="let row" [ngStyle]="cellStyle">
+        <mat-form-field class="comments" appearance="fill">
+          <textarea matInput value="{{row.Comments}}" #Mct="ngModel" [(ngModel)]="row.Comments"></textarea>
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <!-- delete column -->
+    <ng-container matColumnDef="Delete">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="headerCellStyle">מחיקה</th>
+      <td mat-cell *matCellDef="let row" [ngStyle]="cellStyle">
+        <button class="delete-button" mat-mini-fab (click)="handleSnackBar(row)" [ngStyle]="buttonStyle"
+         [disabled]="disableForm">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>
+<!-- </div> -->
+
+</html>

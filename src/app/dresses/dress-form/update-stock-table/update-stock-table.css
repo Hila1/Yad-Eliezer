@@ -1,0 +1,62 @@
+table {
+    width: 100%;
+}
+
+ng-container {
+    margin: 100px;
+    padding: 30px;
+}
+
+.mat-header-cell {
+    padding-right: 15px;
+    background-color: #1a9177;
+    color: rgb(255, 255, 255);
+    font-size: medium;
+}
+
+mat-form-field {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 83px;
+    height: min-content;
+}
+
+.narrow-input-field {
+    width: 50px;
+}
+
+.comments {
+    width: 140px;
+}
+
+.delete-button {
+    background-color: rgb(194, 63, 40);
+}
+
+.add-button-container button{
+    background-color: #1a9177;
+    font-size: 35px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+
+.save-button-container button{
+    background-color: #1a9177;
+    font-size: 35px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+}
+
+div {
+    align-items: center;
+    padding-left: auto;
+    padding-right: auto;
+    display: flex;
+    flex-direction: column;
+}
+

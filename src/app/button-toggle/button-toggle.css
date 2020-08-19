@@ -1,0 +1,10 @@
+mat-button-toggle {
+    font-size: small;
+    background-color: white;
+    color: teal;
+}
+
+.mat-button-toggle-checked {
+    background-color: teal;
+    color: white;
+}

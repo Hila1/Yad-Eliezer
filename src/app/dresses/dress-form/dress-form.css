@@ -1,0 +1,114 @@
+table {
+    border: solid;
+    border-color: rgba(128, 128, 128, 0.404);
+    border-radius: 15px;
+    border-width: 0.5px;
+    background-color: rgb(241, 241, 241);
+    padding-right: 50px;
+    padding-left: 25px;
+    padding-bottom: 10px;
+}
+
+mat-form-field {
+    margin-left: 15px;
+    width: 175px;
+}
+
+div {
+    padding: 15px;
+    align-items: center;
+    padding-left: auto;
+    padding-right: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.narrow-field {
+    width: 80px;
+}
+
+.line-of-inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.comments {
+    width: 365px;
+}
+
+hr {
+    border: 0;
+    clear: both;
+    display: block;
+    width: 85%;
+    background-color: #94a39e8a;
+    height: 1px;
+}
+
+.delete-button {
+    background-color: rgb(194, 63, 40);
+    right: -30%;
+}
+
+.save-button {
+    background-color: #19a18b;
+    left: -30%;
+}
+
+h1 {
+    font-size: large;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: -10px;
+}
+
+.add-color {
+    background-color: #1a9177;
+    margin-left: 17px;
+    margin-bottom: 20px;
+}
+
+.color-form-field {
+    width: 120px;
+}
+
+.image {
+    height: 170px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+    margin: 15px 5px 0px 5px;
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.imageButtton, .btn-right, .btn-left {
+    background-color: #19a18b;
+}
+
+td {
+    text-align: center;
+}
+
+/* Container needed to position the button. Adjust the width as needed */
+
+.container {
+    position: relative;
+    width: 50%;
+}
+
+/* Style the button and place it in the middle of the container/image */
+
+.container .btn-right {
+    position: absolute;
+    top: 50%;
+    right: -25%;
+}
+
+.container .btn-left {
+    position: absolute;
+    top: 50%;
+    left: -25%;
+}

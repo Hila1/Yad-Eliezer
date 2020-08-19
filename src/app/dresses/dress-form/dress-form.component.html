@@ -1,0 +1,119 @@
+<div [ngStyle]="divStyle" *ngIf="dataSource">
+    <h1>קוד פריט: {{dataSource.BridalItemId}}</h1>
+    <div class="line-of-inputs">
+        <button [ngStyle]="buttonStyle" mat-fab class="delete-button" (click)="deleteItem()" disabled="{{disableForm}}">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button [ngStyle]="buttonStyle" mat-fab class="save-button" (click)="updateServer()" disabled="{{disableForm}}">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+    <div class="line-of-inputs">
+        <table [ngStyle]=divStyle>
+            <tr>
+                <td rowspan="3">
+                    <div class="container">
+                        <img class="image" src="{{imagesSource[imageIndex]['src']}}" alt="dress image">
+                        <button mat-mini-fab (click)="nextImage()" class="btn-right" [ngStyle]="divStyle">
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                        </button>
+                        <button mat-mini-fab (click)="prevImage()" class="btn-left" [ngStyle]="divStyle">
+                            <mat-icon>keyboard_arrow_left</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button mat-fab (click)="deleteCurrentImage()" class="imageButtton" [ngStyle]="divStyle" disabled="{{disableForm}}">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button mat-fab (click)="addNewImage()" class="imageButtton" [ngStyle]="divStyle" disabled="{{disableForm}}">
+                        <mat-icon>add_photo_alternate</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p>
+    </p>
+    <!-- {{ dataSource | json}}
+    {{original|json}} -->
+    <loading-spinner *ngIf="showSpinner"></loading-spinner>
+
+    <div class="line-of-inputs">
+        <mat-form-field appearance="fill">
+            <mat-label>תאור פריט</mat-label>
+            <input matInput value="{{dataSource.Description}}" #Mct="ngModel" required
+                [(ngModel)]="dataSource.Description">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>סוג פריט</mat-label>
+            <mat-select [(value)]="dataSource.BridalTypeItem" [(ngModel)]="dataSource.BridalTypeItemId">
+                <mat-option *ngFor="let type of itemTypes" [value]="type.BridalTypeItemId">{{type.Description}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="line-of-inputs">
+
+        <mat-form-field appearance="fill">
+            <mat-label>צבע</mat-label>
+            <mat-select [(value)]="dataSource.Color" [(ngModel)]="dataSource.ColorId">
+                <mat-option *ngFor="let color of colors" [value]="color.ColorId">{{color.Description}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <app-data-list-plus-input DataListDesc='Description' DataListId='StyleId'
+            styleColumn='[{"width":"175px"}, {"margin-left": "15px"}]' DataListTableName='Style' Label='סגנון'
+            [(inputModel)]="dataSource.StyleId">
+        </app-data-list-plus-input>
+
+    </div>
+
+    <div class="line-of-inputs">
+
+        <!-- <mat-form-field appearance="fill">
+            <mat-label>חנות</mat-label>
+            <input matInput>
+        </mat-form-field> -->
+
+        <app-data-list-plus-input DataListDesc='Description' DataListId='StoreId'
+            styleColumn='[{"width":"175px"}, {"margin-left": "15px"}]' DataListTableName='Store' Label='חנות'
+            [(inputModel)]="dataSource.StoreId">
+        </app-data-list-plus-input>
+
+        <mat-form-field class="narrow-field" appearance="fill">
+            <mat-label>עלות</mat-label>
+            <input matInput type="number" class="example-right-align">
+        </mat-form-field>
+
+        <mat-form-field class="narrow-field" appearance="fill">
+            <mat-label>מטבע</mat-label>
+            <mat-select>
+                <mat-option value="option">$</mat-option>
+                <mat-option value="option">₪</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="line-of-inputs">
+
+        <mat-form-field class="comments" appearance="fill">
+            <mat-label>הערות</mat-label>
+            <textarea matInput></textarea>
+        </mat-form-field>
+    </div>
+    <hr />
+    <h2>עדכון מלאי</h2>
+
+    <div>
+        <update-stock-table [displayMode]="displayMode"></update-stock-table>
+    </div>
+</div>

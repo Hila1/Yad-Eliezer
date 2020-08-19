@@ -1,4 +1,64 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v34/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+}
+
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-card {
+    text-align: -webkit-center;
+}
+
+.demo-toolbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.demo-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.demo-full-width {
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+    height: 100%;
+}
+
+mat-card {
+    max-width: 80%;
+    margin: 2em auto;
+    text-align: center;
+}
+
+mat-toolbar-row {
+    justify-content: space-between;
+}
+
+.done {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+}
+
+.content-center {
+    text-align: -webkit-center;
+}
