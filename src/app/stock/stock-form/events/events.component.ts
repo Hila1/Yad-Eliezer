@@ -43,8 +43,6 @@ export class EventsComponent {
                 this.dataSource = new MatTableDataSource(this.dataSource);
                 //         // this.dataSource.sort = this.sort;
                 this.showSpinner = false;
-                console.log("events")
-                console.log(data);
             });
         });
     }

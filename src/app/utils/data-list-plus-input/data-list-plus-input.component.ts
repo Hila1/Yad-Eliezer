@@ -51,7 +51,6 @@ export class DataListPlusInputComponent implements OnInit {
         this._globalFunctionsService.getTableData(this.DataListTableName, this.DataListDesc)
             .subscribe(data => {
                 this.ArrDataList = data[0];
-                console.log(data);
                 if (this.inputModelId) {// if a value was already selected
                     if (this.ArrDataList.filter(a => a[this.DataListId] == +this.inputModelId).length > 0) {
                         this.inputModelDesc = this.ArrDataList.filter(a => a[this.DataListId] == this.inputModelId)[0][this.DataListDesc];
@@ -86,7 +85,7 @@ export class DataListPlusInputComponent implements OnInit {
     }
 
     clickAddDataList() {
-    
+
         this._saveService.getEmptyObject(this.DataListTableName).subscribe((newObject: any) => { // new empty object
             newObject[this.DataListDesc] = this.inputModelDesc;
             this._saveService.saveData(newObject, this.DataListTableName).subscribe((data: any) => { // save
@@ -134,6 +133,6 @@ export class DataListPlusInputComponent implements OnInit {
         else {
             this.plusIcon.nativeElement.style.display = "none";
         }
-       
+
     }
 }

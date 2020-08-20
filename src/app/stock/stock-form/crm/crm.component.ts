@@ -10,12 +10,12 @@ import { MatTableDataSource } from '@angular/material/table';
     styleUrls: ['crm.css'],
 })
 export class CRMComponent {
-    displayedColumns: string[] = [      
-        "InsertDate"  ,
+    displayedColumns: string[] = [
+        "InsertDate",
         "FullName",
         "PositionBridalItem",
         "Comment"
-        
+
         // "BridalEventItemId",
         // "Comment",
         // "CrmBridalItemId",
@@ -49,8 +49,6 @@ export class CRMComponent {
                 this.dataSource = new MatTableDataSource(this.dataSource);
                 //         // this.dataSource.sort = this.sort;
                 this.showSpinner = false;
-                console.log("crm")
-                console.log(data);
             });
         });
     }

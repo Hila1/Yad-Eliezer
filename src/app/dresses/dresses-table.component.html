@@ -1,10 +1,12 @@
-<!-- <html dir="rtl" lang="he">
-<button class="mdc-fab" aria-label="Favorite">
-  <div class="mdc-fab__ripple"></div>
-  <span class="mdc-fab__icon material-icons">favorite</span>
-</button> -->
 <h1>שמלות</h1>
 <loading-spinner *ngIf="showSpinner"></loading-spinner>
+<div class="center-button">
+  <button mat-fab class="add-button" (click)="addNewItem()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+
 <mat-form-field>
   <mat-label>חיפוש</mat-label>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="הכנס מילות חיפוש" #input>

@@ -10,6 +10,7 @@ table {
 
 h1 {
   font-weight: bold;
+  text-align: center;
 }
 
 .mat-header-cell {
@@ -17,6 +18,12 @@ h1 {
     font-size: medium;
 }
 
-/* @use "@material/fab";
+.add-button {
+  background-color: #1a9177;
+}
 
-@include fab.core-styles; */
+.center-button {
+  display: flex; 
+  flex-direction: row;
+  justify-content: center;
+}

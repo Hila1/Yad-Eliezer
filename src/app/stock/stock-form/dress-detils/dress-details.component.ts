@@ -34,7 +34,6 @@ export class DressDetailsComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.showSpinner = true
       this._stockService.getSingleStockItem(params.get('id')).subscribe(data => {
-        console.log(data);
         this.original = Object.assign({}, data[0]);
         this.dataSource = Object.assign({}, data[0]);
         this.showSpinner = false;

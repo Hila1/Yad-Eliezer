@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { GlobalFunctionsService } from 'src/app/services/global-functions.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialog } from 'src/app/ui/custom-dialog';
 import { DressesService } from 'src/app/services/dresses.service';
+import { SaveService } from 'src/app/services/save.service';
+import { catchError } from 'rxjs/operators';
+import { UpdateStockTableComponent } from './update-stock-table/update-stock-table.component';
 
 @Component({
   selector: 'dress-form',
@@ -13,10 +16,12 @@ import { DressesService } from 'src/app/services/dresses.service';
 })
 
 export class DressFormComponent {
+  @ViewChild(UpdateStockTableComponent) updateStockTableComponent: UpdateStockTableComponent;
+
   private tableName = "BridalItem";
   private tableUniqeKey = "BridalItemId";
 
-  imagesSource = [{ src: "" }]
+  imagesSource = null
   id = "";
   imageIndex = 0;
   showSpinner: boolean = true;
@@ -41,7 +46,7 @@ export class DressFormComponent {
     color: 'black'
   }
 
-  original = {};
+  original = null
   dataSource = null
 
 
@@ -50,18 +55,17 @@ export class DressFormComponent {
     private _globalFunctionService: GlobalFunctionsService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private _dressService: DressesService
+    private _dressService: DressesService,
+    private _SaveService: SaveService
   ) { }
 
   ngOnInit() {
     // get id from router params and use it to get the rest of the data
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this._dressService.getSingleDress(params.get('id')).subscribe(data => {
-        console.log(data);
-        this.original = Object.assign({}, data[0]);
-        this.dataSource = Object.assign({}, data[0]);
-        this.initImagesSource();
-      })
+      this.id = params.get('id');
+
+      if (this.id == "-1") { this.handleNewDress(); }
+      else { this.handleExistingDress(); }
     })
 
     // get list of item types from the service
@@ -71,7 +75,6 @@ export class DressFormComponent {
       this.itemTypes = data[0];
     });
 
-
     // get list of colors from the service
     this.showSpinner = true;
     this._globalFunctionService.getTableData("Color", "Description").subscribe(data => {
@@ -80,12 +83,29 @@ export class DressFormComponent {
     });
   }
 
+  handleNewDress() {
+    // get new dress object from the server and set it to original source
+    this._SaveService.getEmptyObject("BridalItem").subscribe(data => {
+      this.dataSource = Object.assign({}, data[0]);
+    });
+  }
+
+  handleExistingDress() {
+    this._dressService.getSingleDress(this.id).subscribe(data => {
+      this.original = Object.assign({}, data[0]);
+      this.dataSource = Object.assign({}, data[0]);
+      this.initImagesSource();
+    })
+  }
+
 
   initImagesSource() {
-    let imagesURLs = this.dataSource['Attachment'];
-    this.imagesSource = JSON.parse(imagesURLs)
-      .filter(i => i['src'] !== null) // remove items without src
-      .sort((obj1, obj2) => obj1["viewFirst"] ? 1 : -1); // sort the images
+    this.imagesSource = JSON.parse(this.dataSource['Attachment']);
+    if (this.imagesSource != null) {
+      this.imagesSource = this.imagesSource.filter(i => i['src'] !== null) // remove items without src
+        .sort((obj1, obj2) => obj1["viewFirst"] ? 1 : -1); // sort the images
+    }
+
   }
 
   openSnackBar() {
@@ -121,9 +141,8 @@ export class DressFormComponent {
     this.divStyle = this.divUnAvailableStyle;
     this.buttonStyle = this.buttonUnAvailableStyle;
     this.disableForm = true;
-        // change also display mode data since its effecting the table ux
+    // change also display mode data since its effecting the table ux
     this.displayMode = [this.divUnAvailableStyle, this.buttonUnAvailableStyle, this.disableForm];
-
   }
 
   // make ui changes and unable buttons
@@ -141,12 +160,18 @@ export class DressFormComponent {
 
   updateServer() {
     this._globalFunctionService.update(this.original, this.dataSource, this.tableName).subscribe(data => {
-      debugger
-      console.log(data);
-      debugger
+      // need to update the id in case of a new item - only now we have the id.
+      if (this.id == '-1') { this.id = JSON.parse(data[0]) }
       this.original = Object.assign({}, this.dataSource);
+
+      // save changes from the table also
+      this.updateStockTableComponent.saveTableChanges(this.id);
       // show snack bar
-      var message = "נשמר בהצלחה"
+      if (data.length < 3) {
+        var message = "נשמר בהצלחה"
+      } else {
+        var message = 'שגיאה בשמירת השינויים בדו"ח, או שלא נעשו שינויים'
+      }
       var action = "אוקי"
       this._snackBar.open(message, action);
     })
@@ -180,12 +205,10 @@ export class DressFormComponent {
   }
 
   ngOnDestroy() {
-    if (this.hasChangesDone()) {
+    if (this.hasChangesDone() || this.updateStockTableComponent.hasChangesDone()) {
       let dialogRef = this.dialog.open(CustomDialog);
       dialogRef.afterClosed().subscribe(shouldSave => {
-        debugger
         if (shouldSave == 'true') {
-          debugger;
           this.updateServer();
         }
       })

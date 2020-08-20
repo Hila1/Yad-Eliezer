@@ -73,7 +73,7 @@ export class UpdateStockTableComponent {
             this.id = params.get('id');
         })
 
-        this.getItemTypes();
+        if (this.id != '-1') { this.getMct(); }
 
         this.getSizeArray();
 
@@ -81,7 +81,7 @@ export class UpdateStockTableComponent {
     }
 
     getSizeArray() {
-        // get list of item types from the service
+        // get list of sizes from the service
         this.showSpinner = true;
         this._searchTableService.getTableData("Size", "Description").subscribe(data => {
             this.sizeArray = data[0];
@@ -90,15 +90,15 @@ export class UpdateStockTableComponent {
     }
 
     getConditionArray() {
-        // get list of item types from the service
+        // get list of conditions types from the service
         this.showSpinner = true;
         this._searchTableService.getTableData("Condition", "Description").subscribe(data => {
             this.conditionArray = data[0];
             this.showSpinner = false;
         });
     }
-
-    getItemTypes() {
+    //here
+    getMct() {
         // get list of item types from the service
         this.showSpinner = true;
         this._globalFunctionService.getTableData(this.tableName, undefined,
@@ -111,6 +111,7 @@ export class UpdateStockTableComponent {
                 this.dataSource = Object.assign([], data[0]);
                 this.copyDataToOriginal();
                 this.showSpinner = false;
+                console.log('item types')
                 console.log(this.dataSource);
             });
     }
@@ -176,8 +177,10 @@ export class UpdateStockTableComponent {
 
     /**
      * This function saves all the changes in the data source and updates the DB
+     * (being activated from parent component)
      */
-    saveTableChanges() {
+    saveTableChanges(id: string) {
+        this.id = id;
         // detect the changes and update the arrays
         this.detectChanges();
         // use the upadated arrays to save \ update \ delete
@@ -192,9 +195,8 @@ export class UpdateStockTableComponent {
         this.elementsToUpdate = [];
         this.elementsToSave = [];
     }
-
+    //here
     deleteFromServer() {
-        debugger
         this.elementsToDelete.forEach(element => {
             element["BridalItemId"] = this.id;
             console.log("ill delete: ");
@@ -214,14 +216,12 @@ export class UpdateStockTableComponent {
                 debugger
                 try {
                     console.log("item id is: " + JSON.parse(data)[0]);
-                    var message = "התווסף בהצלחה"
                 } catch (error) {
-                    var message = "היתה שגיאה בהוספה"
+                    // show snack bar
+                    var message = "היתה שגיאה בהוספת שורה חדשה לטבלה"
+                    var action = "אוקי"
+                    this._snackBar.open(message, action);
                 }
-
-                // show snack bar
-                var action = "אוקי"
-                this._snackBar.open(message, action);
             })
         });
     }
@@ -263,12 +263,7 @@ export class UpdateStockTableComponent {
     updateServer() {
         this.elementsToUpdate.forEach(element => {
             this._globalFunctionService.update(element.original, element.active, this.tableName).subscribe(data => {
-                console.log("saved successfuly ");
-
-                // show snack bar
-                var message = "נשמר בהצלחה"
-                var action = "אוקי"
-                this._snackBar.open(message, action);
+                console.log("table saved successfuly ");
             })
         });
     }
@@ -294,24 +289,31 @@ export class UpdateStockTableComponent {
 
     }
 
-
-
-    ngOnDestroy() {
+    hasChangesDone() {
         this.detectChanges();
-
-        // if changes has made
         if (this.elementsToDelete.length > 0 ||
             this.elementsToSave.length > 0 ||
-            this.elementsToUpdate.length > 0) {
+            this.elementsToUpdate.length > 0) { return true }
+        return false;
 
-            let dialogRef = this.dialog.open(CustomDialog);
-            dialogRef.afterClosed().subscribe(shouldSave => {
-                console.log(shouldSave);
-                if (shouldSave)
-                    this.saveTableChanges();
-            })
-        }
     }
+
+    // ngOnDestroy() {
+    //     this.detectChanges();
+
+    //     // if changes has made
+    //     if (this.elementsToDelete.length > 0 ||
+    //         this.elementsToSave.length > 0 ||
+    //         this.elementsToUpdate.length > 0) {
+
+    //         let dialogRef = this.dialog.open(CustomDialog);
+    //         dialogRef.afterClosed().subscribe(shouldSave => {
+    //             console.log(shouldSave);
+    //             if (shouldSave)
+    //                 this.saveTableChanges(this.id);
+    //         })
+    //     }
+    // }
 }
 
 

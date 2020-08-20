@@ -36,8 +36,6 @@ export class DressesComponent implements OnInit {
 
       this.dataSource.sort = this.sort;
       this.showSpinner = false;
-      console.log(data);
-
     });
   }
 
@@ -52,6 +50,10 @@ export class DressesComponent implements OnInit {
         if (this.displayedColumns.indexOf(key) <= -1) { delete element[key]; }
       }
     });
+  }
+  addNewItem() {
+    this.router.navigate(['/dresses/dress-form', { id: -1 }]);
+
   }
 
   rowClicked(element: any) {

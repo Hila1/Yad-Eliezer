@@ -1,15 +1,22 @@
 <div [ngStyle]="divStyle" *ngIf="dataSource">
     <h1>קוד פריט: {{dataSource.BridalItemId}}</h1>
     <div class="line-of-inputs">
-        <button [ngStyle]="buttonStyle" mat-fab class="delete-button" (click)="deleteItem()" disabled="{{disableForm}}">
+
+        <button [ngStyle]="buttonStyle" mat-fab class="delete-button" (click)="deleteItem()" disabled="{{disableForm}}"
+            *ngIf="id != '-1'">
             <mat-icon>delete</mat-icon>
         </button>
         <button [ngStyle]="buttonStyle" mat-fab class="save-button" (click)="updateServer()" disabled="{{disableForm}}">
             <mat-icon>save</mat-icon>
         </button>
+        <!-- visible only in case of a new item and new images hasnt been added yet -->
+        <button [ngStyle]="buttonStyle" mat-fab class="add-new-image-button" (click)="addNewImage()"
+         disabled="{{disableForm}}" *ngIf="!imagesSource">
+            <mat-icon>add_photo_alternate</mat-icon>
+        </button>
     </div>
     <div class="line-of-inputs">
-        <table [ngStyle]=divStyle>
+        <table [ngStyle]=divStyle *ngIf="imagesSource">
             <tr>
                 <td rowspan="3">
                     <div class="container">
@@ -25,14 +32,16 @@
             </tr>
             <tr>
                 <td>
-                    <button mat-fab (click)="deleteCurrentImage()" class="imageButtton" [ngStyle]="divStyle" disabled="{{disableForm}}">
+                    <button mat-fab (click)="deleteCurrentImage()" class="imageButtton" [ngStyle]="divStyle"
+                        disabled="{{disableForm}}">
                         <mat-icon>delete_outline</mat-icon>
                     </button>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <button mat-fab (click)="addNewImage()" class="imageButtton" [ngStyle]="divStyle" disabled="{{disableForm}}">
+                    <button mat-fab (click)="addNewImage()" class="imageButtton" [ngStyle]="divStyle"
+                        disabled="{{disableForm}}">
                         <mat-icon>add_photo_alternate</mat-icon>
                     </button>
                 </td>

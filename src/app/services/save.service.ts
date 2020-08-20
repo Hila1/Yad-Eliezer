@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable()
@@ -15,6 +16,11 @@ export class SaveService {
     getEmptyObject(tableName: string): Observable<any[]> {
         return this.http.post<any>(this._url, "objectUtil=" + JSON.stringify(
             { Object: { 'TableName': tableName, 'Flag': 0 }, Action: 'Save' }), this.options)
+            .pipe(catchError(err =>{
+                debugger
+                console.log(err);
+                return Observable.throw(err);
+            }))
     }
 
     saveData(tmp: any, tableName: string) : Observable<any[]> {

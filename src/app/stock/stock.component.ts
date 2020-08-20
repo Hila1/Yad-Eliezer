@@ -28,13 +28,11 @@ export class StockComponent implements OnInit {
   ngOnInit() {
     this.showSpinner = true;
     this._dressesService.getStock().subscribe(data => {
-      console.log(data)
       this.dataSource = data;
       this.removeUnneededData()
       this.dataSource = new MatTableDataSource(this.dataSource);
       this.dataSource.sort = this.sort;
       this.showSpinner = false;
-      console.log(data);
     });
   }
 

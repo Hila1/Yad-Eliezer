@@ -47,12 +47,23 @@ hr {
 
 .delete-button {
     background-color: rgb(194, 63, 40);
-    right: -30%;
+    /* right: -30%; */
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.add-new-image-button {
+    background-color: #19a18b;
+    /* right: -30%; */
+    margin-right: 15px;
+    margin-left: 15px;
 }
 
 .save-button {
     background-color: #19a18b;
-    left: -30%;
+    /* left: -30%; */
+    margin-right: 15px;
+    margin-left: 15px;
 }
 
 h1 {

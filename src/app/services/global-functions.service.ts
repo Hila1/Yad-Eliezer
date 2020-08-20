@@ -45,6 +45,7 @@ export class GlobalFunctionsService {
         return this.http.post<[any[]]>(this._url,
             "objectUtil=" + JSON.stringify({ Object: lists, Action: 'Search' }), this.options)
             .pipe(catchError(err => {
+                debugger
                 console.log(err);
                 return Observable.throw(err);
             }))

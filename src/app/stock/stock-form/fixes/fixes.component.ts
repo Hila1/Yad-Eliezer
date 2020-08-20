@@ -23,7 +23,7 @@ export class FixesComponent {
 
     // "Duration",
     // "ListFile",
-];
+  ];
 
 
   dataSource = null;
@@ -46,8 +46,6 @@ export class FixesComponent {
         this.dataSource = new MatTableDataSource(this.dataSource);
         //     this.dataSource.sort = this.sort;
         this.showSpinner = false;
-        console.log("fixes")
-        console.log(data);
       });
     });
   }
