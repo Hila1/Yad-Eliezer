@@ -47,7 +47,7 @@ export class UpdateStockTableComponent {
     set displayMode(displayMode: any[]) {
         // change style of the component to dark / light
         this.cellStyle = displayMode[0];
-        this.headerCellStyle = displayMode[0];
+        this.headerCellStyle = displayMode[1];
         this.buttonStyle = displayMode[1];
         this.disableForm = displayMode[2];
         this._displayMode = displayMode;
@@ -189,13 +189,19 @@ export class UpdateStockTableComponent {
         this.addToServer();
 
         // update originalDataSource
-        this.originalDataSource = Object.assign([], this.dataSource)
+        this.updateOriginalDataSource();
         // init arrays
         this.elementsToDelete = [];
         this.elementsToUpdate = [];
         this.elementsToSave = [];
     }
-    //here
+    updateOriginalDataSource() {
+        this.originalDataSource = [];
+        this.dataSource.forEach(element => {
+            this.originalDataSource.push(Object.assign({}, element));
+        });
+    }
+
     deleteFromServer() {
         this.elementsToDelete.forEach(element => {
             element["BridalItemId"] = this.id;
@@ -203,7 +209,6 @@ export class UpdateStockTableComponent {
             console.log(element);
             this._globalFunctionService.delete(this.tableName, "StockBridalItemId", element.StockBridalItemId);
         });
-
     }
 
 
@@ -213,7 +218,6 @@ export class UpdateStockTableComponent {
     addToServer() {
         this.elementsToSave.forEach(element => {
             this._globalFunctionService.update(null, element, this.tableName).subscribe(data => {
-                debugger
                 try {
                     console.log("item id is: " + JSON.parse(data)[0]);
                 } catch (error) {
@@ -290,30 +294,18 @@ export class UpdateStockTableComponent {
     }
 
     hasChangesDone() {
+        let res = false;
         this.detectChanges();
         if (this.elementsToDelete.length > 0 ||
             this.elementsToSave.length > 0 ||
-            this.elementsToUpdate.length > 0) { return true }
-        return false;
-
+            this.elementsToUpdate.length > 0) {
+            res = true
+        }
+        //init the arrays
+        this.elementsToSave = [];
+        this.elementsToUpdate = [];
+        return res;
     }
-
-    // ngOnDestroy() {
-    //     this.detectChanges();
-
-    //     // if changes has made
-    //     if (this.elementsToDelete.length > 0 ||
-    //         this.elementsToSave.length > 0 ||
-    //         this.elementsToUpdate.length > 0) {
-
-    //         let dialogRef = this.dialog.open(CustomDialog);
-    //         dialogRef.afterClosed().subscribe(shouldSave => {
-    //             console.log(shouldSave);
-    //             if (shouldSave)
-    //                 this.saveTableChanges(this.id);
-    //         })
-    //     }
-    // }
 }
 
 

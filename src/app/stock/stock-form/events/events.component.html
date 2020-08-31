@@ -1,9 +1,6 @@
-<div>
-    <h1>אירועים</h1>
-</div>
-<div class="line">
+<!-- <div class="line"> -->
     <!-- <loading-spinner *ngIf="showSpinner"></loading-spinner> -->
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource">
+    <table mat-table [dataSource]="dataSource" *ngIf="dataSource">
         <!-- "SeamLevel",
         "SeamType", -->
 
@@ -41,4 +38,4 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
     </table>
-</div>
+<!-- </div> -->

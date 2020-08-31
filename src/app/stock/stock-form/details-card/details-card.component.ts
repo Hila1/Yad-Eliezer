@@ -12,7 +12,6 @@ import { MatAccordion } from '@angular/material/expansion';
 export class DetailsCardComponent {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
-  original = {};
   dataSource = null
   showSpinner = false;
   panelOpenState = false;
@@ -29,9 +28,9 @@ export class DetailsCardComponent {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.showSpinner = true
       this._stockService.getSingleStockItem(params.get('id')).subscribe(data => {
-        this.original = Object.assign({}, data[0]);
-        this.dataSource = Object.assign({}, data[0]);
+        this.dataSource = data[0];
         this.showSpinner = false;
+        console.log(this.dataSource);
       })
     })
   }

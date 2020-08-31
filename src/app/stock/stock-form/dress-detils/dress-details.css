@@ -1,10 +1,10 @@
 mat-form-field {
-    margin-left: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
     width: 175px;
 }
 
 div {
-    padding: 5px;
     align-items: center;
     padding-left: auto;
     padding-right: auto;
@@ -30,8 +30,30 @@ div {
     background-color: teal;
 }
 
+mat-slide-toggle {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
 h1 {
     font-size: large;
     font-weight: bold;
     margin-top: 5px;
+}
+
+.save-button, .delete-button{
+    background-color: #19a18b;
+    margin-bottom: 25px;
+    margin-top: 15px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.delete-button {
+    background-color: rgb(194, 63, 40);
+}
+
+.narrow-input-field {
+    width: 80px;
+    margin-right: 10px;
 }

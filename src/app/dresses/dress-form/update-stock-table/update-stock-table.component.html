@@ -5,17 +5,8 @@
     <div class="add-button-container">
       <button mat-fab (click)="addEmptyRow()" [ngStyle]="buttonStyle" [disabled]="disableForm">+</button>
     </div>
-<!-- 
-    <div class="save-button-container">
-      <button mat-fab (click)="saveTableChanges()" [ngStyle]="buttonStyle" [disabled]="disableForm">
-        <mat-icon>save</mat-icon>
-      </button>
-    </div> -->
   </div>
   <!-- {{ dataSource | json}}
-  <p></p>
-  <p></p>
-  <p></p>
   {{ originalDataSource | json}} -->
 </div>
 <div>
@@ -67,7 +58,6 @@
             <mat-option value="428">עד גובה 1.60</mat-option>
             <mat-option value="429">מגובה 1.68</mat-option>
           </mat-select>
-
         </mat-form-field>
       </td>
     </ng-container>

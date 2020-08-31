@@ -8,10 +8,8 @@
   align-items: center;
 }
 
-
 .sidenav-content {
   background-color: #315344;
-  padding: 2%;
 }
 
 .example-spacer {
@@ -21,6 +19,7 @@
 mat-icon {
   color: white;
 }
+
 span {
   margin-right: 20px;
   color: white;
@@ -29,18 +28,18 @@ span {
 mat-toolbar {
   background-color: #1a9177;
 }
-.nav-links li{
-  list-style: none;
-  margin: 15px;
-}
-.nav-links a{
+
+.nav-links a {
   color: #ffffff;
   text-decoration: none;
   letter-spacing: 3px;
   font-weight: bold;
+  margin: 0px;
+  padding: 5px;
+  width: fit-content;
 }
 
-.nav-links{
+.nav-links {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,9 +53,11 @@ hr {
   width: 100%;
   background-color: #94a39e8a;
   height: 1px;
+  margin: 0px;
 }
 
-.router-content {
+/* .router-content {
   padding-right: 2%;
   padding-left: 2%;
-}
+  padding-bottom: 2%;
+} */

@@ -1,0 +1,103 @@
+<div class="container">
+    <table>
+        <tr>
+            <td class="section">
+                <table *ngIf="dataSource">
+                    <tr>
+                        <td>
+                            <h3>קוד פריט</h3>
+                        </td>
+                        <td>
+                            <h3>סוג פריט</h3>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h5>{{dataSource.BridalItemId}}</h5>
+                        </td>
+                        <td>
+                            <h5>{{dataSource.BridalTypeItem}}</h5>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h3>צבע</h3>
+                        </td>
+                        <td>
+                            <h3>סגנון</h3>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h5>{{dataSource.Color}}</h5>
+                        </td>
+                        <td>
+                            <h5>{{dataSource.Style}}</h5>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h3>חנות</h3>
+                        </td>
+                        <td>
+                            <h3>מחיר עלות</h3>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h5>{{dataSource.Store}}</h5>
+                        </td>
+                        <td>
+                            <h5>cost</h5>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h3>תאור</h3>
+                        </td>
+                        <td>
+                            <h3>הערות</h3>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h5>{{dataSource.Description}}</h5>
+                        </td>
+                        <td>
+                            <h5>{{dataSource.Comments}}</h5>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+            <td>
+                <div class="hr"></div>
+            </td>
+
+            <td> 
+                <button mat-fab class="next-button" (click)="nextImage()" *ngIf="imagesArray">
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
+            </td>
+
+            <td >
+                <img class="image" src="{{imagesArray[imageIndex]['src']}}" alt="dress image" *ngIf="imagesArray">
+            </td>
+
+            <td>
+                <button mat-fab class="prev-button" (click)="prevImage()" *ngIf="imagesArray">
+                    <mat-icon>navigate_before</mat-icon>
+                </button>
+            </td>
+
+        </tr>
+    </table>
+
+</div>

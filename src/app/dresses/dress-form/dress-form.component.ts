@@ -6,8 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { CustomDialog } from 'src/app/ui/custom-dialog';
 import { DressesService } from 'src/app/services/dresses.service';
 import { SaveService } from 'src/app/services/save.service';
-import { catchError } from 'rxjs/operators';
+// import { catchError } from 'rxjs/operators';
 import { UpdateStockTableComponent } from './update-stock-table/update-stock-table.component';
+import * as $ from "jquery";
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'dress-form',
@@ -42,7 +44,7 @@ export class DressFormComponent {
     color: 'light-gray'
   }
   buttonUnAvailableStyle = {
-    background: 'gray',
+    background: 'rgb(63, 62, 62)',
     color: 'black'
   }
 
@@ -101,11 +103,12 @@ export class DressFormComponent {
 
   initImagesSource() {
     this.imagesSource = JSON.parse(this.dataSource['Attachment']);
-    if (this.imagesSource != null) {
+    // if the array is not empty and its first image has a source
+    if (this.imagesSource != null && this.imagesSource[0]['src'] != null) {
       this.imagesSource = this.imagesSource.filter(i => i['src'] !== null) // remove items without src
         .sort((obj1, obj2) => obj1["viewFirst"] ? 1 : -1); // sort the images
-    }
-
+    } else
+      this.imagesSource = null; // make null for ui
   }
 
   openSnackBar() {
@@ -158,22 +161,25 @@ export class DressFormComponent {
     return (JSON.stringify(this.original) !== JSON.stringify(this.dataSource))
   }
 
+  saveChanges() {
+    // update the images array before testing
+    this.dataSource['Attachment'] = JSON.stringify(this.imagesSource);
+    if (this.hasChangesDone()) {
+      this.updateServer();
+    }
+    // save changes from the table also
+    this.updateStockTableComponent.saveTableChanges(this.id);
+  }
+
   updateServer() {
     this._globalFunctionService.update(this.original, this.dataSource, this.tableName).subscribe(data => {
       // need to update the id in case of a new item - only now we have the id.
       if (this.id == '-1') { this.id = JSON.parse(data[0]) }
       this.original = Object.assign({}, this.dataSource);
-
-      // save changes from the table also
-      this.updateStockTableComponent.saveTableChanges(this.id);
       // show snack bar
-      if (data.length < 3) {
-        var message = "נשמר בהצלחה"
-      } else {
-        var message = 'שגיאה בשמירת השינויים בדו"ח, או שלא נעשו שינויים'
-      }
-      var action = "אוקי"
-      this._snackBar.open(message, action);
+      if (data.length < 3) { var message = "נשמר בהצלחה" }
+      else { var message = 'שגיאה בשמירת השינויים בדו"ח' }
+      this._snackBar.open(message, "אוקי");
     })
   }
 
@@ -197,22 +203,86 @@ export class DressFormComponent {
   }
 
   deleteCurrentImage() {
+    this.imagesSource.splice(this.imageIndex, 1);// remove the image from the array
+    if (this.imagesSource.length == 0) {
+      this.imagesSource = null;
+    } else {
+      this.nextImage();
+    }
+  }
 
+
+
+  uploadFile(event, indexItem) {
+    let files = event.target.files;
+    if (files.length > 0) {
+      var form_data = new FormData();
+      form_data.append('file', files[0]);
+      form_data.append('ImageBridalSalon', this.dataSource["BridalItemId"]);
+      //copy file to server
+      $.ajax({
+        url: this.getUrlPage() + "/php/PHPTablet/PHPBridalSalon.php",// the API of the path
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: (php_script_response) => {
+          var obj = JSON.parse(php_script_response);
+          if (obj.Fail) {
+            alert("לא ניתן לעלות קבצים מסוג זה")
+          }
+          else {
+            //handling the file path
+            indexItem = this.imagesSource.length;
+            this.imagesSource[indexItem] = { src: null, viewFirst: false };
+            this.imagesSource[indexItem].src = this.getUrlPage() + '/' + obj.replace(/\\\\/g, '/');
+
+            // update the images index so the selector will display the new image
+            this.imageIndex = indexItem;
+          }
+        },
+        error: (php_script_response) => {
+          alert("error: file size > 3MB")
+        }
+      });
+    }
   }
 
   addNewImage() {
+    // open image uploading dialog
+    $("#fileLoader" + this.imageIndex).click();
+  }
+
+  /*
+  * This function returns the header of the project's url
+  */
+  getUrlPage() {
+    var urlWindow = document.URL;
+    var urlStart = '';
+    if (urlWindow.indexOf(":4200") != -1) {
+      urlStart = 'http://82.166.33.42:8080//newYadEliezer/trunk';
+    } else {
+      var index = urlWindow.indexOf("trunk");
+      urlStart = urlWindow.substring(0, index + 5);
+    }
+    return urlStart;
 
   }
 
   ngOnDestroy() {
-    if (this.hasChangesDone() || this.updateStockTableComponent.hasChangesDone()) {
-      let dialogRef = this.dialog.open(CustomDialog);
-      dialogRef.afterClosed().subscribe(shouldSave => {
-        if (shouldSave == 'true') {
-          this.updateServer();
-        }
-      })
-    }
+    // surrounded by try-finnaly for edge case when there was an issue with the code bellow
+    // allow the user leave the component safely
+    try {
+      if (this.hasChangesDone() || this.updateStockTableComponent.hasChangesDone()) {
+        let dialogRef = this.dialog.open(CustomDialog);
+        dialogRef.afterClosed().subscribe(shouldSave => {
+          if (shouldSave == 'true')
+            this.saveChanges();
+        })
+      }
+    } finally { }
   }
 }
 

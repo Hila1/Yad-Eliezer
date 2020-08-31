@@ -7,6 +7,13 @@ mat-tab-group {
     flex-direction: column;
 }
 
+.mat-drawer-inner-container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+}
+
 /* Styles for tab labels */
 
 .mat-tab-label, .mat-tab-label.mat-tab-label-active {
@@ -16,36 +23,106 @@ mat-tab-group {
     color: #1a9177;
     font-weight: bold;
     font-size: large;
+    box-shadow: none;
 }
 
-hr {
+.single-line {
+    display: flex;
+    flex-direction: row;
+}
+
+.space {
+    width: 10px;
+}
+
+mat-expansion-panel, mat-accordion {
+    width: 100%;
+}
+
+mat-expansion-panel-header {
+    background-color: rgb(241, 241, 241);
+}
+
+.example-container mat-sidenav {
+    background-color: #1a9177;
+    color: white;
+    align-items: center;
+    padding-left: auto;
+    padding-right: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: fit-content;
+    box-shadow: none;
+}
+
+ul {
+    margin: 0px;
+}
+
+.example-container {
+    width: 100%;
+    height: 100%;
+}
+
+.example-sidenav-content {
+    min-height: fit-content;
+    align-items: center;
+}
+
+.sidenav-content {
+    background-color: #1a9177;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    margin: 0px;
+    height: fit-content;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: -40px;
+}
+
+.nav-list-hr {
     border: 0;
     clear: both;
     display: block;
     width: 100%;
     background-color: #94a39e8a;
     height: 1px;
-    margin-top: 35px;
-    margin-bottom: 15px;
-} 
-
-
-.single-line {
-    display: flex;
-    flex-direction: row;
-    /* background-color: indigo; */
+    margin: 0px;
 }
 
-.space {
-    width: 15%;
-    /* background-color: green; */
-    height: 50px;
+.mat-list-base {
+    padding-top: 0px;
 }
 
+.tables-section {
+    border: 1px solid;
+    /* height: fit-content;
+    min-height: 200px; */
+    margin-top: 30px;
+    background-color: cornflowerblue;
+    margin: 10px;
+}
 
-mat-expansion-panel {
-    width: 70%;
-} 
-mat-expansion-panel-header {
-    background-color: rgb(241, 241, 241);
+.inner-container {
+    height: 100%;
+    min-height: 192px;
+    margin: 5px
+}
+
+.mat-drawer-container.mat-drawer-container-explicit-backdrop .mat-drawer-side {
+    z-index: 3;
+    height: -webkit-fill-available;
 }

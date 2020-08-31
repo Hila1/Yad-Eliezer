@@ -1,0 +1,22 @@
+<!-- <h1>this is customers form</h1> -->
+<h1 class='title'>תיק טיפול באירוע</h1>
+<div class="header" *ngIf="dataSource">
+    <table>
+        <tr>
+            <!-- <td rowspan="2"><h5 class='title'>תיק טיפול באירוע</h5></td> -->
+            <td><h5>קוד תיק</h5></td>
+            <td><h5>שם לקוח</h5></td>
+            <td><h5>תאריך אירוע</h5></td>
+            <td><h5>סטטוס תיק</h5></td>
+            <td><h5>תופרת אחראית</h5></td>
+        </tr>
+        <tr>            
+            <!-- <td><h3>-</h3></td> -->
+            <td><h3>{{dataSource.BridalEventId}}</h3></td>
+            <td><h3>{{dataSource.PersonName}}</h3></td>
+            <td><h3>{{dataSource.TakenDate}}</h3></td>
+            <td><h3>{{dataSource.statusBridalEvent}}</h3></td>
+            <td><h3>{{dataSource.BridalStaff}}</h3></td>
+        </tr>
+    </table>
+</div>

@@ -101,4 +101,13 @@ export class GlobalFunctionsService {
                 console.log(data);
             }))
     }
+
+    getElementID() {
+        let url = window.location.href;
+        // remove sufix
+        url = url.substring(0, url.lastIndexOf('/'));
+        // remove prefix
+        let id = url.substring(url.lastIndexOf('/') + 1);
+        return id;
+    }
 }

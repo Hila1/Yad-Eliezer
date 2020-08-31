@@ -1,10 +1,6 @@
-import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { GlobalFunctionsService } from 'src/app/services/global-functions.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { StockService } from 'src/app/services/stock.service';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'stock-form',
@@ -12,10 +8,26 @@ import { MatAccordion } from '@angular/material/expansion';
   styleUrls: ['stock-form.css'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class StockFormComponent {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   title = ['תיקונים', 'אירועים', 'CRM'];
   panelOpenState = false;
+  icon = ['chevron_left', 'chevron_right']
+  index = 0
+  constructor(private router: Router,
+    private route: ActivatedRoute) { }
 
+  ngOnInit() {
+    this.navigateTo('fixes');
+  }
+
+  navigateTo(name: string) {
+    this.router.navigate([name], { relativeTo: this.route })
+  }
+  toggleDrwer(drawer) {
+    drawer.toggle();
+    this.index = (this.index + 1) % 2
+  }
 }

@@ -1,19 +1,32 @@
 <div *ngIf="dataSource">
-    <!-- <h1>קוד פריט: {{dataSource.BridalItemId}}</h1> -->
-    
     <loading-spinner *ngIf="showSpinner"></loading-spinner>
+    <div class="line-of-inputs">
+
+        <button mat-fab class="save-button" (click)="updateServer()">
+            <mat-icon>save</mat-icon>
+        </button>
+
+        <button mat-fab class="delete-button" (click)="delete()">
+            <mat-icon>delete</mat-icon>
+        </button>
+
+    </div>
+
+
+    <!-- {{ dataSource | json}} -->
 
     <div class="line-of-inputs">
 
         <mat-form-field appearance="fill">
             <mat-label>מק"ט</mat-label>
-            <input matInput value="{{dataSource.Mct}}">
+            <input matInput value="{{dataSource.Mct}}" #Mct="ngModel" [(ngModel)]="dataSource.Mct">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>מידה</mat-label>
-            <input matInput value="{{dataSource.Size}}">
-
+            <mat-select name="CurrencyId" #Mct="ngModel" [(ngModel)]="dataSource.SizeId">
+                <mat-option [value]="c.SizeId" *ngFor="let c of sizeArray">{{c.Description}}</mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
 
@@ -21,51 +34,70 @@
 
         <mat-form-field appearance="fill">
             <mat-label>אורך</mat-label>
-            <input matInput value="{{dataSource.LengthItemId}}">
+
+            <mat-select value="{{dataSource.LengthItemId}}" #Mct="ngModel" [(ngModel)]="dataSource.LengthItemId"
+                name="lengthItem">
+                <mat-option value="427">סטנדרט</mat-option>
+                <mat-option value="428">עד גובה 1.60</mat-option>
+                <mat-option value="429">מגובה 1.68</mat-option>
+            </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
-            <mat-label>מצב</mat-label>
-            <input matInput value="{{dataSource.Condition}}">
-        </mat-form-field>
+        <app-data-list-plus-input DataListDesc='Description' DataListId='ConditionId'
+            styleColumn='[{"margin-right": "5px"}, {"margin-left": "5px"},{"width": "175px"}]'
+            DataListTableName='Condition' Label='מצב' [(inputModel)]="dataSource.ConditionId">
+        </app-data-list-plus-input>
+
     </div>
 
     <div class="line-of-inputs">
 
         <mat-form-field appearance="fill">
             <mat-label>סטטוס</mat-label>
-            <input matInput disabled value="{{dataSource.StatusActiveDesc}}">
+            <input matInput disabled value="{{dataSource.StatusActiveDesc}}" #Mct="ngModel"
+                [(ngModel)]="dataSource.StatusActiveDesc">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>סטטוס מורחב</mat-label>
-            <input matInput disabled value="{{dataSource.PositionBridalItem}}">
+            <input matInput disabled value="{{dataSource.PositionBridalItem}}" #Mct="ngModel"
+                [(ngModel)]="dataSource.PositionBridalItem">
         </mat-form-field>
 
     </div>
     <div class="line-of-inputs">
-
-        <mat-form-field appearance="fill">
-
-            <mat-label>סיבה</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let reason of reasons" [value]="reason">{{reason}}</mat-option>
-            </mat-select>
+        
+        <app-data-list-plus-input DataListDesc='Description' DataListId='ActiveReasonId'
+            styleColumn='[{"margin-right": "5px"}, {"margin-left": "5px"},{"width": "175px"}]'
+            DataListTableName='ActiveReason' Label='סיבה' [(inputModel)]="dataSource.ActiveReasonId">
+        </app-data-list-plus-input>
+       
+        <mat-slide-toggle checked="dataSource.IsActive" #Mct="ngModel" [(ngModel)]="dataSource.IsActive">פעיל
+        </mat-slide-toggle>
+       
+        <!-- <mat-form-field class="narrow-input-field" appearance="fill">
+            <mat-label>מספר לבישות</mat-label>
+            <input matInput value="{{dataSource.Location}}" #Mct="ngModel"
+                [(ngModel)]="dataSource.Location"></input>
+        </mat-form-field> -->
+        <mat-form-field class="narrow-input-field" appearance="fill">
+            <mat-label>מספר לבישות</mat-label>
+            <input matInput value="{{dataSource.Mct}}" #Mct="ngModel" [(ngModel)]="dataSource.Mct">
         </mat-form-field>
-
-        <mat-slide-toggle checked="dataSource.IsActive">פעיל</mat-slide-toggle>
 
     </div>
 
     <div class="line-of-inputs">
         <mat-form-field class="comments" appearance="fill">
             <mat-label>מיקום</mat-label>
-            <textarea matInput value="{{dataSource.Location}}"></textarea>
+            <textarea matInput value="{{dataSource.Location}}" #Mct="ngModel"
+                [(ngModel)]="dataSource.Location"></textarea>
         </mat-form-field>
 
         <mat-form-field class="comments" appearance="fill">
             <mat-label>הערות</mat-label>
-            <textarea matInput value="{{dataSource.CommentBridalItem}}"></textarea>
+            <textarea matInput value="{{dataSource.CommentBridalItem}}" #Mct="ngModel"
+                [(ngModel)]="dataSource.CommentBridalItem"></textarea>
         </mat-form-field>
     </div>
 </div>

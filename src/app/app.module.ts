@@ -22,7 +22,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { TestComponent } from './test/test.component'
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { UpdateStockTableComponent } from './dresses/dress-form/update-stock-table/update-stock-table.component'
@@ -40,6 +39,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { DetailsCardComponent } from './stock/stock-form/details-card/details-card.component';
 import { EventsComponent } from './stock/stock-form/events/events.component';
 import { CRMComponent } from './stock/stock-form/crm/crm.component';
+import { MatListModule } from '@angular/material/list';
+import { MatAnimatedIconComponent } from './ui/animated-icon/animated-icon.component';
+import { ItemInfoComponent } from './stock/stock-form/item-info/item-info.component';
+import { CustomersService } from './services/customers.service';
+import { CustomersFormComponent } from './customers/customers-form/customers-form.compnent';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,6 @@ import { CRMComponent } from './stock/stock-form/crm/crm.component';
     ButtonToggle,
     Sidenav,
     RoutingComponent,
-    TestComponent,
     UpdateStockTableComponent,
     DressDetailsComponent,
     FixesComponent,
@@ -57,7 +60,10 @@ import { CRMComponent } from './stock/stock-form/crm/crm.component';
     DataListPlusInputComponent,
     DetailsCardComponent,
     EventsComponent,
-    CRMComponent
+    CRMComponent,
+    MatAnimatedIconComponent,
+    ItemInfoComponent,
+    CustomersFormComponent
   ],
   imports: [
     BrowserModule,
@@ -85,10 +91,10 @@ import { CRMComponent } from './stock/stock-form/crm/crm.component';
     MatSnackBarModule,
     MatFormFieldModule,
     MatExpansionModule,
- 
+    MatListModule
   ],
   entryComponents: [CustomDialog],
-  providers: [DressesService, StockService, GlobalFunctionsService, SaveService],
+  providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

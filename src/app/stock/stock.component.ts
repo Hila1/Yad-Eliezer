@@ -54,7 +54,9 @@ export class StockComponent implements OnInit {
   }
 
   rowClicked(element: IStock) {
-    this.router.navigate(['/stock/stock-form', { id: element.StockBridalItemId }]);
+    // this.router.navigate(['/stock/stock-form', { id: element.StockBridalItemId }]);
+    this.router.navigate([ element.StockBridalItemId], { relativeTo: this.route })
+
   }
 
   removeElement(row: IStock) {

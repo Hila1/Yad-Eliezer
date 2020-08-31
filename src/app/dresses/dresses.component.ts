@@ -52,12 +52,13 @@ export class DressesComponent implements OnInit {
     });
   }
   addNewItem() {
-    this.router.navigate(['/dresses/dress-form', { id: -1 }]);
+    // this.router.navigate(['/dresses/dress-form', { id: -1 }]);
+    this.router.navigate([-1], { relativeTo: this.route })
 
   }
 
   rowClicked(element: any) {
-    this.router.navigate(['/dresses/dress-form', { id: element.BridalItemId }]);
-    // this.router.navigate([element.BridalItemId], { relativeTo: this.route })
+    // this.router.navigate(['/dresses/dress-form', { id: element.BridalItemId }]);
+    this.router.navigate([element.BridalItemId], { relativeTo: this.route })
   }
 }

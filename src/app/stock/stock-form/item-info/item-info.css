@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+h3, h5 {
+    text-align: center;
+    margin: 5px;
+    align-self: center;
+}
+
+h5 {
+    margin-top: -15px;
+}
+
+div {
+    align-items: center;
+    padding-left: auto;
+    padding-right: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.hr {
+    border: 0px;
+    clear: both;
+    background-color: #a5adab71;
+    width: 1px;
+    /* margin: 15px 15px 20px 20px; */
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.image {
+    height: 170px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+    margin: 15px 5px 0px 5px;
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+
+.next-button, .prev-button {
+    background-color: #19a18b;
+}

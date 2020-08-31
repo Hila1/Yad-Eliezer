@@ -1,36 +1,97 @@
 <details-card></details-card>
 
 <div class="single-line">
+
   <div class="space"></div>
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+  <mat-accordion>
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          פרטי שמלה
+          עריכת פרטי שמלה
         </mat-panel-title>
         <mat-panel-description>
-          לחץ {{panelOpenState ? 'לסגירה' : 'לפתיחה'}}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <dress-details></dress-details>
     </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          מידע על הפריט
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <item-info></item-info>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="space"></div>
+
 </div>
 
- 
 
-<hr />
+<div class="tables-section">
+  <mat-drawer-container class="example-container" [hasBackdrop]="false">
+    <mat-drawer class="sidenav-content" mode="side" #drawer>
+      <ul class="nav-links">
+        <mat-nav-list>
+          <a mat-list-item (click)="navigateTo('fixes')">תיקונים</a>
+          <hr class="nav-list-hr" />
+          <a mat-list-item (click)="navigateTo('events')">אירועים</a>
+          <hr class="nav-list-hr" />
+          <a mat-list-item (click)="navigateTo('crm')">CRM</a>
+          <hr class="nav-list-hr" />
+          <a mat-list-item (click)="toggleDrwer(drawer)">לחץ לסגירה</a>
+        </mat-nav-list>
+      </ul>
+    </mat-drawer>
+    <mat-drawer-content>
+      <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+      (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="router-content">
+      <router-outlet></router-outlet>
+    </div> -->
 
-<mat-tab-group>
+      <mat-sidenav-container class="example-container">
+        <mat-sidenav mode="side" opened>
+          <ul class="nav-links">
+            <mat-nav-list>
+              <a mat-list-item (click)="navigateTo('fixes')">
+                <mat-icon>content_cut</mat-icon>
+              </a>
+              <hr class="nav-list-hr" />
+              <a mat-list-item (click)="navigateTo('events')">
+                <mat-icon>calendar_today</mat-icon>
+              </a>
+              <hr class="nav-list-hr" />
+              <a mat-list-item (click)="navigateTo('crm')">
+                <mat-icon>groups</mat-icon>
+              </a>
+              <hr class="nav-list-hr" />
+              <a mat-list-item (click)="toggleDrwer(drawer)">
+                <!-- 
+              <button (click)="!this.disabled && iconAnimate10.var=!iconAnimate10.var" #iconAnimate10="var" var="'false'" mat-icon-button [disabled]="false" aria-label="Example icon-button with a heart icon">
+              <animated-icon start="menu" end="close" colorStart="none" colorEnd="none" [animate]="iconAnimate10.var" animateFromParent="true"></animated-icon>
+ -->
+                <mat-icon>{{icon[index]}}</mat-icon>
+                <!-- <mat-icon>chevron_left</mat-icon> -->
+              </a>
+            </mat-nav-list>
+          </ul>
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <div class="inner-container">
+            <router-outlet class="router-content"></router-outlet>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
 
-  <mat-tab [label]=title[0]>
-    <fixes></fixes>
-  </mat-tab>
+    </mat-drawer-content>
+  </mat-drawer-container>
 
-  <mat-tab [label]=title[1]>
-    <events></events>
-  </mat-tab>
-
-  <mat-tab [label]=title[2]>
-    <crm></crm>
-  </mat-tab>
-
-</mat-tab-group>
+</div>

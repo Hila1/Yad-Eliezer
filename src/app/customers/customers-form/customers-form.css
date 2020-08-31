@@ -1,34 +1,36 @@
-div {
+.header {
     background-color: rgb(241, 241, 241);
     color: #1a9177;
     width: 100%;
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    /* border-bottom-color: rgb(70, 70, 70);
-    border-bottom-width: 1px; */
-    /* border-left: 6px solid red; */
     border-bottom: 1px solid rgba(158, 158, 158, 0.836);
-
 }
 
 table {
     text-align: center;
 }
 
+.title {
+    font-size: 17px;
+    color: #14745f;
+    text-align: center;
+    background-color: rgb(241, 241, 241);
+    margin: 0px;
+    padding: 15px;
+    /* text-decoration-line: underline */
+}
+
 h3 {
-    font-weight: bold;
     margin-top: -15px;
-    margin-bottom: -5px;
 }
 
-
-h5, h3 {
-    margin-right: 25px;
-    margin-left: 25px;
+h5, h3, .title {
+    font-weight: bold;
 }
 
-/* for smaller screens */
+/* for smaller screens
 
 @media only screen and (max-width: 736px) {
     h5, h3 {
@@ -42,4 +44,4 @@ h5, h3 {
         margin-right: 2px;
         margin-left: 2px;
     }
-}
+} */

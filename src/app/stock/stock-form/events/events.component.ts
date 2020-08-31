@@ -3,6 +3,7 @@ import { MatSort } from '@angular/material/sort';
 import { StockService } from 'src/app/services/stock.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { GlobalFunctionsService } from 'src/app/services/global-functions.service';
 
 @Component({
     selector: 'events',
@@ -29,21 +30,18 @@ export class EventsComponent {
 
     constructor(private _stockService: StockService,
         private router: Router,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute,
+        private _globalFunctions:GlobalFunctionsService ) { }
 
 
     ngOnInit() {
-        console.log("events component on init")
-        // get id from router params and use it to get the rest of the data
-        this.route.paramMap.subscribe((params: ParamMap) => {
-            this.showSpinner = true
-            this._stockService.getItemEvens(params.get('id')).subscribe(data => {
-                this.dataSource = data;
-                this.removeUnneededData()
-                this.dataSource = new MatTableDataSource(this.dataSource);
-                //         // this.dataSource.sort = this.sort;
-                this.showSpinner = false;
-            });
+        this.showSpinner = true
+        this._stockService.getItemEvens(this._globalFunctions.getElementID()).subscribe(data => {
+            this.dataSource = data;
+            this.removeUnneededData()
+            this.dataSource = new MatTableDataSource(this.dataSource);
+            // this.dataSource.sort = this.sort;
+            this.showSpinner = false;
         });
     }
 

@@ -6,20 +6,27 @@
             *ngIf="id != '-1'">
             <mat-icon>delete</mat-icon>
         </button>
-        <button [ngStyle]="buttonStyle" mat-fab class="save-button" (click)="updateServer()" disabled="{{disableForm}}">
+        <button [ngStyle]="buttonStyle" mat-fab class="save-button" (click)="saveChanges()" disabled="{{disableForm}}">
             <mat-icon>save</mat-icon>
         </button>
         <!-- visible only in case of a new item and new images hasnt been added yet -->
         <button [ngStyle]="buttonStyle" mat-fab class="add-new-image-button" (click)="addNewImage()"
-         disabled="{{disableForm}}" *ngIf="!imagesSource">
+            disabled="{{disableForm}}" *ngIf="!imagesSource">
             <mat-icon>add_photo_alternate</mat-icon>
         </button>
+
     </div>
     <div class="line-of-inputs">
         <table [ngStyle]=divStyle *ngIf="imagesSource">
             <tr>
                 <td rowspan="3">
                     <div class="container">
+                        <!-- selector for uploading images -->
+                        <input type="file" style="display: none" id="fileLoader{{imageIndex}}"
+                            (change)="uploadFile($event, imageIndex)">
+
+                        <h4>תמונה מספר {{imageIndex+1}}</h4>
+
                         <img class="image" src="{{imagesSource[imageIndex]['src']}}" alt="dress image">
                         <button mat-mini-fab (click)="nextImage()" class="btn-right" [ngStyle]="divStyle">
                             <mat-icon>keyboard_arrow_right</mat-icon>
@@ -27,6 +34,7 @@
                         <button mat-mini-fab (click)="prevImage()" class="btn-left" [ngStyle]="divStyle">
                             <mat-icon>keyboard_arrow_left</mat-icon>
                         </button>
+
                     </div>
                 </td>
             </tr>
