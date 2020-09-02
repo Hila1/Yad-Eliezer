@@ -61,6 +61,12 @@ export class DressFormComponent {
     private _SaveService: SaveService
   ) { }
 
+  // goToTop() {
+  //   document.getElementById('top').scrollIntoView();
+  //   window.scrollTo(0,0);
+  //   document.body.scrollTop = 0;
+  // }
+
   ngOnInit() {
     // get id from router params and use it to get the rest of the data
     this.route.paramMap.subscribe((params: ParamMap) => {

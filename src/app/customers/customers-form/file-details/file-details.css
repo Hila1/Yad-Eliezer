@@ -1,0 +1,26 @@
+.lines {
+    display: flex;
+    flex-direction: column;
+}
+
+.line-of-input {
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+h1, h3 {
+    text-align: center;
+}
+
+.h3 {
+    color: teal;
+}
+
+mat-form-field {
+    margin-right: 10px;
+    margin-left: 10px;
+    text-align: center;
+}

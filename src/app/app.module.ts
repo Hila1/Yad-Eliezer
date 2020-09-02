@@ -44,6 +44,8 @@ import { MatAnimatedIconComponent } from './ui/animated-icon/animated-icon.compo
 import { ItemInfoComponent } from './stock/stock-form/item-info/item-info.component';
 import { CustomersService } from './services/customers.service';
 import { CustomersFormComponent } from './customers/customers-form/customers-form.compnent';
+import { ScrollTopComponent } from './ui/scroll-top/scroll-top.component';
+import { FileDetailsComponent } from './customers/customers-form/file-details/file-details.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { CustomersFormComponent } from './customers/customers-form/customers-for
     CRMComponent,
     MatAnimatedIconComponent,
     ItemInfoComponent,
-    CustomersFormComponent
+    CustomersFormComponent,
+    ScrollTopComponent,
+    FileDetailsComponent
   ],
   imports: [
     BrowserModule,

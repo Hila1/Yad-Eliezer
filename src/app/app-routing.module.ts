@@ -10,6 +10,7 @@ import { FixesComponent } from './stock/stock-form/fixes/fixes.component';
 import { EventsComponent } from './stock/stock-form/events/events.component';
 import { CRMComponent } from './stock/stock-form/crm/crm.component';
 import { CustomersFormComponent } from './customers/customers-form/customers-form.compnent';
+import { FileDetailsComponent } from './customers/customers-form/file-details/file-details.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,15 @@ const routes: Routes = [
   { path: 'dresses', component: DressesComponent },
   { path: 'dresses/:id', component: DressFormComponent },
   { path: 'customers', component: CustomersComponent },
-  { path: 'customers/:id', component: CustomersFormComponent },
+  { path: 'customers/:id', component: CustomersFormComponent,
+  children: [
+    { path: 'fileDetails', component: FileDetailsComponent },
+    { path: 'roomsScheduling', component: EventsComponent },
+    { path: 'itemsScheduling', component: CRMComponent },
+    { path: 'fixes', component: CRMComponent },
+    { path: 'payments', component: CRMComponent }
+
+  ] },
   { path: "**", component: PageNotFoundComponent }
 ];
 

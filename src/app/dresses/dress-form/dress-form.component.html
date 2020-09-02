@@ -1,5 +1,6 @@
+<!-- <div id="top" ></div> -->
 <div [ngStyle]="divStyle" *ngIf="dataSource">
-    <h1>קוד פריט: {{dataSource.BridalItemId}}</h1>
+    <!-- <h1 >קוד פריט: {{dataSource.BridalItemId}}</h1> -->
     <div class="line-of-inputs">
 
         <button [ngStyle]="buttonStyle" mat-fab class="delete-button" (click)="deleteItem()" disabled="{{disableForm}}"
@@ -133,4 +134,9 @@
     <div>
         <update-stock-table [displayMode]="displayMode"></update-stock-table>
     </div>
+
+
 </div>
+<!-- <button mat-fab class="bottom-button" (click)="goToTop()">
+    <mat-icon>arrow_upward</mat-icon>
+</button> -->

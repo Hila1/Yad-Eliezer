@@ -49,13 +49,6 @@
       </ul>
     </mat-drawer>
     <mat-drawer-content>
-      <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
-      (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <div class="router-content">
-      <router-outlet></router-outlet>
-    </div> -->
 
       <mat-sidenav-container class="example-container">
         <mat-sidenav mode="side" opened>
@@ -74,12 +67,7 @@
               </a>
               <hr class="nav-list-hr" />
               <a mat-list-item (click)="toggleDrwer(drawer)">
-                <!-- 
-              <button (click)="!this.disabled && iconAnimate10.var=!iconAnimate10.var" #iconAnimate10="var" var="'false'" mat-icon-button [disabled]="false" aria-label="Example icon-button with a heart icon">
-              <animated-icon start="menu" end="close" colorStart="none" colorEnd="none" [animate]="iconAnimate10.var" animateFromParent="true"></animated-icon>
- -->
                 <mat-icon>{{icon[index]}}</mat-icon>
-                <!-- <mat-icon>chevron_left</mat-icon> -->
               </a>
             </mat-nav-list>
           </ul>

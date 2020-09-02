@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class StockFormComponent {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
-  title = ['תיקונים', 'אירועים', 'CRM'];
+  // title = ['תיקונים', 'אירועים', 'CRM'];
   panelOpenState = false;
   icon = ['chevron_left', 'chevron_right']
   index = 0

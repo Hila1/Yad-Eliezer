@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomersService } from 'src/app/services/customers.service';
-import { ParamMap, ActivatedRoute } from '@angular/router';
+import { ParamMap, ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'customers-form',
@@ -9,10 +9,16 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 })
 export class CustomersFormComponent implements OnInit {
 
-    constructor(private _customerService: CustomersService,
-        private route: ActivatedRoute) { }
+    panelOpenState = false;
+    icon = ['chevron_left', 'chevron_right']
+    index = 0
 
     dataSource = null;
+    constructor(private _customerService: CustomersService,
+        private route: ActivatedRoute,
+        private router: Router) { }
+
+
 
     ngOnInit() {
         // get optional router params
@@ -21,13 +27,18 @@ export class CustomersFormComponent implements OnInit {
             this._customerService.getCustomerFileByCode(params.get('id')).subscribe(data => {
                 this.dataSource = data[0]
                 console.log(data[0]);
-                this.fixData();
+                this.dataSource["TakenDate"] = this.dataSource["TakenDate"].slice(0, -13); // edit date format
+                // this.navigateTo('fixes');
             });
         })
     }
 
-    fixData() {
-        let aa = this.dataSource["TakenDate"].slice(0, -13);
-        this.dataSource["TakenDate"] = aa
+    
+    navigateTo(name: string) {
+        this.router.navigate([name], { relativeTo: this.route })
+    }
+    toggleDrwer(drawer) {
+        drawer.toggle();
+        this.index = (this.index + 1) % 2
     }
 }
