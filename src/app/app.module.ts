@@ -46,6 +46,11 @@ import { CustomersService } from './services/customers.service';
 import { CustomersFormComponent } from './customers/customers-form/customers-form.compnent';
 import { ScrollTopComponent } from './ui/scroll-top/scroll-top.component';
 import { FileDetailsComponent } from './customers/customers-form/file-details/file-details.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CustomersFormFixesComponent } from './customers/customers-form/fixes/customers-form-fixes';
+import { RoomScheduling } from './customers/customers-form/rooms-scheduling/room-scheduling.component';
+import { ItemSchedulingComponent } from './customers/customers-form/items-scheduling/item-scheduling.component';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +72,10 @@ import { FileDetailsComponent } from './customers/customers-form/file-details/fi
     ItemInfoComponent,
     CustomersFormComponent,
     ScrollTopComponent,
-    FileDetailsComponent
+    FileDetailsComponent,
+    CustomersFormFixesComponent,
+    RoomScheduling,
+    ItemSchedulingComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +103,8 @@ import { FileDetailsComponent } from './customers/customers-form/file-details/fi
     MatSnackBarModule,
     MatFormFieldModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+    MatCheckboxModule
   ],
   entryComponents: [CustomDialog],
   providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService],

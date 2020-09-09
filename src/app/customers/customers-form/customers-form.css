@@ -5,20 +5,11 @@
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid rgba(158, 158, 158, 0.836);
+    margin: 0px;
 }
 
 table {
     text-align: center;
-}
-
-.title {
-    font-size: 17px;
-    color: #14745f;
-    text-align: center;
-    background-color: rgb(241, 241, 241);
-    margin: 0px;
-    padding: 15px;
-    /* text-decoration-line: underline */
 }
 
 h3 {
@@ -29,17 +20,7 @@ h5, h3, .title {
     font-weight: bold;
 }
 
-
 /* form section */
-
-/* .tables-section {
-    border: 1px solid;
-    height: fit-content;
-    min-height: 200px;
-    margin-top: 30px;
-    background-color: cornflowerblue;
-    margin: 10px;
-} */
 
 .example-container mat-sidenav {
     background-color: #1a9177;
@@ -49,14 +30,11 @@ h5, h3, .title {
     padding-right: auto;
     display: flex;
     flex-direction: column;
-    /* min-height: fit-content; */
-    height: fit-content;
 }
-
 
 .sidenav-content {
     background-color: #1a9177;
-    height: fit-content;
+    height: 100%;
 }
 
 .nav-links a {
@@ -73,9 +51,10 @@ h5, h3, .title {
     flex-direction: column;
     align-items: center;
     margin-right: -40px;
-    height: fit-content;
+    height: calc(100vh-142px);
+    overflow: hidden;
+    position: relative;
 }
-
 
 .nav-list-hr {
     border: 0;
@@ -86,17 +65,35 @@ h5, h3, .title {
     height: 1px;
     margin: 0px;
 }
-/* 
-.example-container {
-    width: 100%;
-    height: 100%;
-} */
 
 .inner-container, .example-container {
     height: fit-content;
     min-height: 341px;
     width: 100%;
     margin: 0px;
-
-    /* margin: 5px */
 }
+
+.inner-container {
+    height: calc(100vh - 142px);
+    width: 100%;
+    min-height: calc(100vh - 142px);
+    max-height: calc(100vh - 142px);
+    overflow-y: auto !important;
+    position: relative;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.bottom-part-container {
+    height: calc(100vh-142px);
+    max-height: calc(100vh-142px);
+    min-height: calc(100vh-142px);
+    width: 100%;
+    z-index: -1;
+}
+
+.line {
+    height: 100%;
+    flex: 1;
+}
+

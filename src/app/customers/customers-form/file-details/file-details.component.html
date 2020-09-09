@@ -1,48 +1,101 @@
-<h1>פרטי תיק</h1>
-
-<h3>פרטים כלליים</h3>
-
-<div class="lines">
-    <div class="line-of-input">
-        <mat-form-field appearance="fill" >
-            <mat-label>שם לקוח</mat-label>
-            <input value='{{dataSource.PersonName}}' matInput disabled>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>תאריך אירוע</mat-label>
-            <input value='{{dataSource.PersonName}}'  matInput disabled>
-        </mat-form-field>
+<div class="lines" *ngIf="dataSource">
+    <!-- <div class="line"> -->
+    <div class="header">
+        <h1>פרטי תיק</h1>
     </div>
+    <!-- </div> -->
+    <div class="space"></div>
+
+    <h3>פרטים כלליים</h3>
+
+    <div class="line">
+        <div class="data-field">
+            <h6 class="label">שם לקוח</h6>
+            <h5 class="text-area">{{dataSource.PersonName}}</h5>
+        </div>
+
+
+        <div class="data-field">
+            <h6 class="label">תאריך אירוע</h6>
+            <h5 class="text-area">{{dataSource.EventDate}}</h5>
+        </div>
+    </div>
+
+    <div class="line">
+        <div class="data-field">
+            <h6 class="label">אולם</h6>
+            <h5 class="text-area">{{dataSource.Hall}}</h5>
+        </div>
+
+        <div class="data-field">
+            <h6 class="label">תאריך לקיחת שמלה</h6>
+            <h5 class="text-area">{{dataSource.TakenDate}}</h5>
+        </div>
+    </div>
+
+    <div class="line">
+        <div class="data-field">
+            <h6 class="label">תופרת אחראית</h6>
+            <h5 class="text-area">{{dataSource.BridalStaff}}</h5>
+        </div>
+
+        <div class="data-field">
+            <h6 class="label">סטטוס</h6>
+            <h5 class="text-area">{{dataSource.statusBridalEvent}}</h5>
+        </div>
+    </div>
+
+    <div class="space"></div>
+
+    <h3>מסמכים</h3>
+    <div class="line">
+        <h4 class="file-header">טופס בקשה</h4>
+        <h4 class="file-header">הסכם תקנון</h4>
+    </div>
+
+    <div class="line">
+        <button mat-mini-fab (click)="viewDoc(0)" class="dowload-file-button">
+            <mat-icon>play_for_work</mat-icon>
+        </button>
+        <button mat-mini-fab (click)="viewDoc(1)" class="dowload-file-button">
+            <mat-icon>vertical_align_bottom</mat-icon>
+        </button>
+    </div>
+
+    <div class="space"></div>
+
+    <h3>פיקדון</h3>
+
+
+    <div class="line">
+        <mat-button-toggle-group #group="matButtonToggleGroup" value="{{dataSource.PaymentMethod}}" disabled='true'>
+            <mat-button-toggle value="check" disabled='true'>צ'ק</mat-button-toggle>
+            <mat-button-toggle value="creditCard" disabled='true'>אשראי</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+<!-- {{+dataSource.StatusSecurityCheckId > 0 | json}} -->
+    <div class="line">
+        <mat-checkbox (ngModel)='+dataSource.StatusSecurityCheckId > 0' disabled class="example-margin" color="primary">התקבל</mat-checkbox>
+        <mat-checkbox (ngModel)='dataSource.StatusSecurityCheckId > 2' disabled class="example-margin" color="primary" ch>הוחזר</mat-checkbox>
+    </div>
+    <div class="line">
+        <div class="data-field">
+            <h6 class="label">מספר צ'ק</h6>
+            <h5 class="text-area">{{dataSource.CheckNumber}}</h5>
+        </div>
+
+        <div class="data-field">
+            <h6 class="label">הערות</h6>
+            <h5 class="text-area">{{dataSource.Comment}}</h5>
+        </div>
+    </div>
+
+    <h3>תשלום עבור שמלה: {{dataSource.SumAmount}}</h3>
     
-    <div class="line-of-input">
-        <mat-form-field appearance="fill">
-            <mat-label>אולם</mat-label>
-            <input value='{{dataSource.PersonName}}' matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>תאריך לקיחת שמלה</mat-label>
-            <input value='{{dataSource.PersonName}}'  matInput>
-        </mat-form-field>
-    </div>
-
-    <div class="line-of-input">
-        <mat-form-field appearance="fill">
-            <mat-label>תופרת אחראית</mat-label>
-            <input value='{{dataSource.PersonName}}' matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>סטטוס</mat-label>
-            <input value='{{dataSource.PersonName}}' matInput disabled>
-        </mat-form-field>
+    <div class="line">
+        <div class="data-field" id="url-to-order">
+            <h6 class="label">קישור להזמנה</h6>
+            <h5 class="text-area">{{dataSource.GuestUserId}}</h5>
+        </div>
     </div>
 </div>
-
-<h3>מסמכים</h3>
-<h3>פיקדון</h3>
-<h3>תשלום עבור שמלה</h3>
-<h3>קישור להזמנה</h3>
-
-

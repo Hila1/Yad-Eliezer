@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class StockService {
 
-    private _url = 'http://82.166.33.42:8080//newYadEliezer/trunk/PHP/PHPTablet/PHPBridalSalon.php'
+    private _url = 'http://82.166.33.42:8080/newYadEliezer/trunk/NewPhp/API/PHPBridalSalon.php'
     private params = { "TypeFunction": "loadStockBridalItem" };
     private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     private options = { headers: this.headers };

@@ -227,7 +227,7 @@ export class DressFormComponent {
       form_data.append('ImageBridalSalon', this.dataSource["BridalItemId"]);
       //copy file to server
       $.ajax({
-        url: this.getUrlPage() + "/php/PHPTablet/PHPBridalSalon.php",// the API of the path
+        url: this._globalFunctionService.getUrlPage() + "/php/PHPTablet/PHPBridalSalon.php",// the API of the path
         dataType: 'text',
         cache: false,
         contentType: false,
@@ -243,7 +243,7 @@ export class DressFormComponent {
             //handling the file path
             indexItem = this.imagesSource.length;
             this.imagesSource[indexItem] = { src: null, viewFirst: false };
-            this.imagesSource[indexItem].src = this.getUrlPage() + '/' + obj.replace(/\\\\/g, '/');
+            this.imagesSource[indexItem].src = this._globalFunctionService.getUrlPage() + '/' + obj.replace(/\\\\/g, '/');
 
             // update the images index so the selector will display the new image
             this.imageIndex = indexItem;
@@ -256,26 +256,13 @@ export class DressFormComponent {
     }
   }
 
+
+
   addNewImage() {
     // open image uploading dialog
     $("#fileLoader" + this.imageIndex).click();
   }
 
-  /*
-  * This function returns the header of the project's url
-  */
-  getUrlPage() {
-    var urlWindow = document.URL;
-    var urlStart = '';
-    if (urlWindow.indexOf(":4200") != -1) {
-      urlStart = 'http://82.166.33.42:8080//newYadEliezer/trunk';
-    } else {
-      var index = urlWindow.indexOf("trunk");
-      urlStart = urlWindow.substring(0, index + 5);
-    }
-    return urlStart;
-
-  }
 
   ngOnDestroy() {
     // surrounded by try-finnaly for edge case when there was an issue with the code bellow

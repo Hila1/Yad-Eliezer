@@ -1,5 +1,3 @@
-<!-- <h1>this is customers form</h1> -->
-<h1 class='title'>תיק טיפול באירוע</h1>
 <div class="header" *ngIf="dataSource">
     <table>
         <tr>
@@ -10,17 +8,17 @@
             <td><h5>תופרת אחראית</h5></td>
         </tr>
         <tr>            
-            <!-- <td><h3>-</h3></td> -->
             <td><h3>{{dataSource.BridalEventId}}</h3></td>
             <td><h3>{{dataSource.PersonName}}</h3></td>
-            <td><h3>{{dataSource.TakenDate}}</h3></td>
+            <td><h3>{{dataSource.EventDate}}</h3></td>
             <td><h3>{{dataSource.statusBridalEvent}}</h3></td>
             <td><h3>{{dataSource.BridalStaff}}</h3></td>
         </tr>
     </table>
 </div>
 
-<!-- <div class="tables-section"> -->
+
+<div class="bottom-part-container">
     <mat-drawer-container class ="example-container" [hasBackdrop]="false">
       <mat-drawer class="sidenav-content" mode="side" #drawer>
         <ul class="nav-links">
@@ -60,5 +58,4 @@
   
       </mat-drawer-content>
     </mat-drawer-container>
-  
-  <!-- </div> -->
+  </div>

@@ -11,6 +11,9 @@ import { EventsComponent } from './stock/stock-form/events/events.component';
 import { CRMComponent } from './stock/stock-form/crm/crm.component';
 import { CustomersFormComponent } from './customers/customers-form/customers-form.compnent';
 import { FileDetailsComponent } from './customers/customers-form/file-details/file-details.component';
+import { CustomersFormFixesComponent } from './customers/customers-form/fixes/customers-form-fixes';
+import { RoomScheduling } from './customers/customers-form/rooms-scheduling/room-scheduling.component';
+import { ItemSchedulingComponent } from './customers/customers-form/items-scheduling/item-scheduling.component';
 
 
 const routes: Routes = [
@@ -30,11 +33,10 @@ const routes: Routes = [
   { path: 'customers/:id', component: CustomersFormComponent,
   children: [
     { path: 'fileDetails', component: FileDetailsComponent },
-    { path: 'roomsScheduling', component: EventsComponent },
-    { path: 'itemsScheduling', component: CRMComponent },
-    { path: 'fixes', component: CRMComponent },
+    { path: 'roomsScheduling', component: RoomScheduling },
+    { path: 'itemsScheduling', component: ItemSchedulingComponent },
+    { path: 'fixes', component: CustomersFormFixesComponent },
     { path: 'payments', component: CRMComponent }
-
   ] },
   { path: "**", component: PageNotFoundComponent }
 ];

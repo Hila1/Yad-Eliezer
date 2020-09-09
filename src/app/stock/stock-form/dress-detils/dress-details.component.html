@@ -52,7 +52,7 @@
 
     <div class="line-of-inputs">
 
-        <mat-form-field appearance="fill">
+        <!-- <mat-form-field appearance="fill">
             <mat-label>סטטוס</mat-label>
             <input matInput disabled value="{{dataSource.StatusActiveDesc}}" #Mct="ngModel"
                 [(ngModel)]="dataSource.StatusActiveDesc">
@@ -62,7 +62,17 @@
             <mat-label>סטטוס מורחב</mat-label>
             <input matInput disabled value="{{dataSource.PositionBridalItem}}" #Mct="ngModel"
                 [(ngModel)]="dataSource.PositionBridalItem">
-        </mat-form-field>
+        </mat-form-field> -->
+
+        <div class="data-field">
+            <h6 class="label">סטטוס</h6>
+            <h5 class="text-area">{{dataSource.StatusActiveDesc}}</h5>
+        </div>
+
+        <div class="data-field">
+            <h6 class="label">סטטוס מורחב</h6>
+            <h5 class="text-area">{{dataSource.PositionBridalItem}}</h5>
+        </div>
 
     </div>
     <div class="line-of-inputs">
@@ -91,13 +101,13 @@
         <mat-form-field class="comments" appearance="fill">
             <mat-label>מיקום</mat-label>
             <textarea matInput value="{{dataSource.Location}}" #Mct="ngModel"
-                [(ngModel)]="dataSource.Location"></textarea>
+                [(ngModel)]="dataSource.Location" rows="1"></textarea>
         </mat-form-field>
 
         <mat-form-field class="comments" appearance="fill">
             <mat-label>הערות</mat-label>
             <textarea matInput value="{{dataSource.CommentBridalItem}}" #Mct="ngModel"
-                [(ngModel)]="dataSource.CommentBridalItem"></textarea>
+                [(ngModel)]="dataSource.CommentBridalItem" rows="1"></textarea>
         </mat-form-field>
     </div>
 </div>

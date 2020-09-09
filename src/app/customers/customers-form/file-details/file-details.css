@@ -3,12 +3,20 @@
     flex-direction: column;
 }
 
-.line-of-input {
-    /* background-color: yellow; */
+.line {
     display: flex;
     flex-direction: row;
     margin-right: auto;
     margin-left: auto;
+}
+
+.header {
+    text-align: center;
+    margin: 5px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center 
 }
 
 h1, h3 {
@@ -23,4 +31,89 @@ mat-form-field {
     margin-right: 10px;
     margin-left: 10px;
     text-align: center;
+}
+
+
+mat-button-toggle {
+    width: 65px;
+}
+
+.example-margin {
+    margin: 30px;
+}
+
+mat-slide-toggle {
+    margin: 15px;
+}
+
+/deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #49c5b6;
+}
+
+/deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: teal;
+}
+
+
+.data-field {
+    width: 201px;
+    height: 51.3px;
+    padding: 10.5px, 10.5px, 10.5px, 0px;
+    margin-right: 10px;
+    margin-left: 10px; 
+    margin-bottom: 19px;
+    background-color: #0000000A;
+    color: rgba(0,0,0,.87);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.445);
+    border-radius: 4px 4px 0 0;
+}
+
+.text-area {
+    margin-top: -0.0625em;
+    padding-right: 10.5px;
+    padding-left: 10.5px;
+    font-size: 14px;
+}
+
+.label {
+    margin-bottom: 0px;
+    padding-right: 10.5px;
+    padding-left: 10.5px;
+    padding-top: 5px;
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.637);
+}
+
+.file-header {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 0px;
+}
+
+.dowload-file-button {
+    color: white;
+    background-color: #49c5b6;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.space {
+    height: 30px;
+}
+
+/*button tuggle style*/
+mat-button-toggle {
+    font-size: small;
+    background-color: white;
+    color: teal;
+}
+
+.mat-button-toggle-checked {
+    background-color: teal;
+    color: white;
+}
+
+#url-to-order {
+    width: 100%;
+    min-width: 200px;
 }

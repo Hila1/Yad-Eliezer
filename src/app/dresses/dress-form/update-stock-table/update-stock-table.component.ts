@@ -102,11 +102,11 @@ export class UpdateStockTableComponent {
         // get list of item types from the service
         this.showSpinner = true;
         this._globalFunctionService.getTableData(this.tableName, undefined,
-            {
+        [{
                 nameField: 'BridalItemId',
                 Value: this.id,
                 Operator: "="
-            })
+            }])
             .subscribe(data => {
                 this.dataSource = Object.assign([], data[0]);
                 this.copyDataToOriginal();
@@ -275,11 +275,11 @@ export class UpdateStockTableComponent {
     checkForMctExistance(value: any, row) {
         // make api request with the given Mct to check whether this Mct is already exist
         this._globalFunctionService.getTableData(this.tableName, undefined,
-            {
+            [{
                 nameField: 'Mct',
                 Value: value,
                 Operator: "="
-            })
+            }])
             .subscribe(data => {
                 // if this mct is already exist
                 var hint = data[0].length > 0 &&

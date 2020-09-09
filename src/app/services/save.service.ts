@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class SaveService {
 
-    private _url = 'http://82.166.33.42:8080//newYadEliezer/trunk/PHP/PHPTablet/phpUtilsFunction.php'
+    private _url = 'http://82.166.33.42:8080//newYadEliezer/trunk/NewPhp/API/phpUtilsFunction.php'
     private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     private options = { headers: this.headers };
 

@@ -31,6 +31,7 @@ mat-toolbar {
   top: 0px;
   width: 100%; 
   z-index:1;
+  height: 70px;
   /* margin-bottom: 100px; */
 }
 
@@ -68,14 +69,15 @@ hr {
   /* padding-right: 2%;
   padding-left: 2%;
   padding-bottom: 2%; */
-  margin-top: 64px;
+  margin-top: 70px;
 }
 
 .bottom-button {
   position: fixed; 
+  z-index:1;
   bottom: 0;
   margin-right: 15px;
   margin-bottom: 15px;
   background-color: #14745f;
-  z-index:1;
+ 
 }

@@ -27,8 +27,8 @@ export class CustomersFormComponent implements OnInit {
             this._customerService.getCustomerFileByCode(params.get('id')).subscribe(data => {
                 this.dataSource = data[0]
                 console.log(data[0]);
-                this.dataSource["TakenDate"] = this.dataSource["TakenDate"].slice(0, -13); // edit date format
-                // this.navigateTo('fixes');
+                this.dataSource["EventDate"] = this.dataSource["EventDate"].slice(0, -13); // edit date format
+                this.router.navigate(['fileDetails'], { relativeTo: this.route })
             });
         })
     }
@@ -37,6 +37,7 @@ export class CustomersFormComponent implements OnInit {
     navigateTo(name: string) {
         this.router.navigate([name], { relativeTo: this.route })
     }
+
     toggleDrwer(drawer) {
         drawer.toggle();
         this.index = (this.index + 1) % 2

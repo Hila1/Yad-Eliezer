@@ -7,7 +7,7 @@ import { SaveService } from './save.service';
 
 @Injectable()
 export class GlobalFunctionsService {
-    private _url = 'http://82.166.33.42:8080//newYadEliezer/trunk/PHP/PHPTablet/phpUtilsFunction.php'
+    private _url = 'http://82.166.33.42:8080//newYadEliezer/trunk/NewPhp/API/phpUtilsFunction.php'
     private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     private options = { headers: this.headers };
 
@@ -21,9 +21,9 @@ export class GlobalFunctionsService {
      */
     getTableData(tableName: string, orderBy?: string, filterObject?: any): Observable<[any[]]> {
         var lists = [];
-        var field = [];
+        // var field = [];
         // add the given filterObject to the list of fileds
-        field.push(filterObject);
+        // field.push(filterObject);
 
         // final object to be send
         var objectOfVars = {};
@@ -31,7 +31,7 @@ export class GlobalFunctionsService {
         // if given, add order by to the final search object
         if (orderBy) { objectOfVars["orderBy"] = orderBy };
         // if given, add the filter object to the final search object
-        if (filterObject) { objectOfVars["FieldList"] = field }
+        if (filterObject) { objectOfVars["FieldList"] = filterObject }
 
         // add the rest of the values to the final object (they are always the same)
         objectOfVars["nameTable"] = tableName;
@@ -110,4 +110,19 @@ export class GlobalFunctionsService {
         let id = url.substring(url.lastIndexOf('/') + 1);
         return id;
     }
+
+      /*
+  * This function returns the header of the project's url
+  */
+  getUrlPage() {
+    var urlWindow = document.URL;
+    var urlStart = '';
+    if (urlWindow.indexOf(":4200") != -1) {
+      urlStart = 'http://82.166.33.42:8080//newYadEliezer/trunk';
+    } else {
+      var index = urlWindow.indexOf("trunk");
+      urlStart = urlWindow.substring(0, index + 5);
+    }
+    return urlStart;
+  }
 }
