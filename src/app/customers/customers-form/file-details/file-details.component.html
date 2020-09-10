@@ -75,8 +75,8 @@
     </div>
 <!-- {{+dataSource.StatusSecurityCheckId > 0 | json}} -->
     <div class="line">
-        <mat-checkbox (ngModel)='+dataSource.StatusSecurityCheckId > 0' disabled class="example-margin" color="primary">התקבל</mat-checkbox>
-        <mat-checkbox (ngModel)='dataSource.StatusSecurityCheckId > 2' disabled class="example-margin" color="primary" ch>הוחזר</mat-checkbox>
+        <mat-checkbox [checked]='shouldCheck(1)' disabled class="example-margin" color="primary">התקבל</mat-checkbox>
+        <mat-checkbox [checked]='shouldCheck(2)' disabled class="example-margin" color="primary" ch>הוחזר</mat-checkbox>
     </div>
     <div class="line">
         <div class="data-field">

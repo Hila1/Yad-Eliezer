@@ -21,7 +21,7 @@ export class FileDetailsComponent {
             this.dataSource = data[0];
             this.dataSource['TakenDate'] = this.dataSource['TakenDate'] ? this.dataSource['TakenDate'].slice(0, -13) : null;
             this.dataSource['EventDate'] = this.dataSource['TakenDate'] ? this.dataSource['EventDate'].slice(0, -13) : null;
-            // this.dataSource['SumAmount‏'] = this.dataSource['SumAmount‏']? 'YES' :'NO'
+            this.dataSource['SumAmount'] = this.dataSource['SumAmount'] ? '✓' : '	✗'
             // normalize payment method value
             if (this.dataSource['PaymentMethod']) {
                 this.dataSource['PaymentMethod'] = this.dataSource['PaymentMethod'] == "צ'ק" ? 'check' : 'creditCard';
@@ -31,9 +31,9 @@ export class FileDetailsComponent {
 
             // get files from server
             this.getFilesFromServer();
-
         })
     }
+
     getFilesFromServer() {
         let filterObj = [{
             nameField: 'SupportActivityId',
@@ -54,14 +54,17 @@ export class FileDetailsComponent {
             })
     }
 
+    // download document
     viewDoc(index) {
         debugger;
         var url = this._globalFunctions.getUrlPage() + "/NewPhp/Libraries/Documents/Download/DownloadFile.php";
-        // var item = index == 1 ? this.DocumentForPerson[0] : this.DocumentForPerson[1];
-        console.log('index is: ' + index);
         var item = this.DocumentForPerson[index];
         item = item.Location.slice(19, item.Location.length);
         //שליחה לשרת ופתיחת התמונה המבוקשת
         window.open(url + '?pathToOpen=' + item);
-    };
+    }
+
+    shouldCheck(value: Number): Boolean {
+        return this.dataSource['StatusSecurityCheckId'] >= value;
+    }
 }
