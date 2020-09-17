@@ -18,6 +18,7 @@ export class ItemSchedulingComponent {
     @ViewChild(MatAccordion) accordion: MatAccordion;
     items: any[] = null//['hello', 'world','hello', 'world','hello', 'world','hello', 'world','hello', 'world','hello', 'world'];
     itemsIds: any;
+    itemsNames: any[];
 
     constructor(private _globalFunctionsService: GlobalFunctionsService,
         private _stockService: StockService,
@@ -35,12 +36,14 @@ export class ItemSchedulingComponent {
             this._globalFunctionsService.getTableData('BridalEventItem', undefined, [filterObj]).subscribe(data => {
                 this.dataSource = data[0]
                 console.log(this.dataSource);
+                this.itemsNames = [];
                 this.dataSource.forEach(element => {
                     this._stockService.getSingleStockItem(element.StockBridalItemId).subscribe(itemData => {
                         element['BridalTypeItem'] = itemData[0]['BridalTypeItem'];
                         element['BridalItem_Description'] = itemData[0]['BridalItem_Description'];
                         element['Mct'] = itemData[0]['Mct'];
                         element['Attachment'] = JSON.parse(itemData[0]['Attachment'])[0];
+                        this.itemsNames.push(element.BridalTypeItem)
                     })
                 });
                 this.getItems(); // get types items from the server
@@ -52,13 +55,9 @@ export class ItemSchedulingComponent {
     getItems() {
         this._globalFunctionsService.getTableData('bridalTypeItem', 'Description').subscribe(data => {
             this.items = data[0];
-            this.itemsIds = []
-            this.dataSource.forEach(element => {
-                this.itemsIds.push(element['BridalEventItemId']); // make array of all Ids
-            });
             // add every item an 'icon' field for the footer
             this.items.forEach(element => {
-                element['icon'] = this.itemsIds.includes(element.BridalTypeItemId) ? "✓" : "✗";
+                element['icon'] = this.itemsNames.includes(element.Description) ? "✓" : "✗";
             })
         })
     }

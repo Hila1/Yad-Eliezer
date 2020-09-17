@@ -1,11 +1,5 @@
-<!-- <head>
-    <link href="path/to/lightbox.css" rel="stylesheet" />
-</head> -->
-
 <body>
-    <!-- <ol> -->
         <mat-accordion *ngFor='let row of dataSource' multi>
-            <!-- <li> -->
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
@@ -22,74 +16,11 @@
                         CostOfDamage='{{row.CostOfDamage}}' CurrencyCostOfDamageId='{{row.CurrencyCostOfDamageId}}'
                         DamageDescription='{{row.DamageDescription}}' ReturnStatusId='{{row.ReturnStatusId}}'>
                     </item-data>
-
                 </mat-expansion-panel>
-
-
-
-
-
-
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{row.BridalTypeItem}} - {{row.BridalItem_Description}} / {{row.Mct}}
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            <img class="header-image" src="{{row.Attachment['src']}}" *ngIf='row.Attachment'>
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-
-                    <item-data SupportActivityId='{{row.SupportActivityId}}' Comment='{{row.Comment}}'
-                        DeliveryStatusId='{{row.DeliveryStatusId}}' DeliveryDate='{{row.DeliveryDate}}'
-                        ReturnDate='{{row.ReturnDate}}' AttachedFile='{{row.AttachedFile}}'
-                        CostOfDamage='{{row.CostOfDamage}}' CurrencyCostOfDamageId='{{row.CurrencyCostOfDamageId}}'
-                        DamageDescription='{{row.DamageDescription}}' ReturnStatusId='{{row.ReturnStatusId}}'>
-                    </item-data>
-
-                </mat-expansion-panel><mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{row.BridalTypeItem}} - {{row.BridalItem_Description}} / {{row.Mct}}
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            <img class="header-image" src="{{row.Attachment['src']}}" *ngIf='row.Attachment'>
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-
-                    <item-data SupportActivityId='{{row.SupportActivityId}}' Comment='{{row.Comment}}'
-                        DeliveryStatusId='{{row.DeliveryStatusId}}' DeliveryDate='{{row.DeliveryDate}}'
-                        ReturnDate='{{row.ReturnDate}}' AttachedFile='{{row.AttachedFile}}'
-                        CostOfDamage='{{row.CostOfDamage}}' CurrencyCostOfDamageId='{{row.CurrencyCostOfDamageId}}'
-                        DamageDescription='{{row.DamageDescription}}' ReturnStatusId='{{row.ReturnStatusId}}'>
-                    </item-data>
-
-                </mat-expansion-panel><mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{row.BridalTypeItem}} - {{row.BridalItem_Description}} / {{row.Mct}}
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            <img class="header-image" src="{{row.Attachment['src']}}" *ngIf='row.Attachment'>
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-
-                    <item-data SupportActivityId='{{row.SupportActivityId}}' Comment='{{row.Comment}}'
-                        DeliveryStatusId='{{row.DeliveryStatusId}}' DeliveryDate='{{row.DeliveryDate}}'
-                        ReturnDate='{{row.ReturnDate}}' AttachedFile='{{row.AttachedFile}}'
-                        CostOfDamage='{{row.CostOfDamage}}' CurrencyCostOfDamageId='{{row.CurrencyCostOfDamageId}}'
-                        DamageDescription='{{row.DamageDescription}}' ReturnStatusId='{{row.ReturnStatusId}}'>
-                    </item-data>
-
-                </mat-expansion-panel>
-            <!-- </li> -->
-
         </mat-accordion>
-    <!-- </ol> -->
 </body>
 
 <footer class='footer' *ngIf='items'>
-    <!-- {{items.icon | json}} -->
     <div *ngFor='let item of items'>
         <h3 class='footer-item' [ngStyle]='getItemColor(item)'>{{item.icon + item.Description}}</h3>
     </div>

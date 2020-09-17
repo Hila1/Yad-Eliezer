@@ -32,10 +32,11 @@ mat-expansion-panel {
 .footer {
     width: calc(100% - 30px);
     height: fit-content;
-    background-color: cadetblue;
+    background-color: rgb(152, 201, 202);
     border: 1px solid;
     margin-right: 15px;
     margin-left: 15px;
+    margin-top: 10px;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
@@ -43,12 +44,15 @@ mat-expansion-panel {
 }
 
 .footer-item {
-    margin: 15px;
+    margin: 10px;
 }
 
 body {
-    margin-top: 10px;
-    height: calc(100vh - 272px);
+    /* margin-top: 10px; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: fit-content;
+    max-height: calc(100vh - 272px);
     overflow: hidden;
     overflow-y: scroll;
 }
