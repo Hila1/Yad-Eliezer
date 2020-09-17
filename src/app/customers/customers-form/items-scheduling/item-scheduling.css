@@ -1,8 +1,54 @@
-.mat-form-field + .mat-form-field {
-    margin-left: 8px;
-  }
+mat-panel-title {
+    max-width: 300px;
+    width: 300px;
+    overflow: hidden;
+}
 
-  mat-expansion-panel {
-      margin-right: 15px;
-      margin-left: 15px;
-  }
+.mat-form-field+.mat-form-field {
+    margin-left: 8px;
+}
+
+mat-expansion-panel {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header-image {
+    width: auto;
+    height: 40px;
+    max-height: 40px;
+    width: 40px;
+    padding: auto;
+    border: 0.1px solid;
+}
+
+.footer {
+    width: calc(100% - 30px);
+    height: fit-content;
+    background-color: cadetblue;
+    border: 1px solid;
+    margin-right: 15px;
+    margin-left: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.footer-item {
+    margin: 15px;
+}
+
+body {
+    margin-top: 10px;
+    height: calc(100vh - 272px);
+    overflow: hidden;
+    overflow-y: scroll;
+}

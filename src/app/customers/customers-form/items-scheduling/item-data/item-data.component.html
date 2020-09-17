@@ -1,0 +1,66 @@
+<!-- <div class="lines"> -->
+<div class="lines">
+
+    <div class="line">
+        <div class="data-field">
+            <h6 class="label">הערה</h6>
+            <h5 class="text-area">{{Comment}}</h5>
+        </div>
+    </div>
+
+    <div class="line">
+        <h3> מסמך תיקונים</h3>
+    </div>
+
+    <div class="line">
+        <button mat-mini-fab class="dowload-file-button" (click)='viewDoc()'>
+            <mat-icon>vertical_align_bottom</mat-icon>
+        </button>
+    </div>
+
+
+    <div class="line">
+        <mat-checkbox [checked]='shouldCheck(0)' disabled class="checkbox" color="primary">נלקח</mat-checkbox>
+        <mat-checkbox [checked]='shouldCheck(1)' disabled class="checkbox" color="primary">הוחזר</mat-checkbox>
+    </div>
+
+    <div class="line">
+
+        <div class="data-field" id='narrow-field'>
+            <h6 class="label">תאריך לקיחה</h6>
+            <h5 class="text-area">{{DeliveryDate}}</h5>
+        </div>
+
+
+        <div class="data-field" *ngIf='shouldCheck(1)' id='narrow-field'>
+            <h6 class="label">תאריך החזרה</h6>
+            <h5 class="text-area">{{ReturnDate}}</h5>
+        </div>
+    </div>
+
+    <div class="line" *ngIf='shouldCheck(1)'>
+        <div class="data-field" id='narrow-field'>
+            <h6 class="label">מצב החזרה</h6>
+            <h5 class="text-area">{{ReturnStatusId}}</h5>
+        </div>
+
+        <div class="data-field" id='narrow-field'>
+            <h6 class="label">סה"כ נזק</h6>
+            <h5 class="text-area">{{CostOfDamage + " " + CurrencyCostOfDamageId}}</h5>
+        </div>
+<!-- 
+        <div class="data-field" id='extra-narrow-field'>
+            <h6 class="label">מטבע</h6>
+            <h5 class="text-area">{{CurrencyId}}</h5>
+        </div> -->
+       
+    </div>
+
+    <div class="line" *ngIf='shouldCheck(1)'>
+        <div class="data-field">
+            <h6 class="label">הערות נזק</h6>
+            <h5 class="text-area">{{DamageDescription}}</h5>
+        </div>
+    </div>
+</div>
+<!-- </div> -->

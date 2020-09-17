@@ -37,13 +37,13 @@ export class CRMComponent {
     constructor(private _stockService: StockService,
         private router: Router,
         private route: ActivatedRoute,
-        private _globalFunctions: GlobalFunctionsService) { }
+        private _globalFunctionsService: GlobalFunctionsService) { }
 
 
     ngOnInit() {
 
         this.showSpinner = true
-        this._stockService.getItemCRM(this._globalFunctions.getElementID()).subscribe(data => {
+        this._stockService.getItemCRM(this._globalFunctionsService.getElementID()).subscribe(data => {
             this.dataSource = data;
             this.removeUnneededData()
             this.dataSource = new MatTableDataSource(this.dataSource);

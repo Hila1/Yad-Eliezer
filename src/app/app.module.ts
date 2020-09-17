@@ -50,6 +50,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CustomersFormFixesComponent } from './customers/customers-form/fixes/customers-form-fixes';
 import { RoomScheduling } from './customers/customers-form/rooms-scheduling/room-scheduling.component';
 import { ItemSchedulingComponent } from './customers/customers-form/items-scheduling/item-scheduling.component';
+import { ItemData } from './customers/customers-form/items-scheduling/item-data/item-data.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { ItemSchedulingComponent } from './customers/customers-form/items-schedu
     FileDetailsComponent,
     CustomersFormFixesComponent,
     RoomScheduling,
-    ItemSchedulingComponent
+    ItemSchedulingComponent,
+    ItemData
   ],
   imports: [
     BrowserModule,

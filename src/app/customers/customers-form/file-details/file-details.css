@@ -6,6 +6,7 @@
 .line {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     margin-right: auto;
     margin-left: auto;
 }
@@ -54,7 +55,7 @@ mat-slide-toggle {
     background-color: teal;
 }
 
-
+/*data filed style*/
 .data-field {
     width: 201px;
     height: 51.3px;
@@ -83,6 +84,13 @@ mat-slide-toggle {
     font-size: 11px;
     color: rgba(0, 0, 0, 0.637);
 }
+/*/>*/
+
+/* #narrow-data-field {
+    width: 115px;
+    margin-left: 2px;
+    margin-right: 10px;
+} */
 
 .file-header {
     margin-right: 10px;

@@ -14,10 +14,10 @@ export class FileDetailsComponent {
     payed = 'x';
 
     constructor(private _customersService: CustomersService,
-        private _globalFunctions: GlobalFunctionsService) { }
+        private _globalFunctionsService: GlobalFunctionsService) { }
 
     ngOnInit() {
-        this._customersService.getCustomerFileByCode(this._globalFunctions.getElementID()).subscribe(data => {
+        this._customersService.getCustomerFileByCode(this._globalFunctionsService.getElementID()).subscribe(data => {
             this.dataSource = data[0];
             this.dataSource['TakenDate'] = this.dataSource['TakenDate'] ? this.dataSource['TakenDate'].slice(0, -13) : null;
             this.dataSource['EventDate'] = this.dataSource['TakenDate'] ? this.dataSource['EventDate'].slice(0, -13) : null;
@@ -35,6 +35,7 @@ export class FileDetailsComponent {
     }
 
     getFilesFromServer() {
+
         let filterObj = [{
             nameField: 'SupportActivityId',
             Value: this.dataSource['SupportActivityId'],
@@ -43,21 +44,19 @@ export class FileDetailsComponent {
             //     nameField: 'DocumentTypeId',
             //     Value: documentTypeId,
             //     Operator: "IN"
-        }
-        ]
-        this._globalFunctions.getTableData('DocumentForPerson'
+        }]
+        
+        this._globalFunctionsService.getTableData('DocumentForPerson'
             , undefined, filterObj
         )
             .subscribe(data => {
-                console.log(data[0]);
                 this.DocumentForPerson = data[0];
             })
     }
 
     // download document
     viewDoc(index) {
-        debugger;
-        var url = this._globalFunctions.getUrlPage() + "/NewPhp/Libraries/Documents/Download/DownloadFile.php";
+        var url = this._globalFunctionsService.getUrlPage() + "/NewPhp/Libraries/Documents/Download/DownloadFile.php";
         var item = this.DocumentForPerson[index];
         item = item.Location.slice(19, item.Location.length);
         //שליחה לשרת ופתיחת התמונה המבוקשת

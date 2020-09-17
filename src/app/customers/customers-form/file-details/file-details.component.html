@@ -1,24 +1,30 @@
 <div class="lines" *ngIf="dataSource">
-    <!-- <div class="line"> -->
     <div class="header">
         <h1>פרטי תיק</h1>
     </div>
-    <!-- </div> -->
+
     <div class="space"></div>
 
     <h3>פרטים כלליים</h3>
-
     <div class="line">
         <div class="data-field">
             <h6 class="label">שם לקוח</h6>
             <h5 class="text-area">{{dataSource.PersonName}}</h5>
         </div>
+    </div>
 
+    <div class="line">
 
         <div class="data-field">
             <h6 class="label">תאריך אירוע</h6>
             <h5 class="text-area">{{dataSource.EventDate}}</h5>
         </div>
+
+        <div class="data-field" id="narrow-data-field">
+            <h6 class="label">תאריך עברי</h6>
+            <h5 class="text-area">{{dataSource.DateH}}</h5>
+        </div>
+
     </div>
 
     <div class="line">
@@ -27,10 +33,11 @@
             <h5 class="text-area">{{dataSource.Hall}}</h5>
         </div>
 
-        <div class="data-field">
+        <div class="data-field" id="narrow-data-field">
             <h6 class="label">תאריך לקיחת שמלה</h6>
             <h5 class="text-area">{{dataSource.TakenDate}}</h5>
         </div>
+
     </div>
 
     <div class="line">
@@ -73,7 +80,7 @@
             <mat-button-toggle value="creditCard" disabled='true'>אשראי</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
-<!-- {{+dataSource.StatusSecurityCheckId > 0 | json}} -->
+    <!-- {{+dataSource.StatusSecurityCheckId > 0 | json}} -->
     <div class="line">
         <mat-checkbox [checked]='shouldCheck(1)' disabled class="example-margin" color="primary">התקבל</mat-checkbox>
         <mat-checkbox [checked]='shouldCheck(2)' disabled class="example-margin" color="primary" ch>הוחזר</mat-checkbox>
@@ -91,7 +98,7 @@
     </div>
 
     <h3>תשלום עבור שמלה: {{dataSource.SumAmount}}</h3>
-    
+
     <div class="line">
         <div class="data-field" id="url-to-order">
             <h6 class="label">קישור להזמנה</h6>

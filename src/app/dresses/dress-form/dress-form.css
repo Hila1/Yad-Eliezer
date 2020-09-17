@@ -31,11 +31,12 @@ div {
 .line-of-inputs {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.comments {
+/* .comments {
     width: 365px;
-}
+} */
 
 hr {
     border: 0;

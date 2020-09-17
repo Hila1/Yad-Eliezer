@@ -36,11 +36,8 @@ export class RoomScheduling {
     })
   }
   modifyData() {
-
-    this.dataSource.forEach(element => {
-      let date = element['ScheduleDate'];
-  
-      element['ScheduleDate'] = date.slice(0,-7);
+    this.dataSource.forEach(element => {  
+      element['ScheduleDate'] = element['ScheduleDate'].slice(0,-7);
     });
   }
 }

@@ -31,12 +31,12 @@ export class EventsComponent {
     constructor(private _stockService: StockService,
         private router: Router,
         private route: ActivatedRoute,
-        private _globalFunctions:GlobalFunctionsService ) { }
+        private _globalFunctionsService:GlobalFunctionsService ) { }
 
 
     ngOnInit() {
         this.showSpinner = true
-        this._stockService.getItemEvens(this._globalFunctions.getElementID()).subscribe(data => {
+        this._stockService.getItemEvens(this._globalFunctionsService.getElementID()).subscribe(data => {
             this.dataSource = data;
             this.removeUnneededData()
             this.dataSource = new MatTableDataSource(this.dataSource);
