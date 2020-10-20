@@ -108,6 +108,11 @@ export class GlobalFunctionsService {
         url = url.substring(0, url.lastIndexOf('/'));
         // remove prefix
         let id = url.substring(url.lastIndexOf('/') + 1);
+        // in case there is no more slashes after the id - defferent formatting
+        if(isNaN(+id)){
+            url = window.location.href;
+            id = url.substring(url.lastIndexOf('/') + 1);
+        }
         return id;
     }
 

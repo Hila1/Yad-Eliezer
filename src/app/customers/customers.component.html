@@ -58,7 +58,11 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{
+        'make-red': row.color == '1', 
+        'make-green': row.color == '2', 
+        'make-yellow': row.color == '3',
+        'make-white': row.color == '4'}"></tr>
 
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>

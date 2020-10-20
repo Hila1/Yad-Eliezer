@@ -97,3 +97,32 @@ h5, h3, .title {
     flex: 1;
 }
 
+/*change background-color when an item is selected*/
+a.mat-list-item.active {
+    color: #20b393;
+}
+
+/*change background-color when the router is activating the link*/
+.is-active {
+    background-color: #20b393;
+}
+
+/*change background-color of the anchors focus after click*/
+a:focus, a.nav-links:focus, a.mat-list-item:focus {
+    background-color: #20b393
+}
+
+/* for smaller screens */
+@media only screen and (max-width: 352px) {
+    .bottom-part-container {
+        height: calc(100vh-190px);
+        max-height: calc(100vh-190px);
+        min-height: calc(100vh-190px);
+    }
+    .inner-container {
+        height: calc(100vh - 190px);
+        width: 100%;
+        min-height: calc(100vh - 190px);
+        max-height: calc(100vh - 190px);
+    }
+}

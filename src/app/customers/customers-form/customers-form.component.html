@@ -23,11 +23,11 @@
       <mat-drawer class="sidenav-content" mode="side" #drawer>
         <ul class="nav-links">
           <mat-nav-list>
-            <a mat-list-item (click)="navigateTo('fileDetails')">פרטי תיק</a><hr class="nav-list-hr" />
-            <a mat-list-item (click)="navigateTo('roomsScheduling')">שיבוץ חדרים</a><hr class="nav-list-hr" />
-            <a mat-list-item (click)="navigateTo('itemsScheduling')">שיבוץ פריטים</a><hr class="nav-list-hr" />
-            <a mat-list-item (click)="navigateTo('fixes')">תיקונים</a><hr class="nav-list-hr" />
-            <a mat-list-item (click)="navigateTo('payments')">תשלומים</a><hr class="nav-list-hr" />
+            <a mat-list-item routerLink="./fileDetails" [routerLinkActive]="['is-active']">פרטי תיק</a><hr class="nav-list-hr" />
+            <a mat-list-item routerLink="./roomsScheduling" [routerLinkActive]="['is-active']">שיבוץ חדרים</a><hr class="nav-list-hr" />
+            <a mat-list-item routerLink="./itemsScheduling" [routerLinkActive]="['is-active']">שיבוץ פריטים</a><hr class="nav-list-hr" />
+            <a mat-list-item routerLink="./fixes" [routerLinkActive]="['is-active']">תיקונים</a><hr class="nav-list-hr" />
+            <a mat-list-item routerLink="./payments" [routerLinkActive]="['is-active']">תשלומים</a><hr class="nav-list-hr" />
 
             <a mat-list-item (click)="toggleDrwer(drawer)">לחץ לסגירה</a>
           </mat-nav-list>
@@ -39,11 +39,11 @@
           <mat-sidenav mode="side" opened>
             <ul class="nav-links">
               <mat-nav-list>
-                <a mat-list-item (click)="navigateTo('fileDetails')"><mat-icon>business_center</mat-icon></a><hr class="nav-list-hr" />
-                <a mat-list-item (click)="navigateTo('roomsScheduling')"><mat-icon>room</mat-icon></a><hr class="nav-list-hr" />
-                <a mat-list-item (click)="navigateTo('itemsScheduling')"><mat-icon>vibration</mat-icon></a><hr class="nav-list-hr" />
-                <a mat-list-item (click)="navigateTo('fixes')"><mat-icon>content_cut</mat-icon></a><hr class="nav-list-hr" />
-                <a mat-list-item (click)="navigateTo('payments')"><mat-icon>payment</mat-icon></a><hr class="nav-list-hr" />
+                <a mat-list-item routerLink="./fileDetails" [routerLinkActive]="['is-active']"><mat-icon>business_center</mat-icon></a><hr class="nav-list-hr" />
+                <a mat-list-item routerLink="./roomsScheduling" [routerLinkActive]="['is-active']"><mat-icon>room</mat-icon></a><hr class="nav-list-hr" />
+                <a mat-list-item routerLink="./itemsScheduling" [routerLinkActive]="['is-active']"><mat-icon>vibration</mat-icon></a><hr class="nav-list-hr" />
+                <a mat-list-item routerLink="./fixes" [routerLinkActive]="['is-active']"><mat-icon>content_cut</mat-icon></a><hr class="nav-list-hr" />
+                <a mat-list-item routerLink="./payments" [routerLinkActive]="['is-active']"><mat-icon>payment</mat-icon></a><hr class="nav-list-hr" />
 
                 <a mat-list-item (click)="toggleDrwer(drawer)"><mat-icon>{{icon[index]}}</mat-icon></a>
               </mat-nav-list>
@@ -51,6 +51,7 @@
           </mat-sidenav>
           <mat-sidenav-content>
             <div class="inner-container">
+              <!-- <customers-form-fixes></customers-form-fixes> -->
               <router-outlet></router-outlet>
             </div>
           </mat-sidenav-content>

@@ -26,10 +26,12 @@ export class ItemSchedulingComponent {
 
 
     ngOnInit() {
-        this._customerService.getCustomerFileByCode(this._globalFunctionsService.getElementID()).subscribe(data => { // get BridalEventId from server
+        // this._customerService.getCustomerFileByCode(this._globalFunctionsService.getElementID()).subscribe(data => { // get BridalEventId from server
+        this._customerService.getBridalEventId().subscribe(bridalEventId => {
+            
             let filterObj = {
                 nameField: 'BridalEventId',
-                Value: data[0]['BridalEventId'],
+                Value: bridalEventId,
                 Operator: "="
             }
 

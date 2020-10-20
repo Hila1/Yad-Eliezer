@@ -1,0 +1,55 @@
+.lines {
+    display: flex;
+    flex-direction: column;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*data filed style*/
+.data-field {
+    width: 201px;
+    height: 51.3px;
+    padding: 10.5px, 10.5px, 10.5px, 0px;
+    margin-right: 10px;
+    margin-left: 10px; 
+    margin-bottom: 19px;
+    background-color: #0000000A;
+    color: rgba(0,0,0,.87);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.445);
+    border-radius: 4px 4px 0 0;
+}
+
+.text-area {
+    margin-top: -0.0625em;
+    padding-right: 10.5px;
+    padding-left: 10.5px;
+    font-size: 14px;
+}
+
+.label {
+    margin-bottom: 0px;
+    padding-right: 10.5px;
+    padding-left: 10.5px;
+    padding-top: 5px;
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.637);
+}
+/*until here*/
+
+.dowload-file-button {
+    color: white;
+    background-color: #49c5b6;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.checkbox {
+    margin: 30px;
+    margin-top: 30px;
+}

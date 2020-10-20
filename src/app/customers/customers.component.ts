@@ -15,7 +15,7 @@ export class CustomersComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  displayedColumns: string[] = ['BridalEventId', 'PersonId', 'PersonName', 'Addresss', 'PhoneNumber','EventDate', 'StatusSupportActivity', 'StatusBridalEvent'];
+  displayedColumns: string[] = ['BridalEventId', 'PersonId', 'PersonName', 'Addresss', 'PhoneNumber', 'EventDate', 'StatusSupportActivity', 'StatusBridalEvent'];
   dataSource: any = [];
   errorMsg: any;
   showSpinner: boolean = true;
@@ -32,6 +32,7 @@ export class CustomersComponent implements OnInit {
 
       this.dataSource.sort = this.sort;
       this.showSpinner = false;
+      console.log(this.dataSource);
     })
   }
 
@@ -45,11 +46,11 @@ export class CustomersComponent implements OnInit {
    */
   removeUnneededData() {
     this.dataSource.forEach(element => {
-      // for (let key in element) {
-      //   if (this.displayedColumns.indexOf(key) <= -1) { delete element[key]; }
-      // }
+      for (let key in element) {
+        if (this.displayedColumns.indexOf(key) <= -1 && key != 'color' && key != 'SupportActivityId') { delete element[key]; }
+      }
       element['EventDate'] = element['EventDate'].slice(0, - 13); // hide the end of the date string
-      element['Addresss'] = element['Addresss'].substring(0,25); // show only the fitst 25 chars
+      element['Addresss'] = element['Addresss'].substring(0, 25); // show only the fitst 25 chars
       element['PhoneNumber'] = element['PhoneNumber'].split(',')[0]; //show only the first phone number
     });
   }

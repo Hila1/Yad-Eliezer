@@ -29,6 +29,22 @@ h1 {
     justify-content: center;
 }
 
+.make-red {
+    background-color: #ffbdbd;
+}
+
+.make-green {
+    background-color: #b9ffb9;
+}
+
+.make-yellow {
+    background-color: #ffffd1;
+}
+
+.make-white {
+    background-color: white;
+}
+
 /* for smaller screens */
 
 @media only screen and (max-width: 736px) {

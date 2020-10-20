@@ -17,7 +17,7 @@ export class FileDetailsComponent {
         private _globalFunctionsService: GlobalFunctionsService) { }
 
     ngOnInit() {
-        this._customersService.getCustomerFileByCode(this._globalFunctionsService.getElementID()).subscribe(data => {
+        this._customersService.getCustomerFileByCode(/*this._globalFunctionsService.getElementID()*/).subscribe(data => {
             this.dataSource = data[0];
             this.dataSource['TakenDate'] = this.dataSource['TakenDate'] ? this.dataSource['TakenDate'].slice(0, -13) : null;
             this.dataSource['EventDate'] = this.dataSource['TakenDate'] ? this.dataSource['EventDate'].slice(0, -13) : null;

@@ -1,0 +1,76 @@
+<!-- first table - payments demand -->
+<ol>
+    <table *ngIf='paymentReasons'>
+        <caption>דרישת תשלום:</caption>
+        <thead>
+            <tr>
+                <th scope="col">סיבת תשלום</th>
+                <th scope="col">סה"כ עלות</th>
+                <th scope="col">סה"כ נזק</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor='let reason of paymentReasons'>
+                <td>
+                    <li>{{reason.reason}}</li>
+                </td>
+                <td>{{reason.cost}}</td>
+                <td>{{reason.dammage}}</td>
+            </tr>
+
+            <tr class="summary">
+                <th scope="col">סה"כ לתשלום</th>
+                <th scope="col">$$$</th>
+                <th scope="col">---</th>
+            </tr>
+        </tbody>
+    </table>
+</ol>
+
+<br>
+<br>
+
+<!-- second table - Actual payments -->
+<ol>
+    <table *ngIf='actualPayments'>
+        <caption>תשלומים בפועל</caption>
+        <thead>
+            <tr>
+                <th scope="col">תאריך</th>
+                <th scope="col">תאריך הפקדה</th>
+                <th scope="col">צורת תשלום</th>
+                <th scope="col">סכום</th>
+                <th scope="col">פרטי תשלום</th>
+                <th scope="col">מ. קבלה זמנית</th>
+                <th scope="col">סיבה</th>
+                <th scope="col">הערות</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor='let payment of actualPayments'>
+                <td>
+                    <li>{{cutDate(payment.PaymentDate)}}</li>
+                </td>
+                <td>{{payment.DepositDate}}</td>
+                <td>{{payment.PaymentMethodId}}</td>
+                <td>{{payment.Amount}}</td>
+                <td>{{payment.PaymentDetails}}</td>
+                <td>{{payment.ReceiptNumber}}</td>
+                <td>{{payment.PaymentReasonId}}</td>
+                <td>{{payment.Comment}}</td>
+            </tr>
+
+            <tr class="summary">
+                <th scope="col">סה"כ שולם:</th>
+                <th scope="col">{{paymentsSum + '₪'}}</th>
+                <th scope="col">---</th>
+                <th scope="col">|</th>
+                <th scope="col">יתרת תשלום</th>
+                <th scope="col">$$$</th>
+                <th scope="col">---</th>
+            </tr>
+        </tbody>
+    </table>
+</ol>

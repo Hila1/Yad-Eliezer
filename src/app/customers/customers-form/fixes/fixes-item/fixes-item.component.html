@@ -1,0 +1,39 @@
+<h4 *ngIf="stockBridalItemData == null">אין תיקונים לפריט זה</h4>
+
+<div class="lines" *ngFor='let item of stockBridalItemData'>
+
+    <div class="line">
+        <div class="data-field">
+            <h6 class="label">תאריך יעד</h6>
+            <h5 class="text-area">{{item.DueDate}}</h5>
+        </div>
+
+        <div class="data-field">
+            <h6 class="label">סוג תיקון ורמה</h6>
+            <h5 class="text-area">item.PersonName</h5>
+        </div>
+
+
+        <div class="data-field">
+            <h6 class="label">זמן תיקון</h6>
+            <h5 class="text-area">{{item.Duration}}</h5>
+        </div>
+    </div>
+
+    <div class="line">
+        <div class="data-field">
+            <h6 class="label">הערות</h6>
+            <h5 class="text-area">item.PersonName</h5>
+        </div>
+
+        <div class="data-field">
+            <h6 class="label">בוצע</h6>
+            <h5 class="text-area">item.PersonName</h5>
+        </div>
+
+        <button mat-mini-fab (click)="viewDoc(item.Attachments)" class="dowload-file-button">
+            <mat-icon>play_for_work</mat-icon>
+        </button>
+    </div>
+
+</div>

@@ -33,6 +33,10 @@ h1 {
     justify-content: center;
 }
 
+td {
+    text-align: center; 
+}
+
 /* for smaller screens */
 
 @media only screen and (max-width: 736px) {
@@ -57,16 +61,20 @@ h1 {
     }
 }
 
-.edit-buttom {
+.edit-button {
     background-color: #1a9177;
     color: white;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin: 5px;
+    padding: 0px;
 }
 
 .delete-button {
     background-color: rgb(194, 63, 40);
     color-interpolation-filters: white;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin: 5px;
+    padding: 0px;
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+    padding: 0px !important;
 }

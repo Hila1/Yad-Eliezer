@@ -51,6 +51,8 @@ import { CustomersFormFixesComponent } from './customers/customers-form/fixes/cu
 import { RoomScheduling } from './customers/customers-form/rooms-scheduling/room-scheduling.component';
 import { ItemSchedulingComponent } from './customers/customers-form/items-scheduling/item-scheduling.component';
 import { ItemData } from './customers/customers-form/items-scheduling/item-data/item-data.component';
+import { PaymentsComponent } from './customers/customers-form/payments/payments.component';
+import { FixesItemComponent } from './customers/customers-form/fixes/fixes-item/fixes-item.component';
 
 
 @NgModule({
@@ -77,7 +79,9 @@ import { ItemData } from './customers/customers-form/items-scheduling/item-data/
     CustomersFormFixesComponent,
     RoomScheduling,
     ItemSchedulingComponent,
-    ItemData
+    ItemData,
+    PaymentsComponent,
+    FixesItemComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+<body>
+    <h4 *ngIf='dataSource==null' class="no-fixes-header">לא קיימים תיקונים ללקוח זה</h4>
+    <div *ngIf='dataSource!=null'>
+        <h3>מידות לקוח</h3>
+
+        <mat-accordion *ngFor='let row of dataSource' multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{row.BridalTypeItem}} - {{row.BridalItem_Description}} / {{row.Mct}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        לא קיימים תיקונים </mat-panel-description>
+                </mat-expansion-panel-header>
+                
+                <fixes-item *ngIf='seamStressList' [stockBridalItemData]='getSeamsForSingleItem(row.StockBridalItemId)'>
+                </fixes-item>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</body>

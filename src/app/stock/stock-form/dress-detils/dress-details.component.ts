@@ -64,7 +64,6 @@ export class DressDetailsComponent implements OnInit {
   updateServer() {
     this._globalFunctionService.update(this.original, this.dataSource, "StockBridalItem").subscribe(data => {
       this.original = Object.assign({}, this.dataSource);
-      debugger;
       // show snack bar
       if (data.length < 3) {
         var message = "נשמר בהצלחה"

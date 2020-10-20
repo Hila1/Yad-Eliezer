@@ -21,19 +21,14 @@ export class CustomersFormComponent implements OnInit {
 
 
     ngOnInit() {
-        // get optional router params
-        this.route.paramMap.subscribe((params: ParamMap) => {
-
-            this._customerService.getCustomerFileByCode(params.get('id')).subscribe(data => {
-                this.dataSource = data[0]
-                console.log(data[0]);
-                this.dataSource["EventDate"] = this.dataSource["EventDate"].slice(0, -13); // edit date format
-                this.router.navigate(['fileDetails'], { relativeTo: this.route })
-            });
-        })
+        this._customerService.getCustomerFileByCode().subscribe(data => {
+            this.dataSource = data[0]
+            this.dataSource["EventDate"] = this.dataSource["EventDate"].slice(0, -13); // edit date format
+            this.router.navigate(['fileDetails'], { relativeTo: this.route })
+        });
     }
 
-    
+
     navigateTo(name: string) {
         this.router.navigate([name], { relativeTo: this.route })
     }

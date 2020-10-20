@@ -14,6 +14,7 @@ import { FileDetailsComponent } from './customers/customers-form/file-details/fi
 import { CustomersFormFixesComponent } from './customers/customers-form/fixes/customers-form-fixes';
 import { RoomScheduling } from './customers/customers-form/rooms-scheduling/room-scheduling.component';
 import { ItemSchedulingComponent } from './customers/customers-form/items-scheduling/item-scheduling.component';
+import { PaymentsComponent } from './customers/customers-form/payments/payments.component';
 
 
 const routes: Routes = [
@@ -36,7 +37,7 @@ const routes: Routes = [
     { path: 'roomsScheduling', component: RoomScheduling },
     { path: 'itemsScheduling', component: ItemSchedulingComponent },
     { path: 'fixes', component: CustomersFormFixesComponent },
-    { path: 'payments', component: CRMComponent }
+    { path: 'payments', component: PaymentsComponent }
   ] },
   { path: "**", component: PageNotFoundComponent }
 ];
