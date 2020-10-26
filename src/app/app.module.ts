@@ -1,9 +1,10 @@
+import { MbscModule } from '@mobiscroll/angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule, RoutingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DressesComponent } from './dresses/dresses.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { DressesService } from './services/dresses.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
@@ -53,6 +54,9 @@ import { ItemSchedulingComponent } from './customers/customers-form/items-schedu
 import { ItemData } from './customers/customers-form/items-scheduling/item-data/item-data.component';
 import { PaymentsComponent } from './customers/customers-form/payments/payments.component';
 import { FixesItemComponent } from './customers/customers-form/fixes/fixes-item/fixes-item.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 @NgModule({
@@ -81,9 +85,11 @@ import { FixesItemComponent } from './customers/customers-form/fixes/fixes-item/
     ItemSchedulingComponent,
     ItemData,
     PaymentsComponent,
-    FixesItemComponent
+    FixesItemComponent,
+    CalendarComponent
   ],
-  imports: [
+  imports: [ 
+    MbscModule, 
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -110,8 +116,14 @@ import { FixesItemComponent } from './customers/customers-form/fixes/fixes-item/
     MatFormFieldModule,
     MatExpansionModule,
     MatListModule,
-    MatCheckboxModule
-  ],
+    MatCheckboxModule,
+    BrowserModule,
+    MbscModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    HttpClientJsonpModule
+    ],
   entryComponents: [CustomDialog],
   providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService],
   bootstrap: [AppComponent]

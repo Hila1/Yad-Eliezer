@@ -9,8 +9,7 @@
                     <mat-panel-title>
                         {{row.BridalTypeItem}} - {{row.BridalItem_Description}} / {{row.Mct}}
                     </mat-panel-title>
-                    <mat-panel-description>
-                        לא קיימים תיקונים </mat-panel-description>
+                    <mat-panel-description *ngIf='seamStressList'>{{getPanelDescription(row.StockBridalItemId)}}</mat-panel-description>
                 </mat-expansion-panel-header>
                 
                 <fixes-item *ngIf='seamStressList' [stockBridalItemData]='getSeamsForSingleItem(row.StockBridalItemId)'>

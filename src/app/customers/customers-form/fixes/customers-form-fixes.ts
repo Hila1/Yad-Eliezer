@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { element } from 'protractor';
 import { CustomersService } from 'src/app/services/customers.service';
 import { GlobalFunctionsService } from 'src/app/services/global-functions.service';
 import { StockService } from 'src/app/services/stock.service';
@@ -49,12 +50,26 @@ export class CustomersFormFixesComponent {
         })
     }
 
-    getSeamsForSingleItem(stockBridalItemId: string){
+    getSeamsForSingleItem(stockBridalItemId: string) {
         let res = []
         this.seamStressList.forEach(element => {
-            if(element['StockBridalItemId'] == stockBridalItemId)
+            if (element['StockBridalItemId'] == stockBridalItemId)
                 res.push(element);
         });
         return res;
+    }
+
+    getPanelDescription(stockBridalItemId: string) {
+        let itemSeamList = this.getSeamsForSingleItem(stockBridalItemId);
+        if( itemSeamList[0] == null) { // if the list is empty
+            return "לא קיימים תיקונים";
+        }
+        let done = 0;
+        itemSeamList.forEach(item => {
+            if (item['TakenOn'])
+                done += 1;
+        })
+
+        return " קיימים " + itemSeamList.length + " תיקונים, מתוכם " + done + " בוצעו ";
     }
 }

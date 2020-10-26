@@ -15,10 +15,12 @@ import { CustomersFormFixesComponent } from './customers/customers-form/fixes/cu
 import { RoomScheduling } from './customers/customers-form/rooms-scheduling/room-scheduling.component';
 import { ItemSchedulingComponent } from './customers/customers-form/items-scheduling/item-scheduling.component';
 import { PaymentsComponent } from './customers/customers-form/payments/payments.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/dresses', pathMatch: 'full' },
+  {path:'calendar', component: CalendarComponent},
   { path: 'stock', component: StockComponent },
   {
     path: 'stock/:id', component: StockFormComponent,

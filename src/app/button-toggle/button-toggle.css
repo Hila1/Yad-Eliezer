@@ -2,9 +2,11 @@ mat-button-toggle {
     font-size: small;
     background-color: white;
     color: teal;
+    font-weight: bold;
 }
 
 .mat-button-toggle-checked {
     background-color: teal;
     color: white;
+    font-weight: bold;
 }
