@@ -57,6 +57,7 @@ import { FixesItemComponent } from './customers/customers-form/fixes/fixes-item/
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 // import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarService } from './services/calendar.service';
 
 
 @NgModule({
@@ -117,15 +118,12 @@ import { CalendarComponent } from './calendar/calendar.component';
     MatExpansionModule,
     MatListModule,
     MatCheckboxModule,
-    BrowserModule,
-    MbscModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
-    HttpClientJsonpModule
+    HttpClientJsonpModule,
+
     ],
   entryComponents: [CustomDialog],
-  providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService],
+  providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService, CalendarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
