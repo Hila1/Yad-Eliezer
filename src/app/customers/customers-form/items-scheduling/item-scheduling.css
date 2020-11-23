@@ -52,7 +52,7 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
     height: fit-content;
-    max-height: calc(100vh - 272px);
+    max-height: calc(100% - 66px);
     overflow: hidden;
     overflow-y: scroll;
 }

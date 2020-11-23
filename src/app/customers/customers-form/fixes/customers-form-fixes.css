@@ -10,3 +10,8 @@ body {
     font-weight: bold;
     font-size: 15px;
 }
+
+.customer-size-header {
+    direction: rtl;
+    font-weight: bold; 
+}

@@ -16,12 +16,14 @@ import { RoomScheduling } from './customers/customers-form/rooms-scheduling/room
 import { ItemSchedulingComponent } from './customers/customers-form/items-scheduling/item-scheduling.component';
 import { PaymentsComponent } from './customers/customers-form/payments/payments.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { GalleryComponent } from './dresses/gallery-view/gallery-view.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/dresses', pathMatch: 'full' },
-  {path:'calendar', component: CalendarComponent},
+  { path: 'calendar', component: CalendarComponent },
   { path: 'stock', component: StockComponent },
+  { path: 'gallery', component: GalleryComponent },
   {
     path: 'stock/:id', component: StockFormComponent,
     children: [
@@ -33,14 +35,16 @@ const routes: Routes = [
   { path: 'dresses', component: DressesComponent },
   { path: 'dresses/:id', component: DressFormComponent },
   { path: 'customers', component: CustomersComponent },
-  { path: 'customers/:id', component: CustomersFormComponent,
-  children: [
-    { path: 'fileDetails', component: FileDetailsComponent },
-    { path: 'roomsScheduling', component: RoomScheduling },
-    { path: 'itemsScheduling', component: ItemSchedulingComponent },
-    { path: 'fixes', component: CustomersFormFixesComponent },
-    { path: 'payments', component: PaymentsComponent }
-  ] },
+  {
+    path: 'customers/:id', component: CustomersFormComponent,
+    children: [
+      { path: 'fileDetails', component: FileDetailsComponent },
+      { path: 'roomsScheduling', component: RoomScheduling },
+      { path: 'itemsScheduling', component: ItemSchedulingComponent },
+      { path: 'fixes', component: CustomersFormFixesComponent },
+      { path: 'payments', component: PaymentsComponent }
+    ]
+  },
   { path: "**", component: PageNotFoundComponent }
 ];
 

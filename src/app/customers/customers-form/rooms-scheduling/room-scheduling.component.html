@@ -1,7 +1,11 @@
 <loading-spinner *ngIf="showSpinner"></loading-spinner>
 
-<div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort *ngIf='dataSource' >
+<div class="no-room-scheduling" *ngIf='dataSource == null || this.dataSource.length == 0'>
+    <h3>לא קיימים שיבוצי חדרים לתיק זה</h3>
+</div>
+
+<div class="mat-elevation-z8" *ngIf='dataSource && dataSource.length > 0' >
+    <table mat-table [dataSource]="dataSource" matSort >
 
         <ng-container matColumnDef="ScheduleDate">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>תאריך</th>

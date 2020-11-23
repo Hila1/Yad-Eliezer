@@ -37,7 +37,12 @@ export class ItemInfoComponent {
   }
 
   initImagesSource() {
-    this.imagesArray = JSON.parse(this.dataSource['Attachment']);
+    try {
+      this.imagesArray = JSON.parse(this.dataSource['Attachment']);
+    } catch (error) {
+      debugger
+      console.log(this.dataSource);
+    }
     // if the array is not empty and its first image has a source
     if (this.imagesArray != null && this.imagesArray[0]['src'] != null) {
       this.imagesArray = this.imagesArray.filter(i => i['src'] !== null) // remove items without src

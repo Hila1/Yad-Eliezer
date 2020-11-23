@@ -5,80 +5,83 @@
     <mat-label>חיפוש</mat-label>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="הכנס מילות חיפוש" #input>
 </mat-form-field>
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" *ngIf="dataSource">
-    <!-- StockBridalItemId Column -->
-    <ng-container matColumnDef="StockBridalItemId">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>קוד פריט במלאי</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.StockBridalItemId}} </td>
-    </ng-container>
 
-    <!-- Mct Column -->
-    <ng-container matColumnDef="Mct">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>מקט</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.Mct}} </td>
-    </ng-container>
+<div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" *ngIf="dataSource">
+        <!-- StockBridalItemId Column -->
+        <ng-container matColumnDef="StockBridalItemId">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>קוד פריט במלאי</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.StockBridalItemId}} </td>
+        </ng-container>
 
-    <!-- BridalTypeItem Column -->
-    <ng-container matColumnDef="BridalTypeItem">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>סוג פריט</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.BridalTypeItem}} </td>
-    </ng-container>
+        <!-- Mct Column -->
+        <ng-container matColumnDef="Mct">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>מקט</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.Mct}} </td>
+        </ng-container>
 
-    <!-- BridalItem_Description Column -->
-    <ng-container matColumnDef="BridalItem_Description">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>תאור פריט</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.BridalItem_Description}} </td>
-    </ng-container>
+        <!-- BridalTypeItem Column -->
+        <ng-container matColumnDef="BridalTypeItem">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>סוג פריט</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.BridalTypeItem}} </td>
+        </ng-container>
 
-    <!-- Size Column -->
-    <ng-container matColumnDef="Size">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>מידה</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.Size}} </td>
-    </ng-container>
+        <!-- BridalItem_Description Column -->
+        <ng-container matColumnDef="BridalItem_Description">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>תאור פריט</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.BridalItem_Description}} </td>
+        </ng-container>
 
-    <!-- Condition Column -->
-    <ng-container matColumnDef="Condition">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>מצב</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.Condition}} </td>
-    </ng-container>
+        <!-- Size Column -->
+        <ng-container matColumnDef="Size">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>מידה</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.Size}} </td>
+        </ng-container>
 
-    <!-- lengthItem Column -->
-    <ng-container matColumnDef="lengthItem">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>אורך</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.lengthItem}} </td>
-    </ng-container>
+        <!-- Condition Column -->
+        <ng-container matColumnDef="Condition">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>מצב</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.Condition}} </td>
+        </ng-container>
 
-    <!-- Location Column -->
-    <ng-container matColumnDef="Location">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>מיקום</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.Location}} </td>
-    </ng-container>
+        <!-- lengthItem Column -->
+        <ng-container matColumnDef="lengthItem">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>אורך</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.lengthItem}} </td>
+        </ng-container>
 
-    <!-- IsActive Column -->
-    <ng-container matColumnDef="IsActive">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>פעיל</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.IsActive}} </td>
-    </ng-container>
+        <!-- Location Column -->
+        <ng-container matColumnDef="Location">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>מיקום</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.Location}} </td>
+        </ng-container>
 
-    <!-- ActiveReason Column -->
-    <ng-container matColumnDef="ActiveReason">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>סיבה</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.ActiveReason}} </td>
-    </ng-container>
+        <!-- IsActive Column -->
+        <ng-container matColumnDef="IsActive">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>פעיל</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.IsActive}} </td>
+        </ng-container>
 
-    <!-- LastEventDate Column -->
-    <ng-container matColumnDef="LastEventDate">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>שיבוץ אירוע אחרון</th>
-        <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.LastEventDate}} </td>
-    </ng-container>
+        <!-- ActiveReason Column -->
+        <ng-container matColumnDef="ActiveReason">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>סיבה</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.ActiveReason}} </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <!-- LastEventDate Column -->
+        <ng-container matColumnDef="LastEventDate">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>שיבוץ אירוע אחרון</th>
+            <td mat-cell (click)="rowClicked(row)" *matCellDef="let row"> {{row.LastEventDate}} </td>
+        </ng-container>
 
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr>
-</table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
+</div>
 
 </html>

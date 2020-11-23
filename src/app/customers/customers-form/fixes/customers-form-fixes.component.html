@@ -1,7 +1,7 @@
 <body>
     <h4 *ngIf='dataSource==null' class="no-fixes-header">לא קיימים תיקונים ללקוח זה</h4>
     <div *ngIf='dataSource!=null'>
-        <h3>מידות לקוח</h3>
+        <h4 class='customer-size-header'>מידות לקוח</h4>
 
         <mat-accordion *ngFor='let row of dataSource' multi>
             <mat-expansion-panel>

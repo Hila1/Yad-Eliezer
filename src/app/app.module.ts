@@ -1,4 +1,3 @@
-import { MbscModule } from '@mobiscroll/angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule, RoutingComponent } from './app-routing.module';
@@ -55,10 +54,17 @@ import { ItemData } from './customers/customers-form/items-scheduling/item-data/
 import { PaymentsComponent } from './customers/customers-form/payments/payments.component';
 import { FixesItemComponent } from './customers/customers-form/fixes/fixes-item/fixes-item.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
-// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarService } from './services/calendar.service';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DemoUtilsModule } from './demo-utils/model';
+import { NgxImageGalleryModule } from 'ngx-image-gallery';
+import { GalleryComponent } from './dresses/gallery-view/gallery-view.component';
 
+import localeHe from '@angular/common/locales/he';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeHe);
 
 @NgModule({
   declarations: [
@@ -87,10 +93,12 @@ import { CalendarService } from './services/calendar.service';
     ItemData,
     PaymentsComponent,
     FixesItemComponent,
-    CalendarComponent
+    CalendarComponent,
+    GalleryComponent
   ],
-  imports: [ 
-    MbscModule, 
+  imports: [
+    NgxImageGalleryModule,
+    DemoUtilsModule, 
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -120,7 +128,11 @@ import { CalendarService } from './services/calendar.service';
     MatCheckboxModule,
     HttpClientModule,
     HttpClientJsonpModule,
-
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    NgbModule,
     ],
   entryComponents: [CustomDialog],
   providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService, CalendarService],

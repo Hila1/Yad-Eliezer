@@ -1,205 +1,186 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MbscEventcalendar, MbscEventcalendarOptions, MbscPopupOptions, MbscRangeOptions, mobiscroll } from '@mobiscroll/angular';
 import { CalendarService } from '../services/calendar.service';
-
-/**
- * important comment!
- * in case of updating the library mobiscroll, go to the file 'mobiscroll.angular.min.js' (inside esm5),
- * look for the string: fromCharCode, bellow the for loop, add this line:
- *     b=b.replace("\\u0054\\u0052\\u0049\\u0041\\u004c","")
- */
-
-mobiscroll.settings = {
-    lang: 'he',
-    theme: 'material',
-    themeVariant: 'light'
-};
-
-let preventSet = false;
-let id = 5;
-
-const now = new Date();
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import {
+    startOfDay,
+    endOfDay,
+    subDays,
+    addDays,
+    endOfMonth,
+    isSameDay,
+    isSameMonth,
+    addHours,
+} from 'date-fns';
+import { Subject } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
+import { colors, EventColor } from '../demo-utils/colors';
+import { formatNumber } from '@angular/common';
 
 @Component({
-    selector: 'calendar',
+    selector: 'mwl-demo-component',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['calendar.css'],
     templateUrl: 'calendar.component.html',
 })
-export class CalendarComponent implements OnInit {
-    @ViewChild('mbscMonthCal')
-    monthCal: MbscEventcalendar;
+export class CalendarComponent {
+    @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
-    @ViewChild('mbscDayCal')
-    dayCal: MbscEventcalendar;
+    locale: string = "he";
 
-    allDay = false;
-    eventDate = [now, new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 2)];
-    colorArray = ['#ffbdbd', '#b9ffb9', '#ffffd1', '#fffabd', '#bdfffc', '#bdc8ff', '#008016']
+    view: CalendarView = CalendarView.Month;
 
-    isFree = 'busy';
-    eventText = '';
-    eventDesc = '';
-    control: Array<string>;
-    wheels: string;
-    events: any;
-    rangeSettings: MbscRangeOptions = {
-        lang: 'he',
-        controls: ['date', 'time'],
-        dateWheels: '|D M d|',
-        startInput: '#startDate',
-        endInput: '#endDate',
-        tabs: false,
-        responsive: {
-            large: {
-                touchUi: false
-            }
-        },
-        showSelector: false
+    CalendarView = CalendarView;
+
+    viewDate: Date = new Date();
+
+    colorsArray = Object.keys( colors );
+    currentColorIndex = 0;
+
+    modalData: {
+        action: string;
+        event: CalendarEvent;
     };
 
-    daySettings: MbscEventcalendarOptions = {
-        display: 'inline',
-        lang: 'he',
-        view: {
-            eventList: { type: 'day' }
+    actions: CalendarEventAction[] = [
+        {
+            label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+            a11yLabel: 'Edit',
+            onClick: ({ event }: { event: CalendarEvent }): void => {
+                this.handleEvent('Edited', event);
+            },
         },
-        onPageChange: (event, inst) => {
-            const day = event.firstDay;
-            preventSet = true;
-            this.navigate(this.monthCal.instance, day);
-            this.eventDate = [day, new Date(day.getFullYear(), day.getMonth(), day.getDate(), day.getHours() + 2)];
+        {
+            label: '<i class="fas fa-fw fa-trash-alt"></i>',
+            a11yLabel: 'Delete',
+            onClick: ({ event }: { event: CalendarEvent }): void => {
+                this.events = this.events.filter((iEvent) => iEvent !== event);
+                this.handleEvent('Deleted', event);
+            },
         },
-        onEventSelect: (event, inst) => {
-            if (event.domEvent.target.classList.contains('md-delete-btn')) {
-                mobiscroll.confirm({
-                    title: 'Confirm Deletion',
-                    message: 'Are you sure you want to delete this item?',
-                    okText: 'Delete',
-                    callback: (res) => {
-                        if (res) {
-                            //remove element by id
-                            const events = this.events;
-                            const index = events.indexOf(events.filter(x => x.id === event.event.id)[0]);
+    ];
 
-                            events.splice(index, 1);
+    refresh: Subject<any> = new Subject();
 
-                            mobiscroll.toast({
-                                message: 'Deleted'
-                            });
-                        }
-                    }
-                });
-            }
-        }
-    };
+    events: CalendarEvent[];
+    activeDayIsOpen: boolean = true;
+    StuffColors: {} = {};
 
-    monthSettings: MbscEventcalendarOptions = {
-        display: 'inline',
-        lang: 'he',
-        view: {
-            calendar: { type: 'month' }
-        },
-        onSetDate: (event, inst) => {
-            if (!preventSet) {
-                const day = event.date;
-                this.navigate(this.dayCal.instance, day);
-                this.eventDate = [day, new Date(day.getFullYear(), day.getMonth(), day.getDate(), day.getHours() + 2)];
-            }
-            preventSet = false;
-        }
-    };
-
-    popupSettings: MbscPopupOptions = {
-        display: 'center',
-        lang: 'he',
-        cssClass: 'mbsc-no-padding',
-        buttons: [{
-            text: 'הוסף אירוע',
-            handler: 'set'
-        },
-            'cancel'
-        ],
-        headerText: 'הוסף אירוע חדש',
-        onSet: (event, inst) => {
-            this.events.push({
-                id: id,
-                start: this.eventDate[0],
-                end: this.eventDate[1],
-                text: (this.eventText || 'New Event'),
-                title: this.eventText || 'New Event',
-                description: this.eventDesc,
-                allDay: this.allDay,
-                free: this.isFree === 'free'
-            });
-            this.eventText = '';
-            this.eventDesc = '';
-            id += 1;
-            // Navigate the calendar to the new event's start date
-            this.monthCal.instance.navigate(this.eventDate[0], true);
-        }
-    };
-    bridalStuffColors: {} = {};
-    colorIndex: number = 0;
-
-    constructor(private http: HttpClient,
-        private _calendarService: CalendarService) { }
+    constructor(private _calendarService: CalendarService,
+        private modal: NgbModal) { };
 
     ngOnInit() {
         this._calendarService.getAllEvents().subscribe(events => {
             console.log(events);
-            this.events = events;
-            this.events.forEach(event => {
-                event['d'] = new Date(event['start'])
-                event['text'] = event['title']
-                delete event['title'];
-                this.addStuffIdToColorsObj(event['BridalStaffId']); // add the id and color to the colors obj
-                event['color'] = this.bridalStuffColors[event['BridalStaffId']]
+            this.events = [];
+            events.forEach((event: {}) => {
+                this.events.push(this.fixEventFormat(event));
+
+
             });
         })
-        // this.http.jsonp('https://trial.mobiscroll.com/events/', 'callback').subscribe((resp: any) => {
-        //     this.events = resp;
-        //     var id = 1;
-        //     this.events.forEach(event => {
-        //         event['id'] = id;
-        //         id += 1;
-        //         event['d'] = new Date(event['start'])
-        //     });
-        //     console.log(resp)
-        // });
     }
-    addStuffIdToColorsObj(staffId: any) {
-        debugger
-        // if the stuff id is not already in the obj -> add it
-        if (!(staffId in this.bridalStuffColors)) {
-            this.bridalStuffColors[staffId] = this.colorArray[this.colorIndex];
-            this.colorIndex += 1;
+    fixEventFormat(event: {}): CalendarEvent<any> {
+        // var stuffId = event['BridalStaffId'];
+        // var color = this.getStuffIdToColors(stuffId);
+        // var newColor = this.getNewColor()
+        // console.log(color)
+        // console.log(newColor)
+
+
+
+        let formatedEvent: CalendarEvent<any> = {
+            start: new Date(event['start']),
+            end: new Date(event['end']),
+            title: "this is the title",
+            color: this.getStuffIdToColors(event['BridalStaffId'])
+        }
+        return formatedEvent;
+
+    }
+
+    // this function gets a stuff ID and returns its event color
+    getStuffIdToColors(stuffId: string): EventColor {
+        var res = this.StuffColors[stuffId];
+        if(res == undefined){
+        // if (stuffId in this.StuffColors) {
+        //     res = 
+        // } else {
+            this.StuffColors[stuffId] = this.getNewColor();
+            res = this.StuffColors[stuffId]
+        }
+
+        return res;
+    }
+
+    getNewColor(): EventColor {
+        let res = colors[this.colorsArray[this.currentColorIndex]];
+        this.currentColorIndex +=1;
+        return res;
+    }
+
+    dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+        if (isSameMonth(date, this.viewDate)) {
+            if (
+                (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+                events.length === 0
+            ) {
+                this.activeDayIsOpen = false;
+            } else {
+                this.activeDayIsOpen = true;
+            }
+            this.viewDate = date;
         }
     }
 
-
-    navigate(inst, val) {
-        if (inst) {
-            inst.navigate(val);
-        }
+    eventTimesChanged({
+        event,
+        newStart,
+        newEnd,
+    }: CalendarEventTimesChangedEvent): void {
+        this.events = this.events.map((iEvent) => {
+            if (iEvent === event) {
+                return {
+                    ...event,
+                    start: newStart,
+                    end: newEnd,
+                };
+            }
+            return iEvent;
+        });
+        this.handleEvent('Dropped or resized', event);
     }
 
-    change() {
-        this.control = this.allDay ? ['date'] : ['date', 'time'];
-        this.wheels = this.allDay ? 'MM dd yy' : '|D M d|';
+    handleEvent(action: string, event: CalendarEvent): void {
+        this.modalData = { event, action };
+        this.modal.open(this.modalContent, { size: 'lg' });
     }
 
     addEvent(): void {
-        if (this.eventDate && this.eventText) {
-            this.events.push({
-                d: this.eventDate,
-                text: this.eventText
-            });
-        }
+        this.events = [
+            ...this.events,
+            {
+                title: 'New event',
+                start: startOfDay(new Date()),
+                end: endOfDay(new Date()),
+                color: colors.red,
+                draggable: true,
+                resizable: {
+                    beforeStart: true,
+                    afterEnd: true,
+                },
+            },
+        ];
     }
 
-    //item is tapped
-    onItemTap(event, inst) {
-        console.log('onItemTap')
+    deleteEvent(eventToDelete: CalendarEvent) {
+        this.events = this.events.filter((event) => event !== eventToDelete);
+    }
+
+    setView(view: CalendarView) {
+        this.view = view;
+    }
+
+    closeOpenMonthViewDay() {
+        this.activeDayIsOpen = false;
     }
 }

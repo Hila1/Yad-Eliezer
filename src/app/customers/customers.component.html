@@ -6,69 +6,70 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="הכנס מילות חיפוש" #input>
 </mat-form-field>
 
-<div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
+<div class="table-container">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
 
-        <!-- BridalEventId Column -->
-        <ng-container matColumnDef="BridalEventId">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>קוד תיק</th>
-            <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.BridalEventId}} </td>
-        </ng-container>
+            <!-- BridalEventId Column -->
+            <ng-container matColumnDef="BridalEventId">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>קוד תיק</th>
+                <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.BridalEventId}} </td>
+            </ng-container>
 
-        <!-- PersonId Column -->
-        <ng-container matColumnDef="PersonId">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>קוד לקוח</th>
-            <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.PersonId}} </td>
-        </ng-container>
+            <!-- PersonId Column -->
+            <ng-container matColumnDef="PersonId">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>קוד לקוח</th>
+                <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.PersonId}} </td>
+            </ng-container>
 
-        <!-- PersonName Column -->
-        <ng-container matColumnDef="PersonName">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>שם לקוח</th>
-            <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.PersonName}} </td>
-        </ng-container>
+            <!-- PersonName Column -->
+            <ng-container matColumnDef="PersonName">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>שם לקוח</th>
+                <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.PersonName}} </td>
+            </ng-container>
 
-        <!-- Addresss Column -->
-        <ng-container matColumnDef="Addresss">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>כתובת</th>
-            <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.Addresss}} </td>
-        </ng-container>
+            <!-- Addresss Column -->
+            <ng-container matColumnDef="Addresss">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>כתובת</th>
+                <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.Addresss}} </td>
+            </ng-container>
 
-        <!-- PhoneNumber Column -->
-        <ng-container matColumnDef="PhoneNumber">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>טלפון</th>
-            <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.PhoneNumber}} </td>
-        </ng-container>
+            <!-- PhoneNumber Column -->
+            <ng-container matColumnDef="PhoneNumber">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>טלפון</th>
+                <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.PhoneNumber}} </td>
+            </ng-container>
 
-        <!-- EventDate Column -->
-        <ng-container matColumnDef="EventDate">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>תאריך אירוע</th>
-            <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.EventDate}} </td>
-        </ng-container>
+            <!-- EventDate Column -->
+            <ng-container matColumnDef="EventDate">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>תאריך אירוע</th>
+                <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.EventDate}} </td>
+            </ng-container>
 
-        <!-- StatusSupportActivity Column -->
-        <ng-container matColumnDef="StatusSupportActivity">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>סטטוס החלטה</th>
-            <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.StatusSupportActivity}} </td>
-        </ng-container>
+            <!-- StatusSupportActivity Column -->
+            <ng-container matColumnDef="StatusSupportActivity">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>סטטוס החלטה</th>
+                <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.StatusSupportActivity}} </td>
+            </ng-container>
 
-        <!-- StatusBridalEvent Column -->
-        <ng-container matColumnDef="StatusBridalEvent">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef>סטטוס תיק</th>
-            <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.StatusBridalEvent}} </td>
-        </ng-container>
+            <!-- StatusBridalEvent Column -->
+            <ng-container matColumnDef="StatusBridalEvent">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef>סטטוס תיק</th>
+                <td (click)="rowClicked(row)" mat-cell *matCellDef="let row"> {{row.StatusBridalEvent}} </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{
         'make-red': row.color == '1', 
         'make-green': row.color == '2', 
         'make-yellow': row.color == '3',
         'make-white': row.color == '4'}"></tr>
 
-        <!-- Row shown when there is no matching data. -->
-        <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-        </tr>
-    </table>
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+    </div>
 </div>
-
 <!-- </html> -->

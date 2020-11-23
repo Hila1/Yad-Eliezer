@@ -15,13 +15,12 @@ export class CalendarService {
     bridalEventId: string;
     localElementId: string;
 
-    constructor(private http: HttpClient,
-        private _globalFunctionsService: GlobalFunctionsService) { }
+    constructor(private http: HttpClient) { }
 
-    getAllEvents(bridelStaff: string = null, room: string = null): Observable<ICustomer> {
+    getAllEvents(bridelStaff: string = null, room: string = null): Observable<any> {
         let params = { "TypeFunction": "getAllEvents", "Params": { "bridelStaff": bridelStaff, "room": room } }
 
-        return this.http.post<ICustomer>(this._url, "object=" + JSON.stringify(params), this.options)
+        return this.http.post<any>(this._url, "object=" + JSON.stringify(params), this.options)
             .pipe(catchError(err => {
                 console.log(err);
                 return Observable.throw(err);

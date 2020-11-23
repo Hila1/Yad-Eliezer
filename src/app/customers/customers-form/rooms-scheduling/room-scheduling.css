@@ -37,29 +37,7 @@ td {
     text-align: center; 
 }
 
-/* for smaller screens */
 
-@media only screen and (max-width: 736px) {
-    .mat-header-cell {
-        padding-right: 5px;
-        font-size: small;
-    }
-    td {
-        font-size: small;
-    }
-}
-
-/* for smaller screens */
-
-@media only screen and (max-width: 568px) {
-    .mat-header-cell {
-        padding-right: 5px;
-        font-size: x-small;
-    }
-    td {
-        font-size: x-small;
-    }
-}
 
 .edit-button {
     background-color: #1a9177;
@@ -77,4 +55,48 @@ td {
 
 th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
     padding: 0px !important;
+}
+
+/* for smaller screens */
+
+@media only screen and (max-width: 736px) {
+    .mat-header-cell {
+        padding-right: 5px;
+        font-size: small;
+    }
+    td {
+        font-size: small;
+    }
+}
+
+/* for smaller screens */
+
+@media only screen and (max-width: 522px) {
+    .mat-header-cell {
+        padding-right: 2px;
+        font-size: xx-small;
+    }
+    td {
+        font-size: xx-small;
+        margin: 0px;
+    }
+
+    .edit-button {
+        margin-left: 0px;
+        padding-right: 0px;
+    }
+    
+    .delete-button {
+        margin-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .mat-header-cell {
+        font-size: 8px;
+    }
+    td {
+        font-size: 8px;
+    }
 }

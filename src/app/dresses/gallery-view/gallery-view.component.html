@@ -1,0 +1,19 @@
+<ngx-image-gallery [images]="images" [conf]="conf" (onOpen)="galleryOpened($event)" (onClose)="galleryClosed()"
+    (onImageClicked)="galleryImageClicked($event)" (onImageChange)="galleryImageChanged($event)"
+    (onDelete)="deleteImage($event)"></ngx-image-gallery>
+
+<h1 routerLink="/dresses">גלריה</h1>
+
+<!-- <div *ngFor='let item of dataSource'>
+        <div class='gallery-container'>
+            <img src="{{getUrlOfImage(item)}}" class="image-item">
+        </div>
+    </div> -->
+
+<div *ngIf="dataSource" class="gallery-container">
+    <div class="row" *ngFor='let item of dataSource'>
+        <div class="column">
+            <img src="{{getUrlOfImage(item)}}" class="image-item">
+        </div>
+    </div>
+</div>

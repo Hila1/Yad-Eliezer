@@ -1,32 +1,44 @@
+<!-- calendar header -->
+<mwl-demo-utils-calendar-header
+  [(view)]="view"
+  [(viewDate)]="viewDate"
+  [locale]="locale">
+</mwl-demo-utils-calendar-header>
 
-<mbsc-form dir="ltr">
-    <div class="mbsc-grid md-add-event-demo">
-        <div class="mbsc-row mbsc-no-padding">
-            <div class="mbsc-col-md-4 mbsc-col-12">
-                <mbsc-eventcalendar [marked]="events" [data]="events" [options]="monthSettings" #mbscMonthCal="mobiscroll"></mbsc-eventcalendar>
-                <!-- <div class="mbsc-btn-group-block">
-                    <mbsc-button (click)="mbscPopup.instance.show()">אירוע חדש</mbsc-button>
-                </div> -->
-            </div>
-            <div class="mbsc-col-md-8 mbsc-col-12 md-col-right">
-                <mbsc-eventcalendar [data]="events" [options]="daySettings" #mbscDayCal="mobiscroll"></mbsc-eventcalendar>
-            </div>
-        </div>
-    </div>
-</mbsc-form>
-<!-- 
-<mbsc-popup [options]="popupSettings" #mbscPopup="mobiscroll" class="md-add-event-popup">
-    <mbsc-form>
-        <mbsc-form-group>
-            <mbsc-input [(ngModel)]="eventText">כותרת</mbsc-input>
-            <mbsc-textarea [(ngModel)]="eventDesc">אירוע</mbsc-textarea>
-        </mbsc-form-group>
-        <mbsc-form-group>
-            <mbsc-switch [(ngModel)]="allDay" (change)="change()">כל היום</mbsc-switch>
-            <mbsc-range [(ngModel)]="eventDate" [options]="rangeSettings" [controls]="control" [dateWheels]="wheels">
-                <mbsc-range-start>Starts</mbsc-range-start>
-                <mbsc-range-end>Ends</mbsc-range-end>
-            </mbsc-range>
-        </mbsc-form-group>
-    </mbsc-form>
-</mbsc-popup> -->
+<!-- calendar itself -->
+<div class="calendar-container">
+<div [ngSwitch]="view" >
+  <mwl-calendar-month-view 
+    *ngSwitchCase="CalendarView.Month"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [locale]="locale"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="CalendarView.Week"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [locale]="locale"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="CalendarView.Day"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [locale]="locale"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-day-view>
+</div>
+</div>

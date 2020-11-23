@@ -1,23 +1,31 @@
-<body>
-        <mat-accordion *ngFor='let row of dataSource' multi>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{row.BridalTypeItem}} - {{row.BridalItem_Description}} / {{row.Mct}}
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            <img class="header-image" src="{{row.Attachment['src']}}" *ngIf='row.Attachment'>
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
+<ngx-image-gallery *ngIf='dataSource' [images]="images" [conf]="conf" (onOpen)="galleryOpened($event)"
+    (onImageChange)="galleryImageChanged($event)" (onDelete)="deleteImage($event)">
+</ngx-image-gallery>
 
-                    <item-data SupportActivityId='{{row.SupportActivityId}}' Comment='{{row.Comment}}'
-                        DeliveryStatusId='{{row.DeliveryStatusId}}' DeliveryDate='{{row.DeliveryDate}}'
-                        ReturnDate='{{row.ReturnDate}}' AttachedFile='{{row.AttachedFile}}'
-                        CostOfDamage='{{row.CostOfDamage}}' CurrencyCostOfDamageId='{{row.CurrencyCostOfDamageId}}'
-                        DamageDescription='{{row.DamageDescription}}' ReturnStatusId='{{row.ReturnStatusId}}'>
-                    </item-data>
-                </mat-expansion-panel>
-        </mat-accordion>
+<body>
+    <mat-accordion *ngFor='let row of dataSource' multi>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{row.BridalTypeItem}} - {{row.BridalItem_Description}} / {{row.Mct}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    <img class="header-image" src="{{row.Attachment['src']}}" *ngIf='row.Attachment'
+                        (click)="openImagePreview(row.Attachment['src'])">
+
+
+
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <item-data SupportActivityId='{{row.SupportActivityId}}' Comment='{{row.Comment}}'
+                DeliveryStatusId='{{row.DeliveryStatusId}}' DeliveryDate='{{row.DeliveryDate}}'
+                ReturnDate='{{row.ReturnDate}}' AttachedFile='{{row.AttachedFile}}' CostOfDamage='{{row.CostOfDamage}}'
+                CurrencyCostOfDamageId='{{row.CurrencyCostOfDamageId}}' DamageDescription='{{row.DamageDescription}}'
+                ReturnStatusId='{{row.ReturnStatusId}}'>
+            </item-data>
+        </mat-expansion-panel>
+    </mat-accordion>
 </body>
 
 <footer class='footer' *ngIf='items'>

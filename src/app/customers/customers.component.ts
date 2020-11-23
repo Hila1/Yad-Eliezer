@@ -50,8 +50,8 @@ export class CustomersComponent implements OnInit {
         if (this.displayedColumns.indexOf(key) <= -1 && key != 'color' && key != 'SupportActivityId') { delete element[key]; }
       }
       element['EventDate'] = element['EventDate'].slice(0, - 13); // hide the end of the date string
-      element['Addresss'] = element['Addresss'].substring(0, 25); // show only the fitst 25 chars
-      element['PhoneNumber'] = element['PhoneNumber'].split(',')[0]; //show only the first phone number
+      element['Addresss'] = element['Addresss'] ? element['Addresss'].substring(0, 25) : ""; // show only the fitst 25 chars
+      element['PhoneNumber'] = element['PhoneNumber'] ? element['PhoneNumber'].split(',')[0] : ""; //show only the first phone number
     });
   }
 

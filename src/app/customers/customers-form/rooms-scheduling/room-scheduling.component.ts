@@ -1,9 +1,7 @@
 import { Component } from "@angular/core";
 import { CustomersService } from 'src/app/services/customers.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
 import { GlobalFunctionsService } from 'src/app/services/global-functions.service';
-import { element } from 'protractor';
 
 @Component({
   selector: 'room-scheduling',
@@ -48,13 +46,12 @@ export class RoomScheduling {
     this._customersService.getBridalEventId().subscribe(bridalEventId => {
       // remove irrelevant  rooms
       this.dataSource.forEach(element => {
+        // keep only the rooms with the same BridalEventId
         if (element['BridalEventId'] == bridalEventId) {
-          // if(this.dataSource == null) {this.dataSource = []} //init the array if needed
           temporaryArray.push(element);
         }
       })
       this.dataSource = temporaryArray;
-
     });
   }
 
