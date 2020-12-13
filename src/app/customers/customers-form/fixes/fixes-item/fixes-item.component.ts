@@ -15,7 +15,7 @@ export class FixesItemComponent {
         private _snackBar: MatSnackBar) { }
 
     ngOnInit() {
-        console.log(this.stockBridalItemData);
+        // console.log(this.stockBridalItemData);
 
         // reformat DueDate
         this.stockBridalItemData.forEach(item => {

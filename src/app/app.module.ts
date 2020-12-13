@@ -61,9 +61,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemoUtilsModule } from './demo-utils/model';
 import { NgxImageGalleryModule } from 'ngx-image-gallery';
 import { GalleryComponent } from './dresses/gallery-view/gallery-view.component';
-
+import { MatChipsModule } from '@angular/material/chips';
 import localeHe from '@angular/common/locales/he';
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import { ChipsComponent } from './calendar/chips/chips.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 registerLocaleData(localeHe);
 
 @NgModule({
@@ -94,7 +97,8 @@ registerLocaleData(localeHe);
     PaymentsComponent,
     FixesItemComponent,
     CalendarComponent,
-    GalleryComponent
+    GalleryComponent,
+    ChipsComponent
   ],
   imports: [
     NgxImageGalleryModule,
@@ -133,9 +137,11 @@ registerLocaleData(localeHe);
       useFactory: adapterFactory,
     }),
     NgbModule,
+    MatChipsModule,
+    MatAutocompleteModule,
     ],
   entryComponents: [CustomDialog],
-  providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService, CalendarService],
+  providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService, CalendarService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,24 +3,31 @@ import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@ang
 import {
     startOfDay,
     endOfDay,
-    subDays,
-    addDays,
-    endOfMonth,
     isSameDay,
     isSameMonth,
-    addHours,
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
-import { colors, EventColor } from '../demo-utils/colors';
-import { formatNumber } from '@angular/common';
+import { CalendarDateFormatter, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarMonthViewDay, CalendarView } from 'angular-calendar';
+import { colors, EventColor, metaTypes } from '../demo-utils/colors';
+import { DatePipe } from '@angular/common';
+import { CustomDateFormatter } from './custom-date-formatter.provider';
+
+interface EventGroupMeta {
+    type: string;
+}
 
 @Component({
     selector: 'mwl-demo-component',
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['calendar.css'],
     templateUrl: 'calendar.component.html',
+    providers: [
+        {
+            provide: CalendarDateFormatter,
+            useClass: CustomDateFormatter,
+        },
+    ]
 })
 export class CalendarComponent {
     @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
@@ -32,14 +39,18 @@ export class CalendarComponent {
     CalendarView = CalendarView;
 
     viewDate: Date = new Date();
+    
+    dayStartHour = 7;
+    dayEndHour = 22;
 
-    colorsArray = Object.keys( colors );
+    colorsArray = Object.keys(colors);
     currentColorIndex = 0;
 
     modalData: {
         action: string;
         event: CalendarEvent;
     };
+
 
     actions: CalendarEventAction[] = [
         {
@@ -62,59 +73,170 @@ export class CalendarComponent {
     refresh: Subject<any> = new Subject();
 
     events: CalendarEvent[];
-    activeDayIsOpen: boolean = true;
-    StuffColors: {} = {};
+
+    activeDayIsOpen: boolean = false;
+    stuffColors: {} = null;
+    jewishDates = null;
+    datesObject: {};
+    groupedSimilarEvents: CalendarEvent[] = [];
 
     constructor(private _calendarService: CalendarService,
-        private modal: NgbModal) { };
+        private modal: NgbModal,
+        public datepipe: DatePipe) { };
 
     ngOnInit() {
         this._calendarService.getAllEvents().subscribe(events => {
-            console.log(events);
             this.events = [];
             events.forEach((event: {}) => {
                 this.events.push(this.fixEventFormat(event));
-
-
             });
+
+
+            // get jewish dates
+            this._calendarService.getJewishFullYearDates().subscribe(data => {
+                this.jewishDates = data['items'];
+                console.log(this.jewishDates);
+                this.createDatesObject();
+            })
+
+            this.groupSimilarEvents();
         })
     }
+
+    groupSimilarEvents() {
+        // group any events together that have the same type and dates
+        // use for when you have a lot of events on the week or day view at the same time
+        this.groupedSimilarEvents = [];
+        const processedEvents = new Set();
+        this.events.forEach((event) => {
+            if (processedEvents.has(event)) {
+                return;
+            }
+            const similarEvents = this.events.filter((otherEvent) => {
+                return (
+                    otherEvent !== event &&
+                    !processedEvents.has(otherEvent) &&
+                    isSameDay(otherEvent.start, event.start) &&
+                    (isSameDay(otherEvent.end, event.end) ||
+                        (!otherEvent.end && !event.end)) &&
+                    otherEvent.color.primary === event.color.primary &&
+                    otherEvent.color.secondary === event.color.secondary
+                );
+            });
+            processedEvents.add(event);
+            similarEvents.forEach((otherEvent) => {
+                processedEvents.add(otherEvent);
+            });
+            if (similarEvents.length > 0) {
+                this.groupedSimilarEvents.push({
+                    title: `${similarEvents.length + 1} events`,
+                    color: event.color,
+                    start: event.start,
+                    end: event.end,
+                    meta: {
+                        groupedEvents: [event, ...similarEvents],
+                    },
+                });
+            } else {
+                this.groupedSimilarEvents.push(event);
+            }
+        });
+    }
+
+    beforeMonthViewRender({
+        body,
+    }: {
+        body: CalendarMonthViewDay<EventGroupMeta>[];
+    }): void {
+        // month view has a different UX from the week and day view so we only really need to group by the type
+        body.forEach((cell) => {
+            const groups = {};
+            cell.events.forEach((event: CalendarEvent<EventGroupMeta>) => {
+                groups[event.meta.type] = groups[event.meta.type] || [];
+                groups[event.meta.type].push(event);
+            });
+            cell['eventGroups'] = Object.entries(groups);
+        });
+    }
+
+    createDatesObject() {
+        this.datesObject = {}
+        this.jewishDates.forEach(element => {
+            this.datesObject[element['date']] = element['hebrew']
+        });
+        // refresh the calendar view, so the events will display
+        this.refresh.next();
+    }
+
+    /**
+     * @param event an event from the server
+     * this function reformmat the event and returns it
+     */
     fixEventFormat(event: {}): CalendarEvent<any> {
-        // var stuffId = event['BridalStaffId'];
-        // var color = this.getStuffIdToColors(stuffId);
-        // var newColor = this.getNewColor()
-        // console.log(color)
-        // console.log(newColor)
-
-
-
         let formatedEvent: CalendarEvent<any> = {
             start: new Date(event['start']),
             end: new Date(event['end']),
-            title: "this is the title",
-            color: this.getStuffIdToColors(event['BridalStaffId'])
+            title: event['title'] + " " + event['start'].slice(11, 16),
+            color: this.getStuffIdMeta(event)['color'],
+            meta: { type: this.getStuffIdMeta(event)['meta'] }
         }
         return formatedEvent;
-
     }
 
-    // this function gets a stuff ID and returns its event color
-    getStuffIdToColors(stuffId: string): EventColor {
-        var res = this.StuffColors[stuffId];
-        if(res == undefined){
-        // if (stuffId in this.StuffColors) {
-        //     res = 
-        // } else {
-            this.StuffColors[stuffId] = this.getNewColor();
-            res = this.StuffColors[stuffId]
+    /**
+     * 
+     * @param eventItem an id of the stuff 
+     *  this function returns the event color that matches the given stuff id.
+     */
+    getStuffIdMeta(eventItem): {} {
+        if (this.stuffColors == null) { this.stuffColors = {}; } // init the obj if needed
+        var res = this.stuffColors[eventItem['BridalStaffId']];
+        if (res == undefined || null) {
+            this.stuffColors[eventItem['BridalStaffId']] = {
+                color: this.getNewColor(),
+                meta: this.getMeta(),
+                name: eventItem['BridalStaff']
+            }
+            this.currentColorIndex += 1;
+            if (this.currentColorIndex >= metaTypes.length) { this.currentColorIndex = 0; }
+            res = this.stuffColors[eventItem['BridalStaffId']]
         }
-
         return res;
     }
 
+
+    /**
+     *  This function returning the correct meta for the current color.
+     */
+    getMeta(): string {
+        let res = this.colorsArray[this.currentColorIndex];
+        return res;
+    }
+
+    /**
+     *  This function returning new (unused) color from the colors obj.
+     */
     getNewColor(): EventColor {
         let res = colors[this.colorsArray[this.currentColorIndex]];
-        this.currentColorIndex +=1;
+        return res;
+    }
+
+    /**
+     * @param date the date of the current day in the month view
+     *  This function gets a date and returns its jewish date.
+     */
+    getJewishDate(date) {
+        var dateObj = new Date(date); // make an date object
+        let position = this.datepipe.transform(dateObj, 'yyyy-MM-dd'); // get the needed format of the date
+        var res = this.datesObject[position]; // use the date to get the hebrew date form the object
+
+        if (!res) {
+            return ""
+        }
+        // remove the year from the date format 
+        if (res.indexOf("תש") !== -1) {
+            res = res.slice(0, res.indexOf("תש") - 1)
+        }
         return res;
     }
 

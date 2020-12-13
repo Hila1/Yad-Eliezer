@@ -1,44 +1,61 @@
 <!-- calendar header -->
-<mwl-demo-utils-calendar-header
-  [(view)]="view"
-  [(viewDate)]="viewDate"
-  [locale]="locale">
+<mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
 </mwl-demo-utils-calendar-header>
+
+<chips-component [allStuff]="stuffColors" *ngIf="stuffColors"></chips-component>
 
 <!-- calendar itself -->
 <div class="calendar-container">
-<div [ngSwitch]="view" >
-  <mwl-calendar-month-view 
-    *ngSwitchCase="CalendarView.Month"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    [locale]="locale"
-    [activeDayIsOpen]="activeDayIsOpen"
-    (dayClicked)="dayClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)"
-  >
-  </mwl-calendar-month-view>
-  <mwl-calendar-week-view
-    *ngSwitchCase="CalendarView.Week"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    [locale]="locale"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)"
-  >
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view
-    *ngSwitchCase="CalendarView.Day"
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    [locale]="locale"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)"
-  >
-  </mwl-calendar-day-view>
+
+  <!-- custom template for adding jewish dates on the month view -->
+  <ng-template #customCellTemplate let-day="day" let-locale="locale" let-tooltipPlacement="tooltipPlacement"
+    let-tooltipTemplate="tooltipTemplate" let-tooltipAppendToBody="tooltipAppendToBody" let-highlightDay="highlightDay"
+    let-unhighlightDay="unhighlightDay" let-eventClicked="eventClicked">
+    <div class="cal-cell-top" style="text-align: left;">
+      <div class="column">
+
+        <div>
+          <span class="cal-day-number">
+            {{ day.date | calendarDate:'monthViewDayNumber':locale }}
+          </span>
+          <span class="cal-day-badge" *ngIf="day.badgeTotal > 0" style="align-self: left;">{{ day.badgeTotal }}</span>
+        </div>
+
+        <div>
+          <div class="cal-day-number" *ngIf="jewishDates" style="font-size: smaller;margin: 5px">
+            {{getJewishDate(day.date)}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- grouped events -->
+    <div class="cell-totals">
+      <span *ngFor="let group of day.eventGroups" class="badge badge-{{ group[0] }}">
+        {{ group[1].length }}
+      </span>
+    </div>
+
+  </ng-template>
+
+  
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+      [refresh]="refresh" [locale]="locale" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
+      [cellTemplate]="customCellTemplate" (beforeViewRender)="beforeMonthViewRender($event)">
+    </mwl-calendar-month-view>
+
+    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+      [refresh]="refresh" [locale]="locale" (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)" [dayStartHour]="[dayStartHour]" [dayEndHour]="[dayEndHour]">
+    </mwl-calendar-week-view>
+
+    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+      [locale]="locale" (eventClicked)="handleEvent('Clicked', $event.event)" [dayStartHour]="[dayStartHour]" [dayEndHour]="[dayEndHour]"
+      (eventTimesChanged)="eventTimesChanged($event)">
+    </mwl-calendar-day-view>
+  </div>
 </div>
-</div>
+

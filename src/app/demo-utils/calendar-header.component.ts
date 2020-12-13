@@ -1,9 +1,10 @@
+// This class is used for the calenar component as its headers
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "mwl-demo-utils-calendar-header",
   template: `
-    <div class="row text-center" style="width:100%; margin-top:15px;">
+    <div class="row text-center" style="width:100%; margin-top:10px;">
       <div class="col-md-4">
         <div class="btn-group">
           <div

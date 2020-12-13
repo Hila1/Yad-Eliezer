@@ -26,4 +26,15 @@ export class CalendarService {
                 return Observable.throw(err);
             }))
     }
+
+
+    getJewishFullYearDates() : Observable<any> {
+        // let jerusalemID = '293198'
+        let hebcakURL = "https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&year=now&month=x&d=on&ss=off&mf=off&c=off&geo=geoname&geonameid=3448439&m=50&s=off"
+        return this.http.get(hebcakURL)
+        .pipe(catchError(err => {
+            console.log(err);
+            return Observable.throw(err);
+        }))
+    }
 }

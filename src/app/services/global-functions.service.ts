@@ -58,11 +58,6 @@ export class GlobalFunctionsService {
      * @param tableName the name of the table from which the item should be updated in
      */
     update(original = null, active, tableName: string): Observable<any> {
-        console.log("orginal, active, tableName:");
-        console.log(original);
-        console.log(active);
-        console.log(tableName);
-
         var save = this.saveService.save(original ? [original] : null, [active], tableName);
         var headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         var obj = "objectUtil=" + JSON.stringify({ Object: save, Action: 'Save' })

@@ -1,15 +1,48 @@
-/* .md-add-event-popup { */
-/* background:#f44336, */
-/* currentColor:#4caf50, */
- /* background:#e91e63, */
-  /* background: #ffeb3b , */
-  /* background:#03a9f4  ,  */
-  /* background:#3f51b5, */
-  /* background: #4caf50 */
-/* } */
-
 .calendar-container {
-  margin: 15px;
-  height: calc(100vh - 155px); /*not working*/
-  max-height: calc(100vh - 155px);/*not working*/
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  /* overflow: hidden;
+  overflow-y: auto;
+  min-height: calc(100vh - 155px);
+  height: calc(100vh - 155px);
+  max-height: calc(100vh - 155px); */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* design for grouping similar events */
+.cell-totals {
+  margin: 5px;
+  text-align: center;
+}
+
+.badge {
+  margin-right: 5px;
+}
+
+/* for smaller screens */
+
+@media only screen and (max-width: 568px) {
+  .cell-totals {
+    visibility: hidden;
+    /* display:none; */
+    margin: 0px;
+  }
+  .cal-day-number {
+    /* margin-left: calc(100% - 15px); */
+    font-size: 1em;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .calendar-container {
+    min-height: calc(100vh - 230px);
+    height: calc(100vh - 230px);
+    max-height: calc(100vh - 230px);
+  }
 }
