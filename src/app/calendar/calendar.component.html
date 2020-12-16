@@ -2,7 +2,14 @@
 <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
 </mwl-demo-utils-calendar-header>
 
-<chips-component [allStuff]="stuffColors" *ngIf="stuffColors"></chips-component>
+<div class="chips-container">
+  <chips-component class="chips" [allStuff]="stuffColors" (newItemEvent)="filterCalendarEventsByStuff($event)"
+    *ngIf="stuffColors"></chips-component>
+</div>
+<!-- 
+<div class="date-picker">
+  <datepicker-touch-example (newItemEvent)="viewDateChange.next(viewDate)"></datepicker-touch-example>
+</div> -->
 
 <!-- calendar itself -->
 <div class="calendar-container">
@@ -39,12 +46,14 @@
 
   </ng-template>
 
-  
+
+
   <div [ngSwitch]="view">
     <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-      [refresh]="refresh" [locale]="locale" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+      [refresh]="refresh" [locale]="locale" [activeDayIsOpen]="activeDayIsOpen"
       (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
-      [cellTemplate]="customCellTemplate" (beforeViewRender)="beforeMonthViewRender($event)">
+      [cellTemplate]="customCellTemplate" (beforeViewRender)="beforeMonthViewRender($event)" 
+      (dayClicked)="changeDay($event.day.date)">
     </mwl-calendar-month-view>
 
     <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
@@ -53,9 +62,8 @@
     </mwl-calendar-week-view>
 
     <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-      [locale]="locale" (eventClicked)="handleEvent('Clicked', $event.event)" [dayStartHour]="[dayStartHour]" [dayEndHour]="[dayEndHour]"
-      (eventTimesChanged)="eventTimesChanged($event)">
+      [locale]="locale" (eventClicked)="handleEvent('Clicked', $event.event)" [dayStartHour]="[dayStartHour]"
+      [dayEndHour]="[dayEndHour]" (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-day-view>
   </div>
 </div>
-

@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 import { CustomersService } from 'src/app/services/customers.service';
-import { Router, ActivatedRoute } from '@angular/router';
+// import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalFunctionsService } from 'src/app/services/global-functions.service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'room-scheduling',
@@ -21,9 +22,10 @@ export class RoomScheduling {
   showSpinner: boolean = true;
 
   constructor(private _customersService: CustomersService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private _globalFunctionsService: GlobalFunctionsService) { }
+    // private router: Router,
+    // private route: ActivatedRoute,
+    private _globalFunctionsService: GlobalFunctionsService,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     // Get the data from the table RoomSchedule
@@ -93,4 +95,29 @@ export class RoomScheduling {
     });
     return finalObject
   }
+  addScheduling(){
+    console.log("addScheduling()")
+  }
+
+  closeResult = ''; 
+  
+  open(content) { 
+    this.modalService.open(content, 
+   {ariaLabelledBy: 'modal-basic-title'}).result.then(result => { 
+      this.closeResult = `Closed with: ${result}`; 
+    }, (reason) => { 
+      this.closeResult =  
+         `Dismissed ${this.getDismissReason(reason)}`; 
+    }); 
+  } 
+  
+  private getDismissReason(reason: any): string { 
+    if (reason === ModalDismissReasons.ESC) { 
+      return 'by pressing ESC'; 
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) { 
+      return 'by clicking on a backdrop'; 
+    } else { 
+      return `with: ${reason}`; 
+    } 
+  } 
 }

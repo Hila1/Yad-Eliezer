@@ -114,16 +114,11 @@ a:focus, a.nav-links:focus, a.mat-list-item:focus {
 }
 
 /* for smaller screens */
-/* @media only screen and (max-width: 352px) {
-    .bottom-part-container {
-        height: calc(100vh-190px);
-        max-height: calc(100vh-190px);
-        min-height: calc(100vh-190px);
+@media only screen and (max-width: 340px) {
+    h3 {
+        font-size: small;
     }
-    .inner-container {
-        height: calc(100vh - 190px);
-        width: 100%;
-        min-height: calc(100vh - 190px);
-        max-height: calc(100vh - 190px);
+    h5 {
+        font-size: x-small;
     }
-} */
+  }

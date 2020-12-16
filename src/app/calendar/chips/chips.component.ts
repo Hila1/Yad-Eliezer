@@ -1,10 +1,10 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { GlobalFunctionsService } from 'src/app/services/global-functions.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'chips-component',
@@ -17,90 +17,98 @@ export class ChipsComponent {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
+  refresh: Subject<any> = new Subject();
+
   @Input() allStuff: {};
-  @Output() newItemEvent = new EventEmitter<string>();
+  @Output() newItemEvent = new EventEmitter<any>();
 
   fruits: any[] = [];
   allFruits: any[];
-  
-
-  // @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
-  // @ViewChild('auto') matAutocomplete: MatAutocomplete;
-
-  // constructor() {
-  //   this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-  //     startWith(null),
-  //     map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
-  // }
+  constructor(private _globalFunctionService: GlobalFunctionsService) { }
 
   ngOnInit() {
     this.allFruits = [];
     for (let key in this.allStuff) {
-      this.allFruits.push(this.allStuff[key]['name']);
+      this.allFruits.push(this.getFormattedItem(key));
     }
     this.fruits = Object.assign(this.allFruits);
+
+    // get list of rooms from the service
+    // this._globalFunctionService.getTableData("Room", "Description").subscribe(data => {
+    //   for (let item of data[0]) {
+    //     this.allFruits.push({
+    //       name: item['Description'],
+    //       style: {backgroundColor: "#1a9177", color: "#FFFFFF"},
+    //       icon: "cancel",
+    //       isSelected: true,
+    //       color: {primary: "#1a9177", secondary: "#69a9ff"},
+    //     });
+    //   }
+    //   this.fruits = Object.assign(this.allFruits);
+    //   console.log(this.fruits);
+      // this.refresh.next();
+    // });
+  }
+  getFormattedItem(key: string): any {
+    return{
+      name: this.allStuff[key]['name'],
+      style: this.getChipStyle(this.allStuff[key]),
+      icon: "cancel",
+      isSelected: true,
+      color: this.allStuff[key]['color'],
+    }  }
+
+  getChipStyle(fruit, isSelected = true) {
+    return {
+      backgroundColor: isSelected ?
+        fruit['color']['primary'] :
+        fruit['color']['secondary'],
+      color: "#FFFFFF"
+    }
   }
 
-  getChipStyle(stuffName){
-    for (let key in this.allStuff) {
-      if(this.allStuff[key]['name'] === stuffName){
-       return { 
-         backgroundColor: this.allStuff[key]['color']['primary'],
-         color: "#FFFFFF"
-       };
-      }
-    }
-    return {};
-  }
-  getIcon(fruit){
-    if(this.fruits.includes(fruit.trim())) {
-      return 'cancel'
-    }
-    return 'add_circle'
-  }
+  // add(event: MatChipInputEvent): void {
+  //   const input = event.input;
+  //   const value = event.value;
 
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+  //   // Add our fruit
+  //   if ((value || '').trim()) {
+  //     this.fruits.push(value.trim());
+  //   }
 
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.fruits.push(value.trim());
-    }
+  //   // Reset the input value
+  //   if (input) {
+  //     input.value = '';
+  //   }
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+  //   this.fruitCtrl.setValue(null);
+  //   this.newItemEvent.emit(value);
+  // }
 
-    this.fruitCtrl.setValue(null);
-    this.newItemEvent.emit(value);
-  }
+  remove(fruit: {}): void {
+    fruit['isSelected'] = !fruit['isSelected'];
+    fruit['icon'] = fruit['isSelected'] ? 'cancel' : 'add_circle';
+    fruit['style'] = this.getChipStyle(fruit, fruit['isSelected']);
 
-  remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
+    this.newItemEvent.emit(this.fruits);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     const value = event.option.viewValue;
     if ((value || '').trim()) {
       // make sure the selected stuff is not in the selected array
-      if(!this.fruits.includes(value.trim())) {
+      if (!this.fruits.includes(value.trim())) {
         this.fruits.push(value.trim());
       }
     }
     // this.fruits.push(event.option.viewValue);
     // this.fruitInput.nativeElement.value = '';
     // this.fruitCtrl.setValue(null);
-  } 
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
+
+  // private _filter(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
+
+  //   return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  // }
 }

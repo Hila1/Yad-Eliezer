@@ -1,5 +1,5 @@
 import { CalendarService } from '../services/calendar.service';
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, EventEmitter, Output } from '@angular/core';
 import {
     startOfDay,
     endOfDay,
@@ -31,6 +31,7 @@ interface EventGroupMeta {
 })
 export class CalendarComponent {
     @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+    @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
 
     locale: string = "he";
 
@@ -39,7 +40,7 @@ export class CalendarComponent {
     CalendarView = CalendarView;
 
     viewDate: Date = new Date();
-    
+
     dayStartHour = 7;
     dayEndHour = 22;
 
@@ -73,6 +74,7 @@ export class CalendarComponent {
     refresh: Subject<any> = new Subject();
 
     events: CalendarEvent[];
+    allEvents: CalendarEvent[];
 
     activeDayIsOpen: boolean = false;
     stuffColors: {} = null;
@@ -87,18 +89,18 @@ export class CalendarComponent {
     ngOnInit() {
         this._calendarService.getAllEvents().subscribe(events => {
             this.events = [];
+            this.allEvents = [];
             events.forEach((event: {}) => {
-                this.events.push(this.fixEventFormat(event));
+                let formatedEvent = this.fixEventFormat(event)
+                this.events.push(formatedEvent);
+                this.allEvents.push(formatedEvent);
             });
-
-
             // get jewish dates
             this._calendarService.getJewishFullYearDates().subscribe(data => {
                 this.jewishDates = data['items'];
-                console.log(this.jewishDates);
+                // console.log(this.jewishDates);
                 this.createDatesObject();
             })
-
             this.groupSimilarEvents();
         })
     }
@@ -221,6 +223,30 @@ export class CalendarComponent {
         return res;
     }
 
+    filterCalendarEventsByStuff(arrayOfStuff) {
+        let temporaryArray = [];
+        // go through all the events
+        for (let event of this.allEvents) {
+            // check all the stuff
+            for (let stuff of arrayOfStuff) {
+                // if the stuff is belong to the event
+                if (event['title'].indexOf(stuff['name']) > -1) {
+                    // check if the stuff should be visible or not
+                    if (stuff['isSelected']) {
+                        temporaryArray.push(event)
+                    }
+                    else break;
+                }
+            }
+        }
+        this.events = temporaryArray;
+    }
+
+    changeDay(date: Date) {
+        this.viewDate = date;
+        this.view = CalendarView.Day;
+    }
+
     /**
      * @param date the date of the current day in the month view
      *  This function gets a date and returns its jewish date.
@@ -240,19 +266,20 @@ export class CalendarComponent {
         return res;
     }
 
-    dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-        if (isSameMonth(date, this.viewDate)) {
-            if (
-                (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-                events.length === 0
-            ) {
-                this.activeDayIsOpen = false;
-            } else {
-                this.activeDayIsOpen = true;
-            }
-            this.viewDate = date;
-        }
-    }
+    // dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    //     events = events.sort((a, b) => (a.start < b.start) ? -1 : 1)
+    //     if (isSameMonth(date, this.viewDate)) {
+    //         if (
+    //             (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+    //             events.length === 0
+    //         ) {
+    //             this.activeDayIsOpen = false;
+    //         } else {
+    //             this.activeDayIsOpen = true;
+    //         }
+    //         this.viewDate = date;
+    //     }
+    // }
 
     eventTimesChanged({
         event,

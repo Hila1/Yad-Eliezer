@@ -1,11 +1,13 @@
 <loading-spinner *ngIf="showSpinner"></loading-spinner>
 
+<button mat-raised-button (click)="open(content)" class="add-scheduling-btn">הוספת שיבוץ +</button>
+
 <div class="no-room-scheduling" *ngIf='dataSource == null || this.dataSource.length == 0'>
     <h3>לא קיימים שיבוצי חדרים לתיק זה</h3>
 </div>
 
-<div class="mat-elevation-z8" *ngIf='dataSource && dataSource.length > 0' >
-    <table mat-table [dataSource]="dataSource" matSort >
+<div class="mat-elevation-z8" *ngIf='dataSource && dataSource.length > 0'>
+    <table mat-table [dataSource]="dataSource" matSort>
 
         <ng-container matColumnDef="ScheduleDate">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>תאריך</th>
@@ -65,3 +67,22 @@
 
     </table>
 </div>
+
+<!-- pop up -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
+                aria-hidden="true">×</span>
+        </button>
+    </div>
+
+    <!-- <div class="modal-body"> -->
+    <mwl-demo-component></mwl-demo-component>
+    <!-- </div> -->
+
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">
+            ok
+        </button>
+    </div> -->
+</ng-template>

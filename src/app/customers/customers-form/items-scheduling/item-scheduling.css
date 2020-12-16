@@ -48,7 +48,6 @@ mat-expansion-panel {
 }
 
 body {
-    /* margin-top: 10px; */
     padding-top: 10px;
     padding-bottom: 10px;
     height: fit-content;
@@ -56,3 +55,15 @@ body {
     overflow: hidden;
     overflow-y: scroll;
 }
+
+
+@media only screen and (max-width: 645px) {
+    body {
+        max-height: calc(100% - 120px);
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    body {
+        max-height: calc(100% - 166px);
+    }
+  }

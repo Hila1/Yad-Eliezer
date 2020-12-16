@@ -10,7 +10,7 @@
                     {{row.BridalTypeItem}} - {{row.BridalItem_Description}} / {{row.Mct}}
                 </mat-panel-title>
                 <mat-panel-description>
-                    <img class="header-image" src="{{row.Attachment['src']}}" *ngIf='row.Attachment'
+                    <img class="header-image" src="{{row.Attachment['src']}}" *ngIf='row.Attachment && row.Attachment["src"]'
                         (click)="openImagePreview(row.Attachment['src'])">
 
 
