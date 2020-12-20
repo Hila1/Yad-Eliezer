@@ -34,20 +34,22 @@ export class ChipsComponent {
     this.fruits = Object.assign(this.allFruits);
 
     // get list of rooms from the service
-    // this._globalFunctionService.getTableData("Room", "Description").subscribe(data => {
-    //   for (let item of data[0]) {
-    //     this.allFruits.push({
-    //       name: item['Description'],
-    //       style: {backgroundColor: "#1a9177", color: "#FFFFFF"},
-    //       icon: "cancel",
-    //       isSelected: true,
-    //       color: {primary: "#1a9177", secondary: "#69a9ff"},
-    //     });
-    //   }
-    //   this.fruits = Object.assign(this.allFruits);
-    //   console.log(this.fruits);
-      // this.refresh.next();
-    // });
+    this._globalFunctionService.getTableData("Room", "Description").subscribe(data => {
+      for (let item of data[0]) {
+        this.allFruits.push({
+          name: item['Description'],
+          style: {backgroundColor: "#1a9177", color: "#FFFFFF"},
+          icon: "cancel",
+          isSelected: true,
+          color: {primary: "#1a9177", secondary: "#57c2a6"},
+        });
+      }
+      this.fruits = Object.assign(this.allFruits);
+      console.log(this.fruits);
+      this.refresh.next();
+
+      this.fruits.slice();
+    });
   }
   getFormattedItem(key: string): any {
     return{

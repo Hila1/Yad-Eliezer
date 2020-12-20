@@ -45,7 +45,6 @@ import { GalleryComponent } from './dresses/gallery-view/gallery-view.component'
 import localeHe from '@angular/common/locales/he';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { ChipsComponent } from './calendar/chips/chips.component';
-import { DatepickerTouchExample } from './calendar/date-picker/date-picker.component';
 import { DemoMaterialModule } from './material-module';
 
 registerLocaleData(localeHe);
@@ -80,7 +79,6 @@ registerLocaleData(localeHe);
     CalendarComponent,
     GalleryComponent,
     ChipsComponent,
-    DatepickerTouchExample,
   ],
   imports: [
     NgxImageGalleryModule,

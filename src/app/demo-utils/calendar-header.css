@@ -1,16 +1,18 @@
 .btn.btn-primary {
     border-radius: 0;
     color: white;
-    background-color: teal;
-    border-color: teal;
+    background-color: #1a9177;
+    border-color: #1a9177;
 }
 
 .btn.btn-primary.active {
-    background-color: #1a9177;
-    border-color: white;
+    background-color: white;
+    border-color: #1a9177;
+    color: #1a9177;
 }
 
 .btn.btn-primary:active {
-    background-color: #1a9177;
-    border-color: white;
+    background-color: white;
+    border-color: #1a9177;
+    color: #1a9177;
 }

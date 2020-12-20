@@ -12,6 +12,7 @@ import { CalendarDateFormatter, CalendarEvent, CalendarEventAction, CalendarEven
 import { colors, EventColor, metaTypes } from '../demo-utils/colors';
 import { DatePipe } from '@angular/common';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
+import { NativeDateAdapter, DateAdapter} from '@angular/material/core';
 
 interface EventGroupMeta {
     type: string;
@@ -81,12 +82,17 @@ export class CalendarComponent {
     jewishDates = null;
     datesObject: {};
     groupedSimilarEvents: CalendarEvent[] = [];
+    value = ""
 
     constructor(private _calendarService: CalendarService,
         private modal: NgbModal,
-        public datepipe: DatePipe) { };
+        public datepipe: DatePipe,
+        private dateAdapter: DateAdapter<NativeDateAdapter>,
+        ) { };
 
     ngOnInit() {
+        this.dateAdapter.setLocale('he-HE');
+
         this._calendarService.getAllEvents().subscribe(events => {
             this.events = [];
             this.allEvents = [];
@@ -233,9 +239,10 @@ export class CalendarComponent {
                 if (event['title'].indexOf(stuff['name']) > -1) {
                     // check if the stuff should be visible or not
                     if (stuff['isSelected']) {
-                        temporaryArray.push(event)
+                        temporaryArray.push(event);
+                        break;
                     }
-                    else break;
+                    
                 }
             }
         }
@@ -244,7 +251,20 @@ export class CalendarComponent {
 
     changeDay(date: Date) {
         this.viewDate = date;
-        this.view = CalendarView.Day;
+        // this.view = CalendarView.Day;
+    }
+
+    goToDate(date) {
+        let newDate = new Date(date);
+        if (!this.isValidDate(newDate)) {
+            //try jewish date
+            return;
+        }
+        this.changeDay(newDate);
+    }
+
+    isValidDate(d) {
+        return d instanceof Date && !isNaN(d.getTime());
     }
 
     /**
