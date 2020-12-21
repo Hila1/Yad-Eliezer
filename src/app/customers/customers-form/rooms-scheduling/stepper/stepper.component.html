@@ -1,0 +1,51 @@
+<mat-horizontal-stepper labelPosition="bottom" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>בחירת תאריך</ng-template>
+            <mwl-demo-component (viewDateChange)="setDate($event)"></mwl-demo-component>
+
+            <!-- <div>
+          <button mat-button matStepperNext>Next</button>
+        </div> -->
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>הוספת פרטים</ng-template>
+
+התאריך הוא:
+        {{viewDate}}
+
+
+        <!-- <div class="line-of-inputs">
+            <mat-form-field appearance="fill">
+                <mat-label>תאור פריט</mat-label>
+                <input matInput value="{{dataSource.Description}}" #Mct="ngModel" required
+                    [(ngModel)]="dataSource.Description">
+            </mat-form-field>
+    
+            <mat-form-field appearance="fill">
+                <mat-label>בחירת תופרת</mat-label>
+                <mat-select [(value)]="dataSource.BridalTypeItem" [(ngModel)]="dataSource.BridalTypeItemId">
+                    <mat-option *ngFor="let type of itemTypes" [value]="type.BridalTypeItemId">{{type.Description}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div> -->
+    
+            
+            <!-- <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div> -->
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>סיום</ng-template>
+        <p>You are now done.</p>
+        <!-- <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div> -->
+    </mat-step>
+</mat-horizontal-stepper>

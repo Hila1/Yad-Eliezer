@@ -1,5 +1,5 @@
 import { CalendarService } from '../services/calendar.service';
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, EventEmitter, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, EventEmitter, Output, Input } from '@angular/core';
 import {
     startOfDay,
     endOfDay,
@@ -12,7 +12,7 @@ import { CalendarDateFormatter, CalendarEvent, CalendarEventAction, CalendarEven
 import { colors, EventColor, metaTypes } from '../demo-utils/colors';
 import { DatePipe } from '@angular/common';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
-import { NativeDateAdapter, DateAdapter} from '@angular/material/core';
+import { NativeDateAdapter, DateAdapter } from '@angular/material/core';
 
 interface EventGroupMeta {
     type: string;
@@ -33,6 +33,7 @@ interface EventGroupMeta {
 export class CalendarComponent {
     @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
     @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
+    // @Input() shouldAddEvent: boolean;
 
     locale: string = "he";
 
@@ -54,23 +55,23 @@ export class CalendarComponent {
     };
 
 
-    actions: CalendarEventAction[] = [
-        {
-            label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-            a11yLabel: 'Edit',
-            onClick: ({ event }: { event: CalendarEvent }): void => {
-                this.handleEvent('Edited', event);
-            },
-        },
-        {
-            label: '<i class="fas fa-fw fa-trash-alt"></i>',
-            a11yLabel: 'Delete',
-            onClick: ({ event }: { event: CalendarEvent }): void => {
-                this.events = this.events.filter((iEvent) => iEvent !== event);
-                this.handleEvent('Deleted', event);
-            },
-        },
-    ];
+    // actions: CalendarEventAction[] = [
+    //     {
+    //         label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+    //         a11yLabel: 'Edit',
+    //         onClick: ({ event }: { event: CalendarEvent }): void => {
+    //             this.handleEvent('Edited', event);
+    //         },
+    //     },
+    //     {
+    //         label: '<i class="fas fa-fw fa-trash-alt"></i>',
+    //         a11yLabel: 'Delete',
+    //         onClick: ({ event }: { event: CalendarEvent }): void => {
+    //             this.events = this.events.filter((iEvent) => iEvent !== event);
+    //             this.handleEvent('Deleted', event);
+    //         },
+    //     },
+    // ];
 
     refresh: Subject<any> = new Subject();
 
@@ -88,7 +89,7 @@ export class CalendarComponent {
         private modal: NgbModal,
         public datepipe: DatePipe,
         private dateAdapter: DateAdapter<NativeDateAdapter>,
-        ) { };
+    ) { };
 
     ngOnInit() {
         this.dateAdapter.setLocale('he-HE');
@@ -242,7 +243,7 @@ export class CalendarComponent {
                         temporaryArray.push(event);
                         break;
                     }
-                    
+
                 }
             }
         }
@@ -251,7 +252,8 @@ export class CalendarComponent {
 
     changeDay(date: Date) {
         this.viewDate = date;
-        // this.view = CalendarView.Day;
+        this.view = CalendarView.Day;
+        this.viewDateChange.emit(this.viewDate);
     }
 
     goToDate(date) {
@@ -285,6 +287,11 @@ export class CalendarComponent {
         }
         return res;
     }
+
+    // addNewEvent(){
+    //     console.log("ill add new event, the date is:");
+    //     console.log(this.viewDate);
+    // }
 
     // dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     //     events = events.sort((a, b) => (a.start < b.start) ? -1 : 1)

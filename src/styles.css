@@ -61,5 +61,14 @@ mat-toolbar-row {
     text-align: -webkit-center;
 }
 
+*{
+    outline: none !important;
+}
+
+
+::ng-deep *{
+    outline: none !important;
+}
+
 /* angular-cli file: src/styles.css */
 /* @import "../node_modules/angular-calendar/css/angular-calendar.css"; */

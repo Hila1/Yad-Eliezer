@@ -1,5 +1,4 @@
 <div [ngStyle]="divStyle" *ngIf="dataSource">
-    <!-- <h1 >קוד פריט: {{dataSource.BridalItemId}}</h1> -->
     <div class="line-of-inputs">
 
         <button [ngStyle]="buttonStyle" mat-fab class="delete-button" (click)="deleteItem()" disabled="{{disableForm}}"
@@ -56,10 +55,9 @@
             </tr>
         </table>
     </div>
-    <p>
-    </p>
-    <!-- {{ dataSource | json}}
-    {{original|json}} -->
+    
+    <p></p>
+
     <loading-spinner *ngIf="showSpinner"></loading-spinner>
 
     <div class="line-of-inputs">
@@ -120,7 +118,7 @@
             </mat-select>
         </mat-form-field>
     </div>
-    
+
     <div class="line-of-inputs">
         <mat-form-field class="comments" appearance="fill">
             <mat-label>הערות</mat-label>

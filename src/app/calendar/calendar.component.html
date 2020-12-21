@@ -1,22 +1,24 @@
+<div class="row">
+  <div class="chips-container">
+    <chips-component class="chips" [allStuff]="stuffColors" (newItemEvent)="filterCalendarEventsByStuff($event)"
+      *ngIf="stuffColors"></chips-component>
+  </div>
 
-<div class="chips-container">
-  <chips-component class="chips" [allStuff]="stuffColors" (newItemEvent)="filterCalendarEventsByStuff($event)"
-    *ngIf="stuffColors"></chips-component>
+  <!-- date picker -->
+  <mat-form-field class="example-form-field">
+    <mat-label>עבור לתאריך</mat-label>
+    <input matInput type="text" [(ngModel)]="value" [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="goToDate(value)">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+  </mat-form-field>
+
 </div>
-
-<!-- date picker -->
-<mat-form-field class="example-form-field">
-  <mat-label>עבור לתאריך</mat-label>
-  <input matInput type="text" [(ngModel)]="value" [matDatepicker]="picker">
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-    <mat-icon>close</mat-icon>
-  </button>
-  <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="goToDate(value)">
-    <mat-icon>navigate_before</mat-icon>
-  </button>
-</mat-form-field>
 
 <!-- calendar header -->
 <mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate" [locale]="locale">
@@ -63,7 +65,7 @@
     <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
       [refresh]="refresh" [locale]="locale" [activeDayIsOpen]="activeDayIsOpen"
       (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
-      [cellTemplate]="customCellTemplate" (beforeViewRender)="beforeMonthViewRender($event)" 
+      [cellTemplate]="customCellTemplate" (beforeViewRender)="beforeMonthViewRender($event)"
       (dayClicked)="changeDay($event.day.date)">
     </mwl-calendar-month-view>
 

@@ -40,6 +40,7 @@
     "jquery": "^3.5.1",
     "jss-rtl": "^0.3.0",
     "lightbox2": "^2.11.3",
+    "moment": "^2.29.1",
     "ng-swipe-to-delete": "^1.0.3",
     "ngx-image-gallery": "^2.0.5",
     "photoswipe": "^4.1.3",

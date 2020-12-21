@@ -9,25 +9,23 @@
   flex-direction: column;
 }
 
-/* .row {
+.row {
   display: flex;
   flex-direction: row;
+  width: calc(100%-30px);
+  margin: 15px;
+}
 
-} */
-
-.date-picker {
-  margin-right: 30px;
+.example-form-field {
+  margin-right: auto !important;
 }
 
 .chips-container {
-  width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 15px;
+  width: fit-content;
 }
 
 .chips {
-  width: 100%;
+  width: fit-content;
 }
 
 .example-form-field {

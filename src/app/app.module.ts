@@ -46,6 +46,8 @@ import localeHe from '@angular/common/locales/he';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { ChipsComponent } from './calendar/chips/chips.component';
 import { DemoMaterialModule } from './material-module';
+import { StepperComponent } from './customers/customers-form/rooms-scheduling/stepper/stepper.component';
+
 
 registerLocaleData(localeHe);
 
@@ -79,6 +81,7 @@ registerLocaleData(localeHe);
     CalendarComponent,
     GalleryComponent,
     ChipsComponent,
+    StepperComponent,
   ],
   imports: [
     NgxImageGalleryModule,

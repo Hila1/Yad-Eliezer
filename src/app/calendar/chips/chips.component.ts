@@ -51,6 +51,7 @@ export class ChipsComponent {
       this.fruits.slice();
     });
   }
+  
   getFormattedItem(key: string): any {
     return{
       name: this.allStuff[key]['name'],
