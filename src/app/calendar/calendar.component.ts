@@ -109,6 +109,7 @@ export class CalendarComponent {
                 this.createDatesObject();
             })
             this.groupSimilarEvents();
+            this.viewDateChange.emit(this.viewDate);
         })
     }
 

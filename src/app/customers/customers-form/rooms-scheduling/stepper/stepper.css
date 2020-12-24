@@ -1,14 +1,48 @@
 .mat-form-field {
-  margin-top: 16px;
+  margin: 3px;
 }
 
-@media (min-width: 576px) {
-  ::ng-deep .modal-dialog {
-    max-width: 100%;
-    margin: 0px;
-  }
+::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #1a9177;
+  color: #fff;
 }
-::ng-deep .modal-dialog {
-  max-width: 100%;
-  margin: 0px;
+
+::ng-deep .mat-dialog-container {
+  padding: 0px;
+  text-align: right;
+  border-radius: 0px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+::ng-deep .cdk-overlay-pane {
+  max-width: 100vw!important;
+}
+
+button {
+  background-color: #1a9177;
+  color: #fff;
+  margin-left: auto;
+  margin-right: auto;}
+
+/* ::ng-deep .fieldset {
+  width: fit-content!important;
+} */
+
+::ng-deep .btn-link {
+  color: #1a9177;
+}
+
+::ng-deep ngb-timepicker {
+  direction: ltr;
+}
+
+::ng-deep .ngb-tp {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h3 {
+  text-align: center;
 }

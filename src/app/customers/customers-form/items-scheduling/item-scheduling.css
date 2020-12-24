@@ -6,6 +6,7 @@ mat-panel-title {
 
 .mat-form-field+.mat-form-field {
     margin-left: 8px;
+    text-align: right;
 }
 
 mat-expansion-panel {
@@ -60,7 +61,7 @@ body {
 @media only screen and (max-width: 645px) {
     body {
         max-height: calc(100% - 120px);
-    }
+    } 
   }
   @media only screen and (max-width: 375px) {
     body {

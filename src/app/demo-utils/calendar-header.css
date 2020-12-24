@@ -16,3 +16,19 @@
     border-color: #1a9177;
     color: #1a9177;
 }
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.date {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    ::ng-deep .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

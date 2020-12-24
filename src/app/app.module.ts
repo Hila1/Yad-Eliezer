@@ -103,8 +103,8 @@ registerLocaleData(localeHe);
     NgbModule,
     DemoMaterialModule,
   ],
-  entryComponents: [CustomDialog],
-  providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService, CalendarService, DatePipe],
+  entryComponents: [CustomDialog, StepperComponent],
+  providers: [DressesService, StockService, GlobalFunctionsService, SaveService, CustomersService, CalendarService, DatePipe,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

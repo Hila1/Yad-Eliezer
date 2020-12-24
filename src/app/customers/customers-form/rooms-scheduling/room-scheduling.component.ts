@@ -3,6 +3,8 @@ import { CustomersService } from 'src/app/services/customers.service';
 // import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalFunctionsService } from 'src/app/services/global-functions.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from "@angular/material/dialog";
+import { StepperComponent } from "./stepper/stepper.component";
 
 @Component({
   selector: 'room-scheduling',
@@ -22,10 +24,9 @@ export class RoomScheduling {
   showSpinner: boolean = true;
 
   constructor(private _customersService: CustomersService,
-    // private router: Router,
-    // private route: ActivatedRoute,
     private _globalFunctionsService: GlobalFunctionsService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     // Get the data from the table RoomSchedule
@@ -101,14 +102,22 @@ export class RoomScheduling {
 
   closeResult = ''; 
   
-  open(content) { 
-    this.modalService.open(content, 
-   {ariaLabelledBy: 'modal-basic-title'}).result.then(result => { 
-      this.closeResult = `Closed with: ${result}`; 
-    }, (reason) => { 
-      this.closeResult =  
-         `Dismissed ${this.getDismissReason(reason)}`; 
-    }); 
+  // open(content) { 
+  //   this.modalService.open(content, 
+  //  {ariaLabelledBy: 'modal-basic-title'}).result.then(result => { 
+  //     this.closeResult = `Closed with: ${result}`; 
+  //   }, (reason) => { 
+  //     this.closeResult =  
+  //        `Dismissed ${this.getDismissReason(reason)}`; 
+  //   }); }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(StepperComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  
   } 
   
   private getDismissReason(reason: any): string { 

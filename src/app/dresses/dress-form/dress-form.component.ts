@@ -9,7 +9,6 @@ import { SaveService } from 'src/app/services/save.service';
 // import { catchError } from 'rxjs/operators';
 import { UpdateStockTableComponent } from './update-stock-table/update-stock-table.component';
 import * as $ from "jquery";
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'dress-form',

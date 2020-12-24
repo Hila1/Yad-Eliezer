@@ -1,7 +1,8 @@
 <!-- first table - payments demand -->
 <ol>
+    <h3>דרישת תשלום:</h3>
     <table *ngIf='paymentReasons'>
-        <caption>דרישת תשלום:</caption>
+
         <thead>
             <tr>
                 <th scope="col">סיבת תשלום</th>
@@ -21,7 +22,7 @@
 
             <tr class="summary">
                 <th scope="col">סה"כ לתשלום</th>
-                <th scope="col">$$$</th>
+                <th scope="col">{{getSumOfPaymentReasons()}}</th>
                 <th scope="col">---</th>
             </tr>
         </tbody>
@@ -33,8 +34,9 @@
 
 <!-- second table - Actual payments -->
 <ol>
+    <h3>תשלומים בפועל</h3>
     <table *ngIf='actualPayments'>
-        <caption>תשלומים בפועל</caption>
+
         <thead>
             <tr>
                 <th scope="col">תאריך</th>
@@ -68,7 +70,7 @@
                 <th scope="col">---</th>
                 <th scope="col">|</th>
                 <th scope="col">יתרת תשלום</th>
-                <th scope="col">$$$</th>
+                <th scope="col"></th>
                 <th scope="col">---</th>
             </tr>
         </tbody>

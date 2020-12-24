@@ -7,9 +7,9 @@
   <!-- date picker -->
   <mat-form-field class="example-form-field">
     <mat-label>עבור לתאריך</mat-label>
-    <input matInput type="text" [(ngModel)]="value" [matDatepicker]="picker">
+    <input matInput type="text" [(ngModel)]="value" [matDatepicker]="picker" disabled>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <mat-datepicker #picker disabled="false"></mat-datepicker>
     <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
       <mat-icon>close</mat-icon>
     </button>

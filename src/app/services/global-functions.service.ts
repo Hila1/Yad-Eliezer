@@ -46,7 +46,7 @@ export class GlobalFunctionsService {
             "objectUtil=" + JSON.stringify({ Object: lists, Action: 'Search' }), this.options)
             .pipe(catchError(err => {
                 debugger
-                console.log(err);
+                console.log(lists);
                 return Observable.throw(err);
             }))
     }

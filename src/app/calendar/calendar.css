@@ -1,7 +1,10 @@
 .calendar-container {
   margin-right: 15px;
   margin-left: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+  overflow-y: scroll;
+  max-height: calc(100vh - 220px);
+  height: fit-content;
 }
 
 .column {
@@ -66,7 +69,7 @@
 
 @media only screen and (max-width: 768px) {
   .calendar-container {
-    max-height: calc(100vh - 230px);
+    max-height: calc(100vh - 300px);
     margin-right: 5px;
     margin-left: 5px;
     margin-bottom: 5px;

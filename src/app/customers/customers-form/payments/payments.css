@@ -5,9 +5,7 @@ table {
     border-collapse: collapse;
 }
 
-
-
-table, td , th{
+table, td, th {
     border-bottom: 1px solid #1a5356b5;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -26,18 +24,19 @@ ol, li {
     margin: 0px;
 }
 
-.summary{
+.summary {
     color: #1a5356;
     font-size: 13px;
     font-weight: 700;
 }
 
-caption {
+h3 {
     font-size: 14px;
-    color: var(--LeftSideBtnColor);
+    color: black;
     font-weight: bold;
+    text-align: center;
+    width: 100%;
 }
-
 
 /* for smaller screens */
 
@@ -49,13 +48,11 @@ caption {
     td {
         font-size: small;
     }
-
     table {
         width: calc(100% - 10px);
         margin-right: 5px;
         margin-left: 5px;
     }
-    
 }
 
 /* for smaller screens */
@@ -68,10 +65,9 @@ caption {
     td {
         font-size: xx-small;
     }
-
     table {
         width: calc(100% - 4px);
         margin-right: 2px;
         margin-left: 2px;
-    }    
+    }
 }

@@ -7,8 +7,6 @@ import { GlobalFunctionsService } from 'src/app/services/global-functions.servic
     templateUrl: 'item-data.component.html'
 })
 export class ItemData {
-    // dataSource = null;
-
     @Input() AttachedFile: string = null;
     @Input() SupportActivityId: any = null;
     @Input() Comment: string = null;
@@ -18,7 +16,6 @@ export class ItemData {
 
     @Input() CostOfDamage: string = null;
     @Input() CurrencyCostOfDamageId: string = null;
-    // @Input() CurrencyCostOfDamageId: string = null;
     @Input() DamageDescription: string = null;
     @Input() ReturnStatusId: string = null;
 
@@ -27,13 +24,23 @@ export class ItemData {
     constructor(private _globalFunctionsService: GlobalFunctionsService) { }
     ngOnInit() {
         this.modifyData();
+        this.getReturnStatusTypes();
+    }
+    getReturnStatusTypes() {
+        this._globalFunctionsService.getTableData('ReturnStatus‏').subscribe(data => {
+            data[0].forEach(status => {
+                if(status["ReturnStatusId"] == this.ReturnStatusId){
+                    this.ReturnStatusId = status['Description'];
+                }
+            })
+        })
     }
 
     modifyData() {
         this.DeliveryDate = this.DeliveryDate ? this.DeliveryDate.slice(0, 10) : "";
         this.ReturnDate = this.ReturnDate ? this.ReturnDate.slice(0, 10) : "";
-        this.CurrencyCostOfDamageId = this.CurrencyCostOfDamageId && this.CurrencyCostOfDamageId == '2' ? '$': '₪'
-        }
+        this.CurrencyCostOfDamageId = this.CurrencyCostOfDamageId && this.CurrencyCostOfDamageId == '2' ? '$' : '₪'
+    }
 
     shouldCheck(number: Number) {
         // DeliveryStatusId = 0 -> no checking

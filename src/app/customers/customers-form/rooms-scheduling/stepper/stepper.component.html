@@ -3,49 +3,66 @@
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>בחירת תאריך</ng-template>
             <mwl-demo-component (viewDateChange)="setDate($event)"></mwl-demo-component>
-
-            <!-- <div>
-          <button mat-button matStepperNext>Next</button>
-        </div> -->
         </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>הוספת פרטים</ng-template>
+            <ng-template matStepLabel>בחירת פרטים</ng-template>
 
-התאריך הוא:
-        {{viewDate}}
+            <h3> התאריך הנבחר:
+                {{newEvent['date'].toLocaleString()}}</h3>
+
+            <ngb-timepicker [(ngModel)]="time" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
 
 
-        <!-- <div class="line-of-inputs">
-            <mat-form-field appearance="fill">
-                <mat-label>תאור פריט</mat-label>
-                <input matInput value="{{dataSource.Description}}" #Mct="ngModel" required
-                    [(ngModel)]="dataSource.Description">
-            </mat-form-field>
-    
-            <mat-form-field appearance="fill">
-                <mat-label>בחירת תופרת</mat-label>
-                <mat-select [(value)]="dataSource.BridalTypeItem" [(ngModel)]="dataSource.BridalTypeItemId">
-                    <mat-option *ngFor="let type of itemTypes" [value]="type.BridalTypeItemId">{{type.Description}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div> -->
-    
-            
-            <!-- <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div> -->
+            <div class="details-container" *ngIf="stuffArray">
+                <mat-form-field appearance="fill">
+                    <mat-label>תופרת</mat-label>
+                    <mat-select required [(value)]="newEvent.BridalStaff" [(ngModel)]="newEvent.BridalStaffId"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let stuff of stuffArray" [value]="stuff.BridalStaffId">{{stuff.Description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>חדר</mat-label>
+                    <mat-select required [(value)]="newEvent.Room" [(ngModel)]="newEvent.RoomId"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let room of rooms" [value]="room.RoomId">{{room.Description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>מטרת הפגישה</mat-label>
+                    <mat-select required [(value)]="newEvent.MeetingPurpose" [(ngModel)]="newEvent.MeetingPurposeId"
+                        [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let meetingPurpose of meetingPurposes"
+                            [value]="meetingPurpose.MeetingPurposeId">{{meetingPurpose.Description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>הערות</mat-label>
+                    <input matInput value="{{newEvent.Comment}}" #Mct="ngModel" [(ngModel)]="newEvent.Comment"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>זמן משוער</mat-label>
+                    <input matInput value="{{newEvent.ActualTime}}" #Mct="ngModel" [(ngModel)]="newEvent.ActualTime"
+                        [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+<br><br>
+
+                <button mat-raised-button (click)="saveEvent()" mat-dialog-close>שמירת אירוע</button>
+            </div>
         </form>
     </mat-step>
-    <mat-step>
+    <!-- <mat-step>
         <ng-template matStepLabel>סיום</ng-template>
-        <p>You are now done.</p>
-        <!-- <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-        </div> -->
-    </mat-step>
+        <p></p>
+    </mat-step> -->
 </mat-horizontal-stepper>

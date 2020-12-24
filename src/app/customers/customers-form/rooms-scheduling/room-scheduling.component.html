@@ -1,6 +1,6 @@
 <loading-spinner *ngIf="showSpinner"></loading-spinner>
 
-<button mat-raised-button (click)="open(content)" class="add-scheduling-btn">הוספת שיבוץ +</button>
+<button mat-raised-button (click)="openDialog()" class="add-scheduling-btn">הוספת שיבוץ +</button>
 
 <div class="no-room-scheduling" *ngIf='dataSource == null || this.dataSource.length == 0'>
     <h3>לא קיימים שיבוצי חדרים לתיק זה</h3>
@@ -69,10 +69,10 @@
 </div>
 
 <!-- pop up -->
-<ng-template #content let-modal>
+<!-- <ng-template #content let-modal>
 
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
             aria-hidden="true">×</span>
     </button>
     <stepper></stepper>
-</ng-template>
+</ng-template> -->
